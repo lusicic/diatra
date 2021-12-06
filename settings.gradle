@@ -1,0 +1,2 @@
+rootProject.name = "diatra"
+include ':app'
