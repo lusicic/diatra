@@ -48,6 +48,10 @@ public class TherapyAdapter extends RecyclerView.Adapter<TherapyAdapter.TherapyH
         notifyDataSetChanged();
     }
 
+    public Therapy getTherapyAt(int position){
+        return therapies.get(position);
+    }
+
     class TherapyHolder extends RecyclerView.ViewHolder {
         private TextView textViewTime;
         private TextView textViewType;

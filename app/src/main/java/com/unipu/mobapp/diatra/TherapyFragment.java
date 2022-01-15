@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,6 +22,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.unipu.mobapp.diatra.adapter.TherapyAdapter;
 import com.unipu.mobapp.diatra.data.Therapy;
 import com.unipu.mobapp.diatra.viewmodel.TherapyViewModel;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -68,6 +71,18 @@ public class TherapyFragment extends Fragment {
         });
 
 
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+            @Override
+            public boolean onMove(@NonNull @NotNull RecyclerView recyclerView, @NonNull @NotNull RecyclerView.ViewHolder viewHolder, @NonNull @NotNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull @NotNull RecyclerView.ViewHolder viewHolder, int direction) {
+                therapyViewModel.delete(therapyAdapter.getTherapyAt(viewHolder.getAdapterPosition()));
+                Toast.makeText( getActivity().getApplicationContext(), "Therapy deleted", Toast.LENGTH_SHORT).show();
+            }
+        }).attachToRecyclerView(recyclerViewTherapy);
 
     }
 
