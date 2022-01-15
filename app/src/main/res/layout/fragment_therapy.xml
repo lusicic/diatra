@@ -5,13 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff"
+    android:backgroundTint="#FFFFFF"
     tools:context=".TherapyFragment">
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/button_new_therapy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|top"
+        android:layout_margin="16dp"
+        android:background="@color/white"
+        android:contentDescription="@string/add"
+        android:src="@drawable/ic_add" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_therapy"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/therapy_item"
-        />
+        tools:listitem="@layout/therapy_item" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

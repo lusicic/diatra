@@ -40,4 +40,5 @@ public class TherapyViewModel extends AndroidViewModel {
         return allTherapies;
     }
 
+
 }

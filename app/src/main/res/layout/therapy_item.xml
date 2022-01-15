@@ -14,7 +14,7 @@
         android:layout_marginLeft="15dp"
 >
         <TextView
-            android:id="@+id/text_view_time"
+            android:id="@+id/text_view_therapy_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -25,7 +25,7 @@
             android:id="@+id/text_view_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/text_view_time"
+            android:layout_below="@+id/text_view_therapy_time"
             android:layout_marginRight="10dp"
             android:text="orally"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
@@ -33,7 +33,7 @@
             android:id="@+id/text_view_dosage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/text_view_time"
+            android:layout_below="@+id/text_view_therapy_time"
             android:layout_toRightOf="@id/text_view_type"
             android:text="15ml"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>

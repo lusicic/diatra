@@ -7,14 +7,17 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.unipu.mobapp.diatra.adapter.TherapyAdapter;
 import com.unipu.mobapp.diatra.data.Therapy;
 import com.unipu.mobapp.diatra.viewmodel.TherapyViewModel;
@@ -24,6 +27,8 @@ import java.util.List;
 public class TherapyFragment extends Fragment {
 
     private TherapyViewModel therapyViewModel;
+
+    private FloatingActionButton buttonNewTherapy;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,6 +43,8 @@ public class TherapyFragment extends Fragment {
 
 
         RecyclerView recyclerViewTherapy = view.findViewById(R.id.recycler_view_therapy);
+        buttonNewTherapy = view.findViewById(R.id.button_new_therapy);
+
         recyclerViewTherapy.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerViewTherapy.setHasFixedSize(true);
 
@@ -52,6 +59,15 @@ public class TherapyFragment extends Fragment {
                 therapyAdapter.setTherapies(therapies);
             }
         });
+
+        buttonNewTherapy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.action_therapyFragment_to_addTherapyFragment);
+            }
+        });
+
+
 
     }
 

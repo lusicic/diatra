@@ -35,7 +35,7 @@ public class TherapyAdapter extends RecyclerView.Adapter<TherapyAdapter.TherapyH
         Therapy currentTherapy = therapies.get(position);
         holder.textViewTime.setText(currentTherapy.getTime());
         holder.textViewType.setText(currentTherapy.getType());
-        holder.textViewType.setText(String.valueOf(currentTherapy.getDosage()));
+        holder.textViewDosage.setText(String.valueOf(currentTherapy.getDosage()));
     }
 
     @Override
@@ -55,7 +55,7 @@ public class TherapyAdapter extends RecyclerView.Adapter<TherapyAdapter.TherapyH
 
         public TherapyHolder(@NonNull @NotNull View itemView) {
             super(itemView);
-            textViewTime = itemView.findViewById(R.id.text_view_time);
+            textViewTime = itemView.findViewById(R.id.text_view_therapy_time);
             textViewType = itemView.findViewById(R.id.text_view_type);
             textViewDosage = itemView.findViewById(R.id.text_view_dosage);
         }

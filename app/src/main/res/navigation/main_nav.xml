@@ -28,6 +28,18 @@
         android:id="@+id/therapyFragment"
         android:name="com.unipu.mobapp.diatra.TherapyFragment"
         android:label="fragment_therapy"
-        tools:layout="@layout/fragment_therapy" />
+        tools:layout="@layout/fragment_therapy" >
+        <action
+            android:id="@+id/action_therapyFragment_to_addTherapyFragment"
+            app:destination="@id/addTherapyFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addTherapyFragment"
+        android:name="com.unipu.mobapp.diatra.AddTherapyFragment"
+        android:label="AddTherapyFragment" >
+        <action
+            android:id="@+id/action_addTherapyFragment_to_therapyFragment"
+            app:destination="@id/therapyFragment" />
+    </fragment>
 
 </navigation>
