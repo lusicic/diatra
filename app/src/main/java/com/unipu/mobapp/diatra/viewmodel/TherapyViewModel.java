@@ -5,6 +5,7 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import com.unipu.mobapp.diatra.data.Therapy;
 import com.unipu.mobapp.diatra.data.TherapyRepository;
@@ -17,6 +18,8 @@ public class TherapyViewModel extends AndroidViewModel {
 
     private TherapyRepository repo;
     private LiveData<List<Therapy>> allTherapies;
+
+    private MutableLiveData<Therapy> oneTherapy = new MutableLiveData<>();
 
     public TherapyViewModel(@NonNull @NotNull Application application) {
         super(application);
@@ -40,5 +43,10 @@ public class TherapyViewModel extends AndroidViewModel {
         return allTherapies;
     }
 
+    public LiveData<Therapy> getOneTherapy() {
+        return oneTherapy;
+    }
+
+    public void setOneTherapy (Therapy therapy) { oneTherapy.setValue(therapy); };
 
 }

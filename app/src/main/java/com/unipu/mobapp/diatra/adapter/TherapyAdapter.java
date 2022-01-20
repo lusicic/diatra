@@ -20,6 +20,7 @@ public class TherapyAdapter extends RecyclerView.Adapter<TherapyAdapter.TherapyH
     //initialized on new arraylist, if the list was null before getting LiveData it would crash
     // if there were methods in onbindviewholder and others
     private List<Therapy> therapies = new ArrayList<>();
+    private OnItemClickListener listener;
 
     @NonNull
     @NotNull
@@ -48,7 +49,7 @@ public class TherapyAdapter extends RecyclerView.Adapter<TherapyAdapter.TherapyH
         notifyDataSetChanged();
     }
 
-    public Therapy getTherapyAt(int position){
+    public Therapy getTherapyAt(int position) {
         return therapies.get(position);
     }
 
@@ -62,6 +63,24 @@ public class TherapyAdapter extends RecyclerView.Adapter<TherapyAdapter.TherapyH
             textViewTime = itemView.findViewById(R.id.text_view_therapy_time);
             textViewType = itemView.findViewById(R.id.text_view_type);
             textViewDosage = itemView.findViewById(R.id.text_view_dosage);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int position = getAdapterPosition();
+                    if (listener != null && position != RecyclerView.NO_POSITION) {
+                        listener.onItemClick(therapies.get(position));
+                    }
+                }
+            });
         }
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(Therapy therapy);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
     }
 }

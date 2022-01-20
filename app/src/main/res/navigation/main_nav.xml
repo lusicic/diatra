@@ -39,7 +39,9 @@
         android:label="AddTherapyFragment" >
         <action
             android:id="@+id/action_addTherapyFragment_to_therapyFragment"
-            app:destination="@id/therapyFragment" />
+            app:destination="@id/therapyFragment"
+            app:popUpTo="@id/addTherapyFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
 </navigation>

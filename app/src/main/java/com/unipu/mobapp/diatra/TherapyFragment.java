@@ -64,6 +64,7 @@ public class TherapyFragment extends Fragment {
         });
 
         buttonNewTherapy.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 Navigation.findNavController(view).navigate(R.id.action_therapyFragment_to_addTherapyFragment);
@@ -80,9 +81,17 @@ public class TherapyFragment extends Fragment {
             @Override
             public void onSwiped(@NonNull @NotNull RecyclerView.ViewHolder viewHolder, int direction) {
                 therapyViewModel.delete(therapyAdapter.getTherapyAt(viewHolder.getAdapterPosition()));
-                Toast.makeText( getActivity().getApplicationContext(), "Therapy deleted", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity().getApplicationContext(), "Therapy deleted", Toast.LENGTH_SHORT).show();
             }
         }).attachToRecyclerView(recyclerViewTherapy);
+
+        therapyAdapter.setOnItemClickListener(new TherapyAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Therapy therapy) {
+                therapyViewModel.setOneTherapy(therapy);
+                Navigation.findNavController(view).navigate(R.id.action_therapyFragment_to_addTherapyFragment);
+            }
+        });
 
     }
 
