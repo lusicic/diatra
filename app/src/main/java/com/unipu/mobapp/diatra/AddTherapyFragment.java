@@ -33,10 +33,6 @@ public class AddTherapyFragment extends Fragment {
 
     private Button buttonAddTherapy;
 
-    public AddTherapyFragment() {
-        // Required empty public constructor
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -62,8 +58,7 @@ public class AddTherapyFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 saveTherapy();
-                Navigation.findNavController(view).navigate(R.id.action_addTherapyFragment_to_therapyFragment);
-
+                //Navigation.findNavController(view).navigate(R.id.action_addTherapyFragment_to_therapyFragment);
             }
         });
 

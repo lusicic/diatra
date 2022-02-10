@@ -13,12 +13,19 @@
         <action
             android:id="@+id/action_homeFragment_to_therapyFragment"
             app:destination="@id/therapyFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_welcomeFragment"
+            app:destination="@id/welcomeFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.unipu.mobapp.diatra.ProfileFragment"
+        android:name="com.unipu.mobapp.diatra.UserFragment"
         android:label="Profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_user" >
+        <action
+            android:id="@+id/action_profileFragment_to_addUserFragment"
+            app:destination="@id/addUserFragment" />
+    </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.unipu.mobapp.diatra.SettingsFragment"
@@ -27,7 +34,7 @@
     <fragment
         android:id="@+id/therapyFragment"
         android:name="com.unipu.mobapp.diatra.TherapyFragment"
-        android:label="fragment_therapy"
+        android:label="Therapies"
         tools:layout="@layout/fragment_therapy" >
         <action
             android:id="@+id/action_therapyFragment_to_addTherapyFragment"
@@ -36,12 +43,25 @@
     <fragment
         android:id="@+id/addTherapyFragment"
         android:name="com.unipu.mobapp.diatra.AddTherapyFragment"
-        android:label="AddTherapyFragment" >
+        android:label="Add new therapy" >
         <action
             android:id="@+id/action_addTherapyFragment_to_therapyFragment"
             app:destination="@id/therapyFragment"
             app:popUpTo="@id/addTherapyFragment"
             app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/welcomeFragment"
+        android:name="com.unipu.mobapp.diatra.WelcomeFragment"
+        android:label="fragment_welcome"
+        tools:layout="@layout/fragment_welcome" />
+    <fragment
+        android:id="@+id/addUserFragment"
+        android:name="com.unipu.mobapp.diatra.AddUserFragment"
+        android:label="Edit profile" >
+        <action
+            android:id="@+id/action_addUserFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
 
 </navigation>

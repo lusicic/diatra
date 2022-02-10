@@ -1,7 +1,14 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">diatra</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="diatra">diatra</string>
+
+    <string name="welcome_big" tools:ignore="StringEscaping">Lets start tracking</string>
+    <string name="welcome_small">Start tracking your diabetes.</string>
+    <string name="welcome_button">Start now</string>
+    <string name="user_title">About you</string>
+    <string name="user_title2">Health</string>
 
     <string name="menu_home">Home</string>
     <string name="menu_profile">Profile</string>

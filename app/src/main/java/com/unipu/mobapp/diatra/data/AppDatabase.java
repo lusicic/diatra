@@ -15,10 +15,11 @@ import org.jetbrains.annotations.NotNull;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-@Database(entities = {Therapy.class}, version = 1)
+@Database(entities = {Therapy.class, User.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract TherapyDao therapyDao();
+    public abstract UserDao userDao();
 
     private static AppDatabase instance;
 
@@ -43,9 +44,11 @@ public abstract class AppDatabase extends RoomDatabase {
 
     private static class PopulateDbAsyncTask extends AsyncTask<Void, Void, Void> {
         private TherapyDao therapyDao;
+        private UserDao userDao;
 
         private PopulateDbAsyncTask(AppDatabase db){
             therapyDao = db.therapyDao();
+            //userDao = db.userDao();
         }
 
         Date date = new Date();
@@ -56,6 +59,8 @@ public abstract class AppDatabase extends RoomDatabase {
             therapyDao.insert(new Therapy("orally", 15.00, formatter.format(date)));
             therapyDao.insert(new Therapy("orally", 20.00, "14:15"));
             therapyDao.insert(new Therapy("continuously", 10.00, "18:00"));
+
+            //userDao.insert(new User("", "", 0.00, 0.00, ""));
             return null;
         }
     }
