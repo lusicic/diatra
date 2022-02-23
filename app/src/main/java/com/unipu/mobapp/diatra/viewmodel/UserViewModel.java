@@ -18,8 +18,6 @@ public class UserViewModel extends AndroidViewModel {
     private UserRepository repo;
     private LiveData<User> user;
 
-    private MutableLiveData<User> useric = new MutableLiveData<>();
-
     public UserViewModel(@NonNull @NotNull Application application) {
         super(application);
         repo = new UserRepository(application);
@@ -34,7 +32,4 @@ public class UserViewModel extends AndroidViewModel {
 
     public LiveData<User> getUser() {return user;}
 
-    public LiveData<User> getUseric() {return useric;}
-
-    public void setUseric (User user) { useric.setValue(user); };
 }
