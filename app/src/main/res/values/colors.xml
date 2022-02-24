@@ -21,4 +21,8 @@
     <color name="grey">#666666</color>
     <color name="light_grey">#B3B3B3</color>
     <color name="light_grey_2">#9F9D9D</color>
+
+    <color name="gray">#808080</color>
+    <color name="rLightGray">#D6D6D6</color>
+    <color name="babyBlue">#93ACEB</color>
 </resources>
