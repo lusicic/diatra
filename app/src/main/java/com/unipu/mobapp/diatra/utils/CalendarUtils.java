@@ -14,6 +14,12 @@ public class CalendarUtils {
         return date.format(formatter);
     }
 
+    public static String formattedDate(LocalDate date)
+    {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return date.format(formatter);
+    }
+
     public static ArrayList<LocalDate> showDaysInWeek(LocalDate selectedDate)
     {
         ArrayList<LocalDate> days = new ArrayList<>();

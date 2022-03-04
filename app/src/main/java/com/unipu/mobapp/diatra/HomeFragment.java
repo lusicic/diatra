@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -23,6 +24,7 @@ import com.unipu.mobapp.diatra.data.Therapy;
 import com.unipu.mobapp.diatra.utils.CalendarUtils;
 import com.unipu.mobapp.diatra.viewmodel.TherapyViewModel;
 
+import static com.unipu.mobapp.diatra.utils.CalendarUtils.formattedDate;
 import static com.unipu.mobapp.diatra.utils.CalendarUtils.monthYear;
 import static com.unipu.mobapp.diatra.utils.CalendarUtils.showDaysInWeek;
 
@@ -42,23 +44,16 @@ public class HomeFragment extends Fragment implements CalendarAdapter.OnItemList
     private RecyclerView calendarRecyclerView;
     private ListView dayView;
 
+    private TextView textViewTest;
+
     ImageButton btnBack;
     ImageButton btnNext;
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        therapyViewModel = new ViewModelProvider(requireActivity()).get(TherapyViewModel.class);
-
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-
         return view;
     }
 
@@ -66,28 +61,24 @@ public class HomeFragment extends Fragment implements CalendarAdapter.OnItemList
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        therapyViewModel = new ViewModelProvider(requireActivity()).get(TherapyViewModel.class);
+
         initWidgets(view);
 
-        btnTherapy = view.findViewById(R.id.button_therapy);
-        calendarRecyclerView = view.findViewById(R.id.calendarRecyclerView);
-        monthYearText = view.findViewById(R.id.monthYearTV);
-        dayView = view.findViewById(R.id.dayView);
-
         CalendarUtils.selectedDate = LocalDate.now();
+        therapyViewModel.setDatum(String.valueOf(formattedDate(CalendarUtils.selectedDate)));
         setUpCalendar();
 
         btnBack.setOnClickListener(this::previousWeekAction);
 
         btnNext.setOnClickListener(this::nextWeekAction);
 
-        btnTherapy.setOnClickListener(new View.OnClickListener() {
+        btnTherapy.setOnClickListener(this::navigate);
+
+        therapyViewModel.getDayTherapies().observe(getActivity(), new Observer<List<Therapy>>() {
             @Override
-            public void onClick(View view) {
-
-                Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_therapyFragment);
-
-                //Toast.makeText( getActivity().getApplicationContext(), "boyyy", Toast.LENGTH_LONG).show();
-
+            public void onChanged(List<Therapy> therapies) {
+                textViewTest.setText(String.valueOf(therapies.size()));
             }
         });
 
@@ -96,6 +87,13 @@ public class HomeFragment extends Fragment implements CalendarAdapter.OnItemList
     private void initWidgets(View view){
         btnBack = view.findViewById(R.id.button_calendar_back);
         btnNext = view.findViewById(R.id.button_calendar_next);
+
+        btnTherapy = view.findViewById(R.id.button_therapy);
+        calendarRecyclerView = view.findViewById(R.id.calendarRecyclerView);
+        monthYearText = view.findViewById(R.id.monthYearTV);
+        dayView = view.findViewById(R.id.dayView);
+
+        textViewTest = view.findViewById(R.id.text_view_test);
     }
 
 
@@ -123,10 +121,20 @@ public class HomeFragment extends Fragment implements CalendarAdapter.OnItemList
         setUpCalendar();
     }
 
+    public void navigate(View view)
+    {
+        Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_therapyFragment);
+    }
+
     @Override
     public void onItemClick(int position, LocalDate date)
     {
         CalendarUtils.selectedDate = date;
         setUpCalendar();
+
+        String datumic = String.valueOf(formattedDate(CalendarUtils.selectedDate));
+
+        therapyViewModel.setDatum(datumic);
+
     }
 }

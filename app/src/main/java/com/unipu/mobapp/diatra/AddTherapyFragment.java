@@ -80,7 +80,7 @@ public class AddTherapyFragment extends Fragment {
                     public void onClick(View view) {
                         int id = therapy.getId();
                         editTherapy(id);
-                        therapyViewModel.setOneTherapy(new Therapy("", 0.0, ""));
+                        therapyViewModel.setOneTherapy(new Therapy("", 0.0, "", ""));
                         Navigation.findNavController(view).navigate(R.id.action_addTherapyFragment_to_therapyFragment);
                     }
                 });
@@ -91,7 +91,7 @@ public class AddTherapyFragment extends Fragment {
             @Override
             public void handleOnBackPressed() {
                 Navigation.findNavController(view).navigate(R.id.action_addTherapyFragment_to_therapyFragment);
-                therapyViewModel.setOneTherapy(new Therapy("", 0.0, ""));
+                therapyViewModel.setOneTherapy(new Therapy("", 0.0, "", ""));
             }
         };
         requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
@@ -102,13 +102,14 @@ public class AddTherapyFragment extends Fragment {
         String therapyTime = editTextTherapyTime.getText().toString();
         String type = editTextType.getText().toString();
         Double dose = Double.parseDouble(editTextDose.getText().toString());
+        String date = "1/1/2022";
 
         if(therapyTime.trim().isEmpty() || type.trim().isEmpty()){
             Toast.makeText(getActivity(), "time or type is empty", Toast.LENGTH_SHORT);
             return;
         }
 
-        Therapy therapy = new Therapy(type, dose, therapyTime);
+        Therapy therapy = new Therapy(type, dose, therapyTime, date);
         therapyViewModel.insert(therapy);
     }
 
@@ -116,13 +117,14 @@ public class AddTherapyFragment extends Fragment {
         String therapyTime = editTextTherapyTime.getText().toString();
         String type = editTextType.getText().toString();
         Double dose = Double.parseDouble(editTextDose.getText().toString());
+        String date = "1/1/2022";
 
         if(therapyTime.trim().isEmpty() || type.trim().isEmpty()){
             Toast.makeText(getActivity(), "time or type is empty", Toast.LENGTH_SHORT);
             return;
         }
 
-        Therapy therapy = new Therapy(type, dose, therapyTime);
+        Therapy therapy = new Therapy(type, dose, therapyTime, date);
         therapy.setId(id);
         therapyViewModel.update(therapy);
     }

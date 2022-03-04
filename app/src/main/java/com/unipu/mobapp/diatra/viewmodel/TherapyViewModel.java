@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Transformations;
 
 import com.unipu.mobapp.diatra.data.Therapy;
 import com.unipu.mobapp.diatra.data.TherapyRepository;
@@ -21,10 +22,16 @@ public class TherapyViewModel extends AndroidViewModel {
 
     private MutableLiveData<Therapy> oneTherapy = new MutableLiveData<>();
 
+    //za new MutableLiveData<String>()
+    private MutableLiveData<String> datum = new MutableLiveData<>();
+    private LiveData<List<Therapy>> dayTherapies;
+
     public TherapyViewModel(@NonNull @NotNull Application application) {
         super(application);
         repo = new TherapyRepository(application);
         allTherapies = repo.getAllTherapies();
+        dayTherapies = Transformations.switchMap(datum,
+                datum -> repo.getDayTherapies(datum));
     }
 
     public void insert(Therapy therapy){
@@ -48,5 +55,14 @@ public class TherapyViewModel extends AndroidViewModel {
     }
 
     public void setOneTherapy (Therapy therapy) { oneTherapy.setValue(therapy); };
+
+    ///// filtriranje
+
+    public void setDatum(String date) { datum.setValue(date);}
+
+    public LiveData<List<Therapy>> getDayTherapies() {
+        return dayTherapies;
+    }
+
 
 }

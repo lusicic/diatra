@@ -21,9 +21,9 @@ public interface TherapyDao {
     @Delete
     void delete(Therapy therapy);
 
-    @Query("DELETE from therapy_table")
-    void deleteAllTherapies();
-
     @Query("SELECT * FROM therapy_table ORDER BY time DESC")
     LiveData<List<Therapy>> getAllTherapies();
+
+    @Query("SELECT * FROM therapy_table WHERE date==:date ORDER BY time DESC")
+    LiveData<List<Therapy>> getDayTherapies(String date);
 }

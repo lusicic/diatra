@@ -23,6 +23,8 @@ import com.unipu.mobapp.diatra.viewmodel.UserViewModel;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.time.LocalDate;
+
 public class MainActivity extends AppCompatActivity {
 
     TherapyViewModel therapyViewModel;
@@ -32,7 +34,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         therapyViewModel = new ViewModelProvider(this).get(TherapyViewModel.class);
+        therapyViewModel.setDatum(String.valueOf(LocalDate.now()));
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+
+        therapyViewModel.setDatum(String.valueOf(LocalDate.now()));
         userViewModel.getUser();
         setContentView(R.layout.activity_main);
         setUpNavigation();
@@ -49,8 +54,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
 
         //NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        //srediti backbutton u toolbaru - add new therapy
-        //ostavi edittext s prijasnjim info
+
         NavigationUI.setupWithNavController(
                 toolbar, navController, appBarConfiguration);
 

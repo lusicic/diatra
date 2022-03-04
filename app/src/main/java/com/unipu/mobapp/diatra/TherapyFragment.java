@@ -37,13 +37,11 @@ public class TherapyFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         return inflater.inflate(R.layout.fragment_therapy, container, false);
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
 
         RecyclerView recyclerViewTherapy = view.findViewById(R.id.recycler_view_therapy);
         buttonNewTherapy = view.findViewById(R.id.button_new_therapy);
@@ -55,16 +53,15 @@ public class TherapyFragment extends Fragment {
         recyclerViewTherapy.setAdapter(therapyAdapter);
 
         therapyViewModel = new ViewModelProvider(requireActivity()).get(TherapyViewModel.class);
-        therapyViewModel.getAllTherapies().observe(getActivity(), new Observer<List<Therapy>>() {
+
+        therapyViewModel.getDayTherapies().observe(getActivity(), new Observer<List<Therapy>>() {
             @Override
             public void onChanged(List<Therapy> therapies) {
-                //Toast.makeText( getActivity().getApplicationContext(), "heyyy", Toast.LENGTH_LONG).show();
                 therapyAdapter.setTherapies(therapies);
             }
         });
 
         buttonNewTherapy.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
                 Navigation.findNavController(view).navigate(R.id.action_therapyFragment_to_addTherapyFragment);

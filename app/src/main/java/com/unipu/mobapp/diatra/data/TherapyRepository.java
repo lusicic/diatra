@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class TherapyRepository {
@@ -31,12 +32,13 @@ public class TherapyRepository {
         new DeleteTherapyAsyncTask(therapyDao).execute(therapy);
     }
 
-    public void deleteAllTherapies(Therapy therapy){
-        new DeleteAllTherapiesAsyncTask(therapyDao).execute();
-    }
-
     public LiveData<List<Therapy>> getAllTherapies(){
         return allTherapies;
+    }
+
+    //ovdje negdje fulano
+    public LiveData<List<Therapy>> getDayTherapies(String datumic) {
+        return therapyDao.getDayTherapies(datumic);
     }
 
     public static class InsertTherapyAsyncTask extends AsyncTask<Therapy, Void, Void>{
@@ -81,17 +83,4 @@ public class TherapyRepository {
         }
     }
 
-    public static class DeleteAllTherapiesAsyncTask extends AsyncTask<Therapy, Void, Void>{
-        private TherapyDao therapyDao;
-
-        private DeleteAllTherapiesAsyncTask(TherapyDao therapyDao){
-            this.therapyDao = therapyDao;
-        }
-
-        @Override
-        protected Void doInBackground(Therapy... therapies) {
-            therapyDao.deleteAllTherapies();
-            return null;
-        }
-    }
 }

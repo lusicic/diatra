@@ -14,11 +14,13 @@ public class Therapy {
     private String type;
     private Double dosage;
     private String time;
+    private String date;
 
-    public Therapy(String type, Double dosage, String time) {
+    public Therapy(String type, Double dosage, String time, String date) {
         this.type = type;
         this.dosage = dosage;
         this.time = time;
+        this.date = date;
     }
 
     public void setId(int id) {
@@ -40,4 +42,6 @@ public class Therapy {
     public String getTime() {
         return time;
     }
+
+    public String getDate() {return date;}
 }

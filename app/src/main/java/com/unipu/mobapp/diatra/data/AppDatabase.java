@@ -51,14 +51,17 @@ public abstract class AppDatabase extends RoomDatabase {
             //userDao = db.userDao();
         }
 
-        Date date = new Date();
+        Date time = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
+
+        Date date = new Date();
+        SimpleDateFormat formatter2 = new SimpleDateFormat("dd/MM/yyyy");
 
         @Override
         protected Void doInBackground(Void... voids) {
-            therapyDao.insert(new Therapy("orally", 15.00, formatter.format(date)));
-            therapyDao.insert(new Therapy("orally", 20.00, "14:15"));
-            therapyDao.insert(new Therapy("continuously", 10.00, "18:00"));
+            therapyDao.insert(new Therapy("orally", 15.00, formatter.format(time), formatter2.format(date)));
+            therapyDao.insert(new Therapy("orally", 20.00, "14:15", formatter2.format(date)));
+            therapyDao.insert(new Therapy("continuously", 10.00, "18:00", "28/02/2022"));
 
             //userDao.insert(new User("", "", 0.00, 0.00, ""));
             return null;

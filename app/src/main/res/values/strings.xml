@@ -19,6 +19,7 @@
     <string name="dummy_content">DUMMY\nCONTENT</string>
 
     <!-- EDIT TEXT -->
+    <string name="date">Date</string>
     <string name="time">Time</string>
     <string name="type">Type</string>
     <string name="dose">Dose</string>
