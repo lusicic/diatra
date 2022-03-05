@@ -30,6 +30,7 @@ public class AddTherapyFragment extends Fragment {
     private EditText editTextTherapyTime;
     private EditText editTextType;
     private EditText editTextDose;
+    private EditText editTextTherapyDate;
 
     private Button buttonAddTherapy;
 
@@ -53,6 +54,7 @@ public class AddTherapyFragment extends Fragment {
         editTextTherapyTime = view.findViewById(R.id.edit_text_therapy_time);
         editTextType = view.findViewById(R.id.edit_text_type);
         editTextDose = view.findViewById(R.id.edit_text_dose);
+        editTextTherapyDate = view.findViewById(R.id.edit_text_therapy_date);
 
         buttonAddTherapy.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,6 +69,7 @@ public class AddTherapyFragment extends Fragment {
             public void onChanged(Therapy therapy) {
                 editTextTherapyTime.setText(therapy.getTime());
                 editTextType.setText(therapy.getType());
+                editTextTherapyDate.setText(therapy.getDate());
 
                 if(therapy.getDosage() == 0.0){
                     editTextDose.setText("");
@@ -99,10 +102,10 @@ public class AddTherapyFragment extends Fragment {
     }
 
     private void saveTherapy() {
+        String date = editTextTherapyDate.getText().toString();
         String therapyTime = editTextTherapyTime.getText().toString();
         String type = editTextType.getText().toString();
         Double dose = Double.parseDouble(editTextDose.getText().toString());
-        String date = "1/1/2022";
 
         if(therapyTime.trim().isEmpty() || type.trim().isEmpty()){
             Toast.makeText(getActivity(), "time or type is empty", Toast.LENGTH_SHORT);
@@ -114,10 +117,10 @@ public class AddTherapyFragment extends Fragment {
     }
 
     private void editTherapy(int id) {
+        String date = editTextTherapyDate.getText().toString();
         String therapyTime = editTextTherapyTime.getText().toString();
         String type = editTextType.getText().toString();
         Double dose = Double.parseDouble(editTextDose.getText().toString());
-        String date = "1/1/2022";
 
         if(therapyTime.trim().isEmpty() || type.trim().isEmpty()){
             Toast.makeText(getActivity(), "time or type is empty", Toast.LENGTH_SHORT);

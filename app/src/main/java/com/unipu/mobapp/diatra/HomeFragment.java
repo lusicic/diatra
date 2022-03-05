@@ -66,7 +66,9 @@ public class HomeFragment extends Fragment implements CalendarAdapter.OnItemList
         initWidgets(view);
 
         CalendarUtils.selectedDate = LocalDate.now();
-        therapyViewModel.setDatum(String.valueOf(formattedDate(CalendarUtils.selectedDate)));
+        String date = String.valueOf(formattedDate(CalendarUtils.selectedDate));
+
+        therapyViewModel.setDatum(date);
         setUpCalendar();
 
         btnBack.setOnClickListener(this::previousWeekAction);
@@ -132,9 +134,9 @@ public class HomeFragment extends Fragment implements CalendarAdapter.OnItemList
         CalendarUtils.selectedDate = date;
         setUpCalendar();
 
-        String datumic = String.valueOf(formattedDate(CalendarUtils.selectedDate));
+        String selectedDate = String.valueOf(formattedDate(CalendarUtils.selectedDate));
 
-        therapyViewModel.setDatum(datumic);
+        therapyViewModel.setDatum(selectedDate);
 
     }
 }

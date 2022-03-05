@@ -58,7 +58,14 @@ public class UserFragment extends Fragment {
         userViewModel.getUser().observe(getActivity(), new Observer<User>() {
                 @Override
                 public void onChanged(User user) {
-                    if(user!=null) {
+                    if(user==null) {
+                        textViewName.setText("");
+                        textViewDateOfBirth.setText("");
+                        textViewHeight.setText("");
+                        textViewWeight.setText("");
+                        textViewTypeOfDiabetes.setText("");
+                    }
+                    else{
                         textViewName.setText(user.getName());
                         textViewDateOfBirth.setText(user.getDateOfBirth());
                         textViewHeight.setText(String.valueOf(user.getHeight()));

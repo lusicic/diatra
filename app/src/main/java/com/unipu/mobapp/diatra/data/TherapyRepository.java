@@ -37,8 +37,8 @@ public class TherapyRepository {
     }
 
     //ovdje negdje fulano
-    public LiveData<List<Therapy>> getDayTherapies(String datumic) {
-        return therapyDao.getDayTherapies(datumic);
+    public LiveData<List<Therapy>> getDayTherapies(String date) {
+        return therapyDao.getDayTherapies(date);
     }
 
     public static class InsertTherapyAsyncTask extends AsyncTask<Therapy, Void, Void>{

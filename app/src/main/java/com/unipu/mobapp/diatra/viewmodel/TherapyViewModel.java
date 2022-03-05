@@ -23,15 +23,15 @@ public class TherapyViewModel extends AndroidViewModel {
     private MutableLiveData<Therapy> oneTherapy = new MutableLiveData<>();
 
     //za new MutableLiveData<String>()
-    private MutableLiveData<String> datum = new MutableLiveData<>();
+    private MutableLiveData<String> date = new MutableLiveData<>();
     private LiveData<List<Therapy>> dayTherapies;
 
     public TherapyViewModel(@NonNull @NotNull Application application) {
         super(application);
         repo = new TherapyRepository(application);
         allTherapies = repo.getAllTherapies();
-        dayTherapies = Transformations.switchMap(datum,
-                datum -> repo.getDayTherapies(datum));
+        dayTherapies = Transformations.switchMap(date,
+                date -> repo.getDayTherapies(date));
     }
 
     public void insert(Therapy therapy){
@@ -58,7 +58,7 @@ public class TherapyViewModel extends AndroidViewModel {
 
     ///// filtriranje
 
-    public void setDatum(String date) { datum.setValue(date);}
+    public void setDatum(String newDate) { date.setValue(newDate);}
 
     public LiveData<List<Therapy>> getDayTherapies() {
         return dayTherapies;
