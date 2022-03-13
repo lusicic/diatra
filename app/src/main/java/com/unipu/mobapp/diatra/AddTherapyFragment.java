@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.unipu.mobapp.diatra.data.Therapy;
+import com.unipu.mobapp.diatra.viewmodel.DatePickerViewModel;
 import com.unipu.mobapp.diatra.viewmodel.TimePickerViewModel;
 import com.unipu.mobapp.diatra.viewmodel.TherapyViewModel;
 
@@ -28,6 +29,7 @@ public class AddTherapyFragment extends Fragment {
 
     TherapyViewModel therapyViewModel;
     TimePickerViewModel timePickerViewModel;
+    DatePickerViewModel datePickerViewModel;
 
     private EditText editTextTherapyTime;
     private EditText editTextType;
@@ -37,6 +39,9 @@ public class AddTherapyFragment extends Fragment {
     private Button buttonAddTherapy;
 
     Observer<String> timeObserver;
+    Observer<String> dateObserver;
+
+    String date;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,12 +57,14 @@ public class AddTherapyFragment extends Fragment {
 
         therapyViewModel = new ViewModelProvider(requireActivity()).get(TherapyViewModel.class);
         timePickerViewModel = new ViewModelProvider(requireActivity()).get(TimePickerViewModel.class);
+        datePickerViewModel = new ViewModelProvider(requireActivity()).get(DatePickerViewModel.class);
 
         initWidgets(view);
 
-        String date = therapyViewModel.getDate().getValue();
+        date = therapyViewModel.getDate().getValue();
         editTextTherapyDate.setText(date);
 
+        editTextTherapyDate.setOnClickListener(this::showDatePickerDialog);
         editTextTherapyTime.setOnClickListener(this::showTimePickerDialog);
 
         buttonAddTherapy.setOnClickListener(new View.OnClickListener() {
@@ -88,12 +95,23 @@ public class AddTherapyFragment extends Fragment {
                     public void onClick(View view) {
                         int id = therapy.getId();
                         editTherapy(id);
-                        resetAll();
+                        therapyViewModel.setOneTherapy(new Therapy("", 0.0, "", ""));
+                        timePickerViewModel.setDatum("");
+                        datePickerViewModel.setDate(date);
                         Navigation.findNavController(view).navigate(R.id.action_addTherapyFragment_to_therapyFragment);
                     }
                 });
             }
         });
+
+        dateObserver = new Observer<String>() {
+            @Override
+            public void onChanged(@Nullable final String date) {
+                editTextTherapyDate.setText(date);
+            }
+        };
+
+        datePickerViewModel.getDate().observe(getViewLifecycleOwner(), dateObserver);
 
         timeObserver = new Observer<String>() {
             @Override
@@ -118,6 +136,7 @@ public class AddTherapyFragment extends Fragment {
 
     public void resetAll(){
         timePickerViewModel.setDatum("");
+        datePickerViewModel.setDate(date);
         therapyViewModel.setOneTherapy(new Therapy("", 0.0, "", ""));
     }
 
@@ -165,6 +184,11 @@ public class AddTherapyFragment extends Fragment {
     public void showTimePickerDialog(View v) {
         DialogFragment timeFrag = new TimePickerFragment();
         timeFrag.show(getParentFragmentManager(), "timePicker");
+    }
+
+    public void showDatePickerDialog(View v) {
+        DialogFragment dateFrag = new DatePickerFragment();
+        dateFrag.show(getParentFragmentManager(), "datePicker");
     }
 
 
