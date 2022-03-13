@@ -1,6 +1,5 @@
 package com.unipu.mobapp.diatra;
 
-import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,9 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.unipu.mobapp.diatra.adapter.TherapyAdapter;
@@ -33,6 +30,7 @@ public class TherapyFragment extends Fragment {
     private TherapyViewModel therapyViewModel;
 
     private FloatingActionButton buttonNewTherapy;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -91,5 +89,4 @@ public class TherapyFragment extends Fragment {
         });
 
     }
-
 }

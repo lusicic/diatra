@@ -16,7 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.unipu.mobapp.diatra.adapter.CalendarAdapter;
@@ -33,16 +32,15 @@ import org.jetbrains.annotations.NotNull;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class HomeFragment extends Fragment implements CalendarAdapter.OnItemListener {
 
     private TherapyViewModel therapyViewModel;
+
     Button btnTherapy;
 
     private TextView monthYearText;
     private RecyclerView calendarRecyclerView;
-    private ListView dayView;
 
     private TextView textViewTest;
 
@@ -68,7 +66,7 @@ public class HomeFragment extends Fragment implements CalendarAdapter.OnItemList
         CalendarUtils.selectedDate = LocalDate.now();
         String date = String.valueOf(formattedDate(CalendarUtils.selectedDate));
 
-        therapyViewModel.setDatum(date);
+        therapyViewModel.setDate(date);
         setUpCalendar();
 
         btnBack.setOnClickListener(this::previousWeekAction);
@@ -93,7 +91,6 @@ public class HomeFragment extends Fragment implements CalendarAdapter.OnItemList
         btnTherapy = view.findViewById(R.id.button_therapy);
         calendarRecyclerView = view.findViewById(R.id.calendarRecyclerView);
         monthYearText = view.findViewById(R.id.monthYearTV);
-        dayView = view.findViewById(R.id.dayView);
 
         textViewTest = view.findViewById(R.id.text_view_test);
     }
@@ -136,7 +133,7 @@ public class HomeFragment extends Fragment implements CalendarAdapter.OnItemList
 
         String selectedDate = String.valueOf(formattedDate(CalendarUtils.selectedDate));
 
-        therapyViewModel.setDatum(selectedDate);
+        therapyViewModel.setDate(selectedDate);
 
     }
 }

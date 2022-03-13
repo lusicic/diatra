@@ -1,27 +1,20 @@
 package com.unipu.mobapp.diatra;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
-import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.unipu.mobapp.diatra.viewmodel.TherapyViewModel;
 import com.unipu.mobapp.diatra.viewmodel.UserViewModel;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDate;
 
@@ -34,10 +27,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         therapyViewModel = new ViewModelProvider(this).get(TherapyViewModel.class);
-        therapyViewModel.setDatum(String.valueOf(LocalDate.now()));
+        therapyViewModel.setDate(String.valueOf(LocalDate.now()));
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
-        therapyViewModel.setDatum(String.valueOf(LocalDate.now()));
+        therapyViewModel.setDate(String.valueOf(LocalDate.now()));
         userViewModel.getUser();
         setContentView(R.layout.activity_main);
         setUpNavigation();

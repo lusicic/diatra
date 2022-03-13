@@ -18,21 +18,41 @@ import java.util.List;
 public class TherapyViewModel extends AndroidViewModel {
 
     private TherapyRepository repo;
-    private LiveData<List<Therapy>> allTherapies;
 
-    private MutableLiveData<Therapy> oneTherapy = new MutableLiveData<>();
-
-    //za new MutableLiveData<String>()
     private MutableLiveData<String> date = new MutableLiveData<>();
     private LiveData<List<Therapy>> dayTherapies;
+
+    // dohvat jedne instance
+    private MutableLiveData<Therapy> oneTherapy = new MutableLiveData<>();
 
     public TherapyViewModel(@NonNull @NotNull Application application) {
         super(application);
         repo = new TherapyRepository(application);
-        allTherapies = repo.getAllTherapies();
         dayTherapies = Transformations.switchMap(date,
                 date -> repo.getDayTherapies(date));
     }
+
+
+    // za dohvat terapije na odredeni datum
+    // (promjena oznacenog datuma trigera promijenu liste terapije)
+
+    public void setDate(String newDate) { date.setValue(newDate);}
+
+    public LiveData<String> getDate() { return date;}
+
+    public LiveData<List<Therapy>> getDayTherapies() {
+        return dayTherapies;
+    }
+
+    // dohvat/update jedne instance terapije
+
+    public void setOneTherapy (Therapy therapy) { oneTherapy.setValue(therapy); };
+
+    public LiveData<Therapy> getOneTherapy() {
+        return oneTherapy;
+    }
+
+    // za bazu
 
     public void insert(Therapy therapy){
         repo.insertTherapy(therapy);
@@ -45,24 +65,5 @@ public class TherapyViewModel extends AndroidViewModel {
     public void delete(Therapy therapy){
         repo.deleteTherapy(therapy);
     }
-
-    public LiveData<List<Therapy>> getAllTherapies() {
-        return allTherapies;
-    }
-
-    public LiveData<Therapy> getOneTherapy() {
-        return oneTherapy;
-    }
-
-    public void setOneTherapy (Therapy therapy) { oneTherapy.setValue(therapy); };
-
-    ///// filtriranje
-
-    public void setDatum(String newDate) { date.setValue(newDate);}
-
-    public LiveData<List<Therapy>> getDayTherapies() {
-        return dayTherapies;
-    }
-
 
 }

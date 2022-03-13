@@ -5,8 +5,8 @@ import android.os.Bundle;
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.unipu.mobapp.diatra.data.Therapy;
+import com.unipu.mobapp.diatra.viewmodel.TimePickerViewModel;
 import com.unipu.mobapp.diatra.viewmodel.TherapyViewModel;
 
 import org.jetbrains.annotations.NotNull;
@@ -26,6 +27,7 @@ import org.jetbrains.annotations.NotNull;
 public class AddTherapyFragment extends Fragment {
 
     TherapyViewModel therapyViewModel;
+    TimePickerViewModel timePickerViewModel;
 
     private EditText editTextTherapyTime;
     private EditText editTextType;
@@ -34,12 +36,13 @@ public class AddTherapyFragment extends Fragment {
 
     private Button buttonAddTherapy;
 
+    Observer<String> timeObserver;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         return inflater.inflate(R.layout.fragment_add_therapy, container, false);
-
 
     }
 
@@ -48,19 +51,21 @@ public class AddTherapyFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         therapyViewModel = new ViewModelProvider(requireActivity()).get(TherapyViewModel.class);
+        timePickerViewModel = new ViewModelProvider(requireActivity()).get(TimePickerViewModel.class);
 
-        buttonAddTherapy = view.findViewById(R.id.button_save_therapy);
+        initWidgets(view);
 
-        editTextTherapyTime = view.findViewById(R.id.edit_text_therapy_time);
-        editTextType = view.findViewById(R.id.edit_text_type);
-        editTextDose = view.findViewById(R.id.edit_text_dose);
-        editTextTherapyDate = view.findViewById(R.id.edit_text_therapy_date);
+        String date = therapyViewModel.getDate().getValue();
+        editTextTherapyDate.setText(date);
+
+        editTextTherapyTime.setOnClickListener(this::showTimePickerDialog);
 
         buttonAddTherapy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 saveTherapy();
-                //Navigation.findNavController(view).navigate(R.id.action_addTherapyFragment_to_therapyFragment);
+                resetAll();
+                Navigation.findNavController(view).navigate(R.id.action_addTherapyFragment_to_therapyFragment);
             }
         });
 
@@ -83,21 +88,46 @@ public class AddTherapyFragment extends Fragment {
                     public void onClick(View view) {
                         int id = therapy.getId();
                         editTherapy(id);
-                        therapyViewModel.setOneTherapy(new Therapy("", 0.0, "", ""));
+                        resetAll();
                         Navigation.findNavController(view).navigate(R.id.action_addTherapyFragment_to_therapyFragment);
                     }
                 });
             }
         });
 
+        timeObserver = new Observer<String>() {
+            @Override
+            public void onChanged(@Nullable final String date) {
+                editTextTherapyTime.setText(date);
+            }
+        };
+
+        timePickerViewModel.getDatum().observe(getViewLifecycleOwner(), timeObserver);
+
+
         OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
             @Override
             public void handleOnBackPressed() {
+                resetAll();
                 Navigation.findNavController(view).navigate(R.id.action_addTherapyFragment_to_therapyFragment);
-                therapyViewModel.setOneTherapy(new Therapy("", 0.0, "", ""));
             }
         };
         requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
+
+    }
+
+    public void resetAll(){
+        timePickerViewModel.setDatum("");
+        therapyViewModel.setOneTherapy(new Therapy("", 0.0, "", ""));
+    }
+
+    public void initWidgets(View view){
+        buttonAddTherapy = view.findViewById(R.id.button_save_therapy);
+
+        editTextTherapyTime = view.findViewById(R.id.edit_text_therapy_time);
+        editTextType = view.findViewById(R.id.edit_text_type);
+        editTextDose = view.findViewById(R.id.edit_text_dose);
+        editTextTherapyDate = view.findViewById(R.id.edit_text_therapy_date);
 
     }
 
@@ -131,5 +161,11 @@ public class AddTherapyFragment extends Fragment {
         therapy.setId(id);
         therapyViewModel.update(therapy);
     }
+
+    public void showTimePickerDialog(View v) {
+        DialogFragment timeFrag = new TimePickerFragment();
+        timeFrag.show(getParentFragmentManager(), "timePicker");
+    }
+
 
 }

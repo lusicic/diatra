@@ -45,13 +45,7 @@ public class AddUserFragment extends Fragment {
 
         userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
 
-        buttonAddUser = view.findViewById(R.id.button_save_edit_user);
-
-        editTextName = view.findViewById(R.id.edit_text_name);
-        editTextDateOfBirth = view.findViewById(R.id.edit_text_date_of_birth);
-        editTextHeight = view.findViewById(R.id.edit_text_height);
-        editTextWeight = view.findViewById(R.id.edit_text_weight);
-        editTextTypeOfDiabetes = view.findViewById(R.id.edit_text_type_of_diabetes);
+        initWidgets(view);
 
         buttonAddUser.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,6 +75,16 @@ public class AddUserFragment extends Fragment {
                 }
             }
         });
+    }
+
+    private void initWidgets(View view){
+        buttonAddUser = view.findViewById(R.id.button_save_edit_user);
+
+        editTextName = view.findViewById(R.id.edit_text_name);
+        editTextDateOfBirth = view.findViewById(R.id.edit_text_date_of_birth);
+        editTextHeight = view.findViewById(R.id.edit_text_height);
+        editTextWeight = view.findViewById(R.id.edit_text_weight);
+        editTextTypeOfDiabetes = view.findViewById(R.id.edit_text_type_of_diabetes);
     }
 
     private void saveUser() {

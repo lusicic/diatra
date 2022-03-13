@@ -36,7 +36,6 @@ public class TherapyRepository {
         return allTherapies;
     }
 
-    //ovdje negdje fulano
     public LiveData<List<Therapy>> getDayTherapies(String date) {
         return therapyDao.getDayTherapies(date);
     }
