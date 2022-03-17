@@ -23,7 +23,7 @@ public class TherapyViewModel extends AndroidViewModel {
     private LiveData<List<Therapy>> dayTherapies;
 
     // dohvat jedne instance
-    private MutableLiveData<Therapy> oneTherapy = new MutableLiveData<>();
+    private MutableLiveData<Therapy> singleTherapy = new MutableLiveData<>();
 
     public TherapyViewModel(@NonNull @NotNull Application application) {
         super(application);
@@ -46,10 +46,10 @@ public class TherapyViewModel extends AndroidViewModel {
 
     // dohvat/update jedne instance terapije
 
-    public void setOneTherapy (Therapy therapy) { oneTherapy.setValue(therapy); };
+    public void setSingleTherapy(Therapy therapy) { singleTherapy.setValue(therapy); };
 
-    public LiveData<Therapy> getOneTherapy() {
-        return oneTherapy;
+    public LiveData<Therapy> getSingleTherapy() {
+        return singleTherapy;
     }
 
     // za bazu

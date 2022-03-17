@@ -83,7 +83,7 @@ public class TherapyFragment extends Fragment {
         therapyAdapter.setOnItemClickListener(new TherapyAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Therapy therapy) {
-                therapyViewModel.setOneTherapy(therapy);
+                therapyViewModel.setSingleTherapy(therapy);
                 Navigation.findNavController(view).navigate(R.id.action_therapyFragment_to_addTherapyFragment);
             }
         });

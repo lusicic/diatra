@@ -76,7 +76,7 @@ public class AddTherapyFragment extends Fragment {
             }
         });
 
-        therapyViewModel.getOneTherapy().observe(getViewLifecycleOwner(), new Observer<Therapy>() {
+        therapyViewModel.getSingleTherapy().observe(getViewLifecycleOwner(), new Observer<Therapy>() {
             @Override
             public void onChanged(Therapy therapy) {
                 editTextTherapyTime.setText(therapy.getTime());
@@ -95,9 +95,7 @@ public class AddTherapyFragment extends Fragment {
                     public void onClick(View view) {
                         int id = therapy.getId();
                         editTherapy(id);
-                        therapyViewModel.setOneTherapy(new Therapy("", 0.0, "", ""));
-                        timePickerViewModel.setDatum("");
-                        datePickerViewModel.setDate(date);
+                        resetAll();
                         Navigation.findNavController(view).navigate(R.id.action_addTherapyFragment_to_therapyFragment);
                     }
                 });
@@ -135,9 +133,9 @@ public class AddTherapyFragment extends Fragment {
     }
 
     public void resetAll(){
-        timePickerViewModel.setDatum("");
+        therapyViewModel.setSingleTherapy(new Therapy("", 0.0, "", ""));
+        //timePickerViewModel.setDatum("");
         datePickerViewModel.setDate(date);
-        therapyViewModel.setOneTherapy(new Therapy("", 0.0, "", ""));
     }
 
     public void initWidgets(View view){
