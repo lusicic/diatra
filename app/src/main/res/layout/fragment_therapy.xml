@@ -10,21 +10,99 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".TherapyFragment">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/button_new_therapy"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout1"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="right|top"
-        android:layout_margin="16dp"
-        app:borderWidth="0dp"
-        android:text="@color/black"
-        android:contentDescription="@string/add"
-        android:src="@drawable/ic_add" />
+        android:paddingBottom="30dp">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/button_new_therapy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|top"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="25dp"
+            android:contentDescription="@string/add"
+            android:src="@drawable/ic_add"
+            app:tint="@color/gray"
+            app:backgroundTint="@color/white"
+            app:borderWidth="0dp"
+            app:layout_constraintEnd_toEndOf="@+id/constraintLayout1"
+            app:layout_constraintTop_toTopOf="@+id/constraintLayout1"/>
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="30dp"
+            android:paddingBottom="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/image_view1"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/ic_therapies"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView1"
+                app:layout_constraintVertical_bias="0.146" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/text_view_therapies_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="n"
+                    android:textSize="30dp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/image_view1" />
+
+                <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="taken"
+                    android:textSize="18dp" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textViewTimeline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:text="timeline"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="@color/gray"
+            android:textStyle="bold"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_therapy"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:listitem="@layout/therapy_item" />
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/therapy_item"
+        android:layout_marginTop="5dp"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTimeline"/>
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

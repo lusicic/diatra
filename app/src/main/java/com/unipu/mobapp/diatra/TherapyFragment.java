@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -30,7 +31,7 @@ public class TherapyFragment extends Fragment {
     private TherapyViewModel therapyViewModel;
 
     private FloatingActionButton buttonNewTherapy;
-
+    private TextView textViewTherapiesNumber;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,6 +44,7 @@ public class TherapyFragment extends Fragment {
 
         RecyclerView recyclerViewTherapy = view.findViewById(R.id.recycler_view_therapy);
         buttonNewTherapy = view.findViewById(R.id.button_new_therapy);
+        textViewTherapiesNumber = view.findViewById(R.id.text_view_therapies_number);
 
         recyclerViewTherapy.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerViewTherapy.setHasFixedSize(true);
@@ -55,6 +57,7 @@ public class TherapyFragment extends Fragment {
         therapyViewModel.getDayTherapies().observe(getActivity(), new Observer<List<Therapy>>() {
             @Override
             public void onChanged(List<Therapy> therapies) {
+                textViewTherapiesNumber.setText(String.valueOf(therapies.size()));
                 therapyAdapter.setTherapies(therapies);
             }
         });
