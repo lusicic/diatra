@@ -68,64 +68,64 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="MON"
-                android:textColor="@color/gray"
+                android:text="Mon"
                 android:textAlignment="center"
-                android:textSize="16sp"/>
+                android:textColor="@color/gray"
+                android:textSize="16sp" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="TUE"
-                android:textColor="@color/gray"
+                android:text="Tue"
                 android:textAlignment="center"
-                android:textSize="16sp"/>
+                android:textColor="@color/gray"
+                android:textSize="16sp" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="WED"
-                android:textColor="@color/gray"
+                android:text="Wed"
                 android:textAlignment="center"
-                android:textSize="16sp"/>
+                android:textColor="@color/gray"
+                android:textSize="16sp" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="THUR"
-                android:textColor="@color/gray"
+                android:text="Thur"
                 android:textAlignment="center"
-                android:textSize="16sp"/>
+                android:textColor="@color/gray"
+                android:textSize="16sp" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="FRI"
-                android:textColor="@color/gray"
+                android:text="Fri"
                 android:textAlignment="center"
-                android:textSize="16sp"/>
+                android:textColor="@color/gray"
+                android:textSize="16sp" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="SAT"
-                android:textColor="@color/gray"
+                android:text="Sat"
                 android:textAlignment="center"
-                android:textSize="16sp"/>
+                android:textColor="@color/gray"
+                android:textSize="16sp" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="SUN"
-                android:textColor="@color/gray"
+                android:text="Sun"
                 android:textAlignment="center"
-                android:textSize="16sp"/>
+                android:textColor="@color/gray"
+                android:textSize="16sp" />
 
 
         </LinearLayout>
