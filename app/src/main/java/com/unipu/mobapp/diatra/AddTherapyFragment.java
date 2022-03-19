@@ -14,8 +14,11 @@ import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.unipu.mobapp.diatra.data.Therapy;
@@ -32,9 +35,11 @@ public class AddTherapyFragment extends Fragment {
     DatePickerViewModel datePickerViewModel;
 
     private EditText editTextTherapyTime;
-    private EditText editTextType;
     private EditText editTextDose;
     private EditText editTextTherapyDate;
+
+    Spinner spinnerType;
+    String therapyType;
 
     private Button buttonAddTherapy;
 
@@ -61,11 +66,34 @@ public class AddTherapyFragment extends Fragment {
 
         initWidgets(view);
 
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.type_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerType.setAdapter(adapter);
+
+
         date = therapyViewModel.getDate().getValue();
         editTextTherapyDate.setText(date);
 
         editTextTherapyDate.setOnClickListener(this::showDatePickerDialog);
         editTextTherapyTime.setOnClickListener(this::showTimePickerDialog);
+
+        spinnerType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if(adapterView.getItemAtPosition(i).equals("Choose category")){
+
+                }
+                else{
+                    therapyType = adapterView.getItemAtPosition(i).toString();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         buttonAddTherapy.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,7 +108,6 @@ public class AddTherapyFragment extends Fragment {
             @Override
             public void onChanged(Therapy therapy) {
                 editTextTherapyTime.setText(therapy.getTime());
-                editTextType.setText(therapy.getType());
                 editTextTherapyDate.setText(therapy.getDate());
 
                 if(therapy.getDosage() == 0.0){
@@ -89,6 +116,8 @@ public class AddTherapyFragment extends Fragment {
                 else {
                     editTextDose.setText(String.valueOf(therapy.getDosage()));
                 }
+
+                spinnerType.setSelection(adapter.getPosition(therapy.getType()));
 
                 buttonAddTherapy.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -142,16 +171,17 @@ public class AddTherapyFragment extends Fragment {
         buttonAddTherapy = view.findViewById(R.id.button_save_therapy);
 
         editTextTherapyTime = view.findViewById(R.id.edit_text_therapy_time);
-        editTextType = view.findViewById(R.id.edit_text_type);
         editTextDose = view.findViewById(R.id.edit_text_dose);
         editTextTherapyDate = view.findViewById(R.id.edit_text_therapy_date);
+
+        spinnerType = view.findViewById(R.id.type_spinner);
 
     }
 
     private void saveTherapy() {
         String date = editTextTherapyDate.getText().toString();
         String therapyTime = editTextTherapyTime.getText().toString();
-        String type = editTextType.getText().toString();
+        String type = therapyType;
         Double dose = Double.parseDouble(editTextDose.getText().toString());
 
         if(therapyTime.trim().isEmpty() || type.trim().isEmpty()){
@@ -166,7 +196,7 @@ public class AddTherapyFragment extends Fragment {
     private void editTherapy(int id) {
         String date = editTextTherapyDate.getText().toString();
         String therapyTime = editTextTherapyTime.getText().toString();
-        String type = editTextType.getText().toString();
+        String type = therapyType;
         Double dose = Double.parseDouble(editTextDose.getText().toString());
 
         if(therapyTime.trim().isEmpty() || type.trim().isEmpty()){
