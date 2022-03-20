@@ -1,38 +1,41 @@
 package com.unipu.mobapp.diatra;
 
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.os.Bundle;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.unipu.mobapp.diatra.data.Therapy;
-import com.unipu.mobapp.diatra.viewmodel.DatePickerViewModel;
-import com.unipu.mobapp.diatra.viewmodel.TimePickerViewModel;
 import com.unipu.mobapp.diatra.viewmodel.TherapyViewModel;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Calendar;
+
 public class AddTherapyFragment extends Fragment {
 
     TherapyViewModel therapyViewModel;
-    TimePickerViewModel timePickerViewModel;
-    DatePickerViewModel datePickerViewModel;
 
     private EditText editTextTherapyTime;
     private EditText editTextDose;
@@ -43,10 +46,11 @@ public class AddTherapyFragment extends Fragment {
 
     private Button buttonAddTherapy;
 
-    Observer<String> timeObserver;
     Observer<String> dateObserver;
 
     String date;
+    private TimePickerDialog.OnTimeSetListener onTimeSetListener;
+    private DatePickerDialog.OnDateSetListener onDateSetListener;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -61,16 +65,12 @@ public class AddTherapyFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         therapyViewModel = new ViewModelProvider(requireActivity()).get(TherapyViewModel.class);
-        timePickerViewModel = new ViewModelProvider(requireActivity()).get(TimePickerViewModel.class);
-        datePickerViewModel = new ViewModelProvider(requireActivity()).get(DatePickerViewModel.class);
 
         initWidgets(view);
-
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.type_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerType.setAdapter(adapter);
-
 
         date = therapyViewModel.getDate().getValue();
         editTextTherapyDate.setText(date);
@@ -94,6 +94,28 @@ public class AddTherapyFragment extends Fragment {
 
             }
         });
+
+        onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker timePicker, int hourOfDay, int minute) {
+                String newTime = hourOfDay + ":" + minute;
+                editTextTherapyTime.setText(newTime);
+            }
+        };
+
+        onDateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int day) {
+                String newMonth="";
+
+                if ((month+1)<10){
+                    newMonth = "0"+ (month+1);
+                }
+
+                String newDate = day + "/" + newMonth + "/" + year;
+                editTextTherapyDate.setText(newDate);
+            }
+        };
 
         buttonAddTherapy.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,36 +146,19 @@ public class AddTherapyFragment extends Fragment {
                     public void onClick(View view) {
                         int id = therapy.getId();
                         editTherapy(id);
-                        resetAll();
+                        resetAllExceptDate();
                         Navigation.findNavController(view).navigate(R.id.action_addTherapyFragment_to_therapyFragment);
                     }
                 });
             }
         });
 
-        dateObserver = new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable final String date) {
-                editTextTherapyDate.setText(date);
-            }
-        };
-
-        datePickerViewModel.getDate().observe(getViewLifecycleOwner(), dateObserver);
-
-        timeObserver = new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable final String date) {
-                editTextTherapyTime.setText(date);
-            }
-        };
-
-        timePickerViewModel.getDatum().observe(getViewLifecycleOwner(), timeObserver);
 
 
         OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
             @Override
             public void handleOnBackPressed() {
-                resetAll();
+                resetAllExceptDate();
                 Navigation.findNavController(view).navigate(R.id.action_addTherapyFragment_to_therapyFragment);
             }
         };
@@ -163,8 +168,10 @@ public class AddTherapyFragment extends Fragment {
 
     public void resetAll(){
         therapyViewModel.setSingleTherapy(new Therapy("", 0.0, "", ""));
-        //timePickerViewModel.setDatum("");
-        datePickerViewModel.setDate(date);
+    }
+
+    public void resetAllExceptDate(){
+        therapyViewModel.setSingleTherapy(new Therapy("", 0.0, "", date));
     }
 
     public void initWidgets(View view){
@@ -210,13 +217,25 @@ public class AddTherapyFragment extends Fragment {
     }
 
     public void showTimePickerDialog(View v) {
-        DialogFragment timeFrag = new TimePickerFragment();
-        timeFrag.show(getParentFragmentManager(), "timePicker");
+        final Calendar c = Calendar.getInstance();
+        int hour = c.get(Calendar.HOUR_OF_DAY);
+        int minute = c.get(Calendar.MINUTE);
+
+        TimePickerDialog timePicker = new TimePickerDialog(getActivity(), AlertDialog.THEME_HOLO_LIGHT, onTimeSetListener, hour, minute,
+                DateFormat.is24HourFormat(getActivity()));
+        timePicker.show();
     }
 
+
     public void showDatePickerDialog(View v) {
-        DialogFragment dateFrag = new DatePickerFragment();
-        dateFrag.show(getParentFragmentManager(), "datePicker");
+        final Calendar c = Calendar.getInstance();
+
+        int day = c.get(Calendar.DAY_OF_MONTH);
+        int month = c.get(Calendar.MONTH);
+        int year = c.get(Calendar.YEAR);
+
+        DatePickerDialog datePicker = new DatePickerDialog(getActivity(), AlertDialog.THEME_HOLO_LIGHT, onDateSetListener, year, month, day);
+        datePicker.show();
     }
 
 

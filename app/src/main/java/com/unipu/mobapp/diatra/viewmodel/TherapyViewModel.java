@@ -25,11 +25,24 @@ public class TherapyViewModel extends AndroidViewModel {
     // dohvat jedne instance
     private MutableLiveData<Therapy> singleTherapy = new MutableLiveData<>();
 
+    // dohvat datuma
+    private MutableLiveData<String> timey = new MutableLiveData<>();
+
     public TherapyViewModel(@NonNull @NotNull Application application) {
         super(application);
         repo = new TherapyRepository(application);
         dayTherapies = Transformations.switchMap(date,
                 date -> repo.getDayTherapies(date));
+    }
+
+    //vrijeme
+
+    public void setTimey(String vrijeme) {
+        timey.setValue(vrijeme);
+    }
+
+    public LiveData<String> getTimey() {
+        return timey;
     }
 
 
