@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class CalendarUtils {
 
-    public static LocalDate selectedDate;
+    public static LocalDate selectedDate = LocalDate.now();
 
     public static String monthYear(LocalDate date){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM yyyy");

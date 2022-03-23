@@ -10,12 +10,13 @@ import androidx.lifecycle.Transformations;
 
 import com.unipu.mobapp.diatra.data.Therapy;
 import com.unipu.mobapp.diatra.data.TherapyRepository;
+import com.unipu.mobapp.diatra.utils.SingleLiveEvent;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class TherapyViewModel extends AndroidViewModel {
+public class DayViewModel extends AndroidViewModel {
 
     private TherapyRepository repo;
 
@@ -25,26 +26,20 @@ public class TherapyViewModel extends AndroidViewModel {
     // dohvat jedne instance
     private MutableLiveData<Therapy> singleTherapy = new MutableLiveData<>();
 
-    // dohvat datuma
-    private MutableLiveData<String> timey = new MutableLiveData<>();
+    private SingleLiveEvent<Therapy> sTherapy = new SingleLiveEvent<>();
+    public SingleLiveEvent<Therapy> getSTherapy() {
+        return sTherapy;
+    }
+    public void setSTherapy(Therapy therapy) {
+        sTherapy.setValue(therapy);
+    }
 
-    public TherapyViewModel(@NonNull @NotNull Application application) {
+    public DayViewModel(@NonNull @NotNull Application application) {
         super(application);
         repo = new TherapyRepository(application);
         dayTherapies = Transformations.switchMap(date,
                 date -> repo.getDayTherapies(date));
     }
-
-    //vrijeme
-
-    public void setTimey(String vrijeme) {
-        timey.setValue(vrijeme);
-    }
-
-    public LiveData<String> getTimey() {
-        return timey;
-    }
-
 
     // za dohvat terapije na odredeni datum
     // (promjena oznacenog datuma trigera promijenu liste terapije)

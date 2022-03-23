@@ -13,20 +13,20 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.unipu.mobapp.diatra.viewmodel.TherapyViewModel;
+import com.unipu.mobapp.diatra.viewmodel.DayViewModel;
 import com.unipu.mobapp.diatra.viewmodel.UserViewModel;
 
 import java.time.LocalDate;
 
 public class MainActivity extends AppCompatActivity {
 
-    TherapyViewModel therapyViewModel;
+    DayViewModel therapyViewModel;
     UserViewModel userViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        therapyViewModel = new ViewModelProvider(this).get(TherapyViewModel.class);
+        therapyViewModel = new ViewModelProvider(this).get(DayViewModel.class);
         therapyViewModel.setDate(String.valueOf(LocalDate.now()));
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 

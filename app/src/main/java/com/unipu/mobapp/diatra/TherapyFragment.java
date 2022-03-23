@@ -20,7 +20,7 @@ import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.unipu.mobapp.diatra.adapter.TherapyAdapter;
 import com.unipu.mobapp.diatra.data.Therapy;
-import com.unipu.mobapp.diatra.viewmodel.TherapyViewModel;
+import com.unipu.mobapp.diatra.viewmodel.DayViewModel;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -28,10 +28,13 @@ import java.util.List;
 
 public class TherapyFragment extends Fragment {
 
-    private TherapyViewModel therapyViewModel;
+    private DayViewModel dayViewModel;
 
     private FloatingActionButton buttonNewTherapy;
     private TextView textViewTherapiesNumber;
+    private TextView textViewTherapiesDate;
+
+    String date;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,6 +48,7 @@ public class TherapyFragment extends Fragment {
         RecyclerView recyclerViewTherapy = view.findViewById(R.id.recycler_view_therapy);
         buttonNewTherapy = view.findViewById(R.id.button_new_therapy);
         textViewTherapiesNumber = view.findViewById(R.id.text_view_therapies_number);
+        textViewTherapiesDate = view.findViewById(R.id.text_view_therapies_date);
 
         recyclerViewTherapy.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerViewTherapy.setHasFixedSize(true);
@@ -52,9 +56,12 @@ public class TherapyFragment extends Fragment {
         TherapyAdapter therapyAdapter = new TherapyAdapter();
         recyclerViewTherapy.setAdapter(therapyAdapter);
 
-        therapyViewModel = new ViewModelProvider(requireActivity()).get(TherapyViewModel.class);
+        dayViewModel = new ViewModelProvider(requireActivity()).get(DayViewModel.class);
 
-        therapyViewModel.getDayTherapies().observe(getActivity(), new Observer<List<Therapy>>() {
+        String date = dayViewModel.getDate().getValue();
+        textViewTherapiesDate.setText(date);
+
+        dayViewModel.getDayTherapies().observe(getActivity(), new Observer<List<Therapy>>() {
             @Override
             public void onChanged(List<Therapy> therapies) {
                 textViewTherapiesNumber.setText(String.valueOf(therapies.size()));
@@ -78,7 +85,7 @@ public class TherapyFragment extends Fragment {
 
             @Override
             public void onSwiped(@NonNull @NotNull RecyclerView.ViewHolder viewHolder, int direction) {
-                therapyViewModel.delete(therapyAdapter.getTherapyAt(viewHolder.getAdapterPosition()));
+                dayViewModel.delete(therapyAdapter.getTherapyAt(viewHolder.getAdapterPosition()));
                 Toast.makeText(getActivity().getApplicationContext(), "Therapy deleted", Toast.LENGTH_SHORT).show();
             }
         }).attachToRecyclerView(recyclerViewTherapy);
@@ -86,7 +93,7 @@ public class TherapyFragment extends Fragment {
         therapyAdapter.setOnItemClickListener(new TherapyAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Therapy therapy) {
-                therapyViewModel.setSingleTherapy(therapy);
+                dayViewModel.setSTherapy(therapy);
                 Navigation.findNavController(view).navigate(R.id.action_therapyFragment_to_addTherapyFragment);
             }
         });

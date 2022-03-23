@@ -15,14 +15,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.unipu.mobapp.diatra.adapter.CalendarAdapter;
 import com.unipu.mobapp.diatra.data.Therapy;
 import com.unipu.mobapp.diatra.utils.CalendarUtils;
-import com.unipu.mobapp.diatra.viewmodel.TherapyViewModel;
+import com.unipu.mobapp.diatra.viewmodel.DayViewModel;
 
 import static com.unipu.mobapp.diatra.utils.CalendarUtils.formattedDate;
 import static com.unipu.mobapp.diatra.utils.CalendarUtils.monthYear;
@@ -36,7 +35,7 @@ import java.util.List;
 
 public class HomeFragment extends Fragment implements CalendarAdapter.OnItemListener {
 
-    private TherapyViewModel therapyViewModel;
+    private DayViewModel dayViewModel;
 
     private TextView monthYearText;
     private RecyclerView calendarRecyclerView;
@@ -48,6 +47,7 @@ public class HomeFragment extends Fragment implements CalendarAdapter.OnItemList
 
     CardView therapyCardView;
     CardView newTherapyCardView;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -61,15 +61,12 @@ public class HomeFragment extends Fragment implements CalendarAdapter.OnItemList
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        therapyViewModel = new ViewModelProvider(requireActivity()).get(TherapyViewModel.class);
-
+        initViewModels();
         initWidgets(view);
 
-        CalendarUtils.selectedDate = LocalDate.now();
-        /*String date = String.valueOf(formattedDate(CalendarUtils.selectedDate));
-
-        therapyViewModel.setDate(date);*/
         setUpCalendar();
+
+        dayViewModel.setDate(String.valueOf(formattedDate(CalendarUtils.selectedDate)));
 
         btnBack.setOnClickListener(this::previousWeekAction);
 
@@ -79,13 +76,17 @@ public class HomeFragment extends Fragment implements CalendarAdapter.OnItemList
 
         newTherapyCardView.setOnClickListener(this::newTherapy);
 
-        therapyViewModel.getDayTherapies().observe(getActivity(), new Observer<List<Therapy>>() {
+        dayViewModel.getDayTherapies().observe(getActivity(), new Observer<List<Therapy>>() {
             @Override
             public void onChanged(List<Therapy> therapies) {
                 textViewTest.setText(String.valueOf(therapies.size()));
             }
         });
 
+    }
+
+    private void initViewModels(){
+        dayViewModel = new ViewModelProvider(requireActivity()).get(DayViewModel.class);
     }
 
     private void initWidgets(View view){
@@ -118,8 +119,8 @@ public class HomeFragment extends Fragment implements CalendarAdapter.OnItemList
     {
         CalendarUtils.selectedDate = CalendarUtils.selectedDate.minusWeeks(1);
 
-        String selectedDate = String.valueOf(formattedDate(CalendarUtils.selectedDate));
-        therapyViewModel.setDate(selectedDate);
+        String selectedDate = formattedDate(CalendarUtils.selectedDate);
+        dayViewModel.setDate(selectedDate);
 
         setUpCalendar();
     }
@@ -128,8 +129,8 @@ public class HomeFragment extends Fragment implements CalendarAdapter.OnItemList
     {
         CalendarUtils.selectedDate = CalendarUtils.selectedDate.plusWeeks(1);
 
-        String selectedDate = String.valueOf(formattedDate(CalendarUtils.selectedDate));
-        therapyViewModel.setDate(selectedDate);
+        String selectedDate = formattedDate(CalendarUtils.selectedDate);
+        dayViewModel.setDate(selectedDate);
 
         setUpCalendar();
     }
@@ -148,10 +149,7 @@ public class HomeFragment extends Fragment implements CalendarAdapter.OnItemList
     public void onItemClick(int position, LocalDate date)
     {
         CalendarUtils.selectedDate = date;
-
-        String selectedDate = String.valueOf(formattedDate(CalendarUtils.selectedDate));
-        therapyViewModel.setDate(selectedDate);
-
+        dayViewModel.setDate(formattedDate(date));
         setUpCalendar();
     }
 }
