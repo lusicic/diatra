@@ -98,7 +98,7 @@ public class AddTherapyFragment extends Fragment {
         onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker timePicker, int hourOfDay, int minute) {
-                String newTime = hourOfDay + ":" + minute;
+                String newTime = convertDate(hourOfDay) + ":" + convertDate(minute);
                 editTextTherapyTime.setText(newTime);
             }
         };
@@ -106,13 +106,7 @@ public class AddTherapyFragment extends Fragment {
         onDateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int day) {
-                String newMonth="";
-
-                if ((month+1)<10){
-                    newMonth = "0"+ (month+1);
-                }
-
-                String newDate = day + "/" + newMonth + "/" + year;
+                String newDate = convertDate(day) + "/" + convertDate(month+1) + "/" + convertDate(year);
                 editTextTherapyDate.setText(newDate);
             }
         };
@@ -259,6 +253,14 @@ public class AddTherapyFragment extends Fragment {
 
         DatePickerDialog datePicker = new DatePickerDialog(getActivity(), AlertDialog.THEME_HOLO_LIGHT, onDateSetListener, year, month, day);
         datePicker.show();
+    }
+
+    public String convertDate(int input) {
+        if (input >= 10) {
+            return String.valueOf(input);
+        } else {
+            return "0" + String.valueOf(input);
+        }
     }
 
 }
