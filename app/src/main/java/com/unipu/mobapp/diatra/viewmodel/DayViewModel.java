@@ -23,9 +23,6 @@ public class DayViewModel extends AndroidViewModel {
     private MutableLiveData<String> date = new MutableLiveData<>();
     private LiveData<List<Therapy>> dayTherapies;
 
-    // dohvat jedne instance
-    private MutableLiveData<Therapy> singleTherapy = new MutableLiveData<>();
-
     private SingleLiveEvent<Therapy> sTherapy = new SingleLiveEvent<>();
     public SingleLiveEvent<Therapy> getSTherapy() {
         return sTherapy;
@@ -50,14 +47,6 @@ public class DayViewModel extends AndroidViewModel {
 
     public LiveData<List<Therapy>> getDayTherapies() {
         return dayTherapies;
-    }
-
-    // dohvat/update jedne instance terapije
-
-    public void setSingleTherapy(Therapy therapy) { singleTherapy.setValue(therapy); };
-
-    public LiveData<Therapy> getSingleTherapy() {
-        return singleTherapy;
     }
 
     // za bazu
