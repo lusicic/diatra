@@ -121,7 +121,7 @@ public class AddTherapyFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 saveTherapy();
-                Navigation.findNavController(view).getPreviousBackStackEntry();
+                Navigation.findNavController(view).popBackStack();
             }
         });
 

@@ -43,8 +43,7 @@ public class AddUserFragment extends Fragment {
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
-
+        initViewModel();
         initWidgets(view);
 
         buttonAddUser.setOnClickListener(new View.OnClickListener() {
@@ -75,6 +74,10 @@ public class AddUserFragment extends Fragment {
                 }
             }
         });
+    }
+
+    private void initViewModel() {
+        userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
     }
 
     private void initWidgets(View view){

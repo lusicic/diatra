@@ -26,20 +26,25 @@ import java.time.LocalDate;
 
 public class MainActivity extends AppCompatActivity {
 
-    DayViewModel therapyViewModel;
+    DayViewModel dayViewModel;
     UserViewModel userViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        therapyViewModel = new ViewModelProvider(this).get(DayViewModel.class);
-        therapyViewModel.setDate(String.valueOf(LocalDate.now()));
-        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
-        therapyViewModel.setDate(String.valueOf(LocalDate.now()));
+        initViewModels();
+
+        dayViewModel.setDate(String.valueOf(LocalDate.now()));
         userViewModel.getUser();
+
         setContentView(R.layout.activity_main);
         setUpNavigation();
+    }
+
+    private void initViewModels() {
+        dayViewModel = new ViewModelProvider(this).get(DayViewModel.class);
+        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
     }
 
     public void setUpNavigation() {

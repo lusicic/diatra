@@ -61,7 +61,7 @@ public class HomeFragment extends Fragment implements CalendarAdapter.OnItemList
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        initViewModels();
+        initViewModel();
         initWidgets(view);
 
         setUpCalendar();
@@ -85,7 +85,7 @@ public class HomeFragment extends Fragment implements CalendarAdapter.OnItemList
 
     }
 
-    private void initViewModels(){
+    private void initViewModel(){
         dayViewModel = new ViewModelProvider(requireActivity()).get(DayViewModel.class);
     }
 

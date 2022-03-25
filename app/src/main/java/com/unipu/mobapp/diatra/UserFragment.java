@@ -10,14 +10,11 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.unipu.mobapp.diatra.data.AppDatabase;
 import com.unipu.mobapp.diatra.data.User;
 import com.unipu.mobapp.diatra.viewmodel.UserViewModel;
 
@@ -45,8 +42,37 @@ public class UserFragment extends Fragment {
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
+        initViewModel();
+        initWidgets(view);
+
         userViewModel.getUser();
+
+
+        userViewModel.getUser().observe(getActivity(), new Observer<User>() {
+                @Override
+                public void onChanged(User user) {
+                    if(user!=null) {
+                        updateTextViews(user);
+                    }
+                }
+
+            private void updateTextViews(User user) {
+                textViewName.setText(user.getName());
+                textViewDateOfBirth.setText(user.getDateOfBirth());
+                textViewHeight.setText(String.valueOf(user.getHeight()));
+                textViewWeight.setText(String.valueOf(user.getWeight()));
+                textViewTypeOfDiabetes.setText(user.getTypeOfDiabetes());
+            }
+        });
+
+        buttonEditUser.setOnClickListener(this::changeUserInfo);
+    }
+
+    private void initViewModel() {
+        userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
+    }
+
+    private void initWidgets(View view) {
         buttonEditUser = view.findViewById(R.id.button_edit_user);
 
         textViewName = view.findViewById(R.id.text_view_name);
@@ -54,33 +80,10 @@ public class UserFragment extends Fragment {
         textViewHeight = view.findViewById(R.id.text_view_height);
         textViewWeight = view.findViewById(R.id.text_view_weight);
         textViewTypeOfDiabetes = view.findViewById(R.id.text_view_type_of_diabetes);
+    }
 
-        userViewModel.getUser().observe(getActivity(), new Observer<User>() {
-                @Override
-                public void onChanged(User user) {
-                    if(user==null) {
-                        textViewName.setText("");
-                        textViewDateOfBirth.setText("");
-                        textViewHeight.setText("");
-                        textViewWeight.setText("");
-                        textViewTypeOfDiabetes.setText("");
-                    }
-                    else{
-                        textViewName.setText(user.getName());
-                        textViewDateOfBirth.setText(user.getDateOfBirth());
-                        textViewHeight.setText(String.valueOf(user.getHeight()));
-                        textViewWeight.setText(String.valueOf(user.getWeight()));
-                        textViewTypeOfDiabetes.setText(user.getTypeOfDiabetes());
-                    }
-                }
-        });
-
-        buttonEditUser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.action_profileFragment_to_addUserFragment);
-            }
-        });
+    private void changeUserInfo(View view){
+        Navigation.findNavController(view).navigate(R.id.action_profileFragment_to_addUserFragment);
     }
 
 }

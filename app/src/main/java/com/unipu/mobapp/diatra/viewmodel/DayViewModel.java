@@ -24,12 +24,6 @@ public class DayViewModel extends AndroidViewModel {
     private LiveData<List<Therapy>> dayTherapies;
 
     private SingleLiveEvent<Therapy> sTherapy = new SingleLiveEvent<>();
-    public SingleLiveEvent<Therapy> getSTherapy() {
-        return sTherapy;
-    }
-    public void setSTherapy(Therapy therapy) {
-        sTherapy.setValue(therapy);
-    }
 
     public DayViewModel(@NonNull @NotNull Application application) {
         super(application);
@@ -47,6 +41,16 @@ public class DayViewModel extends AndroidViewModel {
 
     public LiveData<List<Therapy>> getDayTherapies() {
         return dayTherapies;
+    }
+
+    // za edit therapy
+
+    public SingleLiveEvent<Therapy> getSTherapy() {
+        return sTherapy;
+    }
+
+    public void setSTherapy(Therapy therapy) {
+        sTherapy.setValue(therapy);
     }
 
     // za bazu
