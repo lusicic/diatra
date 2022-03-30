@@ -14,9 +14,12 @@ import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import com.unipu.mobapp.diatra.data.User;
 import com.unipu.mobapp.diatra.viewmodel.UserViewModel;
@@ -33,16 +36,18 @@ public class AddUserFragment extends Fragment {
     private EditText editTextDateOfBirth;
     private EditText editTextHeight;
     private EditText editTextWeight;
-    private EditText editTextTypeOfDiabetes;
 
     private Button buttonAddUser;
 
     private DatePickerDialog.OnDateSetListener onDateSetListener;
 
+    private Spinner spinnerTypeOfDiabetes;
+    private ArrayAdapter<CharSequence> typeAdapter;
+    private String diabetesType;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_add_user, container, false);
     }
 
@@ -54,6 +59,23 @@ public class AddUserFragment extends Fragment {
         initWidgets(view);
 
         editTextDateOfBirth.setOnClickListener(this::showDate);
+
+        spinnerTypeOfDiabetes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if(adapterView.getItemAtPosition(i).equals("Choose category")){
+
+                }
+                else{
+                    diabetesType = adapterView.getItemAtPosition(i).toString();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         buttonAddUser.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,7 +92,7 @@ public class AddUserFragment extends Fragment {
                     editTextDateOfBirth.setText(user.getDateOfBirth());
                     editTextHeight.setText(String.valueOf(user.getHeight()));
                     editTextWeight.setText(String.valueOf(user.getWeight()));
-                    editTextTypeOfDiabetes.setText(user.getTypeOfDiabetes());
+                    spinnerTypeOfDiabetes.setSelection(typeAdapter.getPosition(user.getTypeOfDiabetes()));
 
                     int id = user.getUserId();
                     buttonAddUser.setOnClickListener(new View.OnClickListener() {
@@ -104,7 +126,11 @@ public class AddUserFragment extends Fragment {
         editTextDateOfBirth = view.findViewById(R.id.edit_text_date_of_birth);
         editTextHeight = view.findViewById(R.id.edit_text_height);
         editTextWeight = view.findViewById(R.id.edit_text_weight);
-        editTextTypeOfDiabetes = view.findViewById(R.id.edit_text_type_of_diabetes);
+
+        spinnerTypeOfDiabetes = view.findViewById(R.id.spinner_diabetes_type);
+        typeAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.diabetes_type_array, android.R.layout.simple_spinner_item);
+        typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerTypeOfDiabetes.setAdapter(typeAdapter);
     }
 
     private void saveUser() {
@@ -112,7 +138,7 @@ public class AddUserFragment extends Fragment {
         String dateOfBirth = editTextDateOfBirth.getText().toString();
         Double height = Double.parseDouble(editTextHeight.getText().toString());
         Double weight = Double.parseDouble(editTextWeight.getText().toString());
-        String typeOfDiabetes = editTextTypeOfDiabetes.getText().toString();
+        String typeOfDiabetes = diabetesType;
 
         User user = new User(name, dateOfBirth, height, weight, typeOfDiabetes);
         userViewModel.insert(user);
@@ -123,7 +149,7 @@ public class AddUserFragment extends Fragment {
         String dateOfBirth = editTextDateOfBirth.getText().toString();
         Double height = Double.parseDouble(editTextHeight.getText().toString());
         Double weight = Double.parseDouble(editTextWeight.getText().toString());
-        String typeOfDiabetes = editTextTypeOfDiabetes.getText().toString();
+        String typeOfDiabetes = diabetesType;
 
         User user = new User(name, dateOfBirth, height, weight, typeOfDiabetes);
         user.setUserId(id);
