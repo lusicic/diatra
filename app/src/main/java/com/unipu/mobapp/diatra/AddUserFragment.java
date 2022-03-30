@@ -1,5 +1,7 @@
 package com.unipu.mobapp.diatra;
 
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,12 +15,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 
 import com.unipu.mobapp.diatra.data.User;
 import com.unipu.mobapp.diatra.viewmodel.UserViewModel;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Calendar;
 
 public class AddUserFragment extends Fragment {
 
@@ -31,6 +36,8 @@ public class AddUserFragment extends Fragment {
     private EditText editTextTypeOfDiabetes;
 
     private Button buttonAddUser;
+
+    private DatePickerDialog.OnDateSetListener onDateSetListener;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,6 +52,8 @@ public class AddUserFragment extends Fragment {
 
         initViewModel();
         initWidgets(view);
+
+        editTextDateOfBirth.setOnClickListener(this::showDate);
 
         buttonAddUser.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,6 +83,14 @@ public class AddUserFragment extends Fragment {
                 }
             }
         });
+
+        onDateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int day) {
+                String newDate = convertDate(day) + "/" + convertDate(month+1) + "/" + convertDate(year);
+                editTextDateOfBirth.setText(newDate);
+            }
+        };
     }
 
     private void initViewModel() {
@@ -111,5 +128,24 @@ public class AddUserFragment extends Fragment {
         User user = new User(name, dateOfBirth, height, weight, typeOfDiabetes);
         user.setUserId(id);
         userViewModel.update(user);
+    }
+
+    public void showDate(View v) {
+        final Calendar c = Calendar.getInstance();
+
+        int day = c.get(Calendar.DAY_OF_MONTH);
+        int month = c.get(Calendar.MONTH);
+        int year = c.get(Calendar.YEAR);
+
+        DatePickerDialog datePicker = new DatePickerDialog(getActivity(), AlertDialog.THEME_HOLO_LIGHT, onDateSetListener, year, month, day);
+        datePicker.show();
+    }
+
+    public String convertDate(int input) {
+        if (input >= 10) {
+            return String.valueOf(input);
+        } else {
+            return "0" + String.valueOf(input);
+        }
     }
 }
