@@ -34,6 +34,8 @@ public class TherapyFragment extends Fragment {
     private TextView textViewTherapiesNumber;
     private TextView textViewTherapiesDate;
 
+    RecyclerView recyclerViewTherapy;
+
     String date;
 
     @Override
@@ -45,10 +47,7 @@ public class TherapyFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        RecyclerView recyclerViewTherapy = view.findViewById(R.id.recycler_view_therapy);
-        buttonNewTherapy = view.findViewById(R.id.button_new_therapy);
-        textViewTherapiesNumber = view.findViewById(R.id.text_view_therapies_number);
-        textViewTherapiesDate = view.findViewById(R.id.text_view_therapies_date);
+        initWidgets(view);
 
         recyclerViewTherapy.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerViewTherapy.setHasFixedSize(true);
@@ -98,5 +97,12 @@ public class TherapyFragment extends Fragment {
             }
         });
 
+    }
+
+    private void initWidgets(View view) {
+        recyclerViewTherapy = view.findViewById(R.id.recycler_view_therapy);
+        buttonNewTherapy = view.findViewById(R.id.button_new_therapy);
+        textViewTherapiesNumber = view.findViewById(R.id.text_view_therapies_number);
+        textViewTherapiesDate = view.findViewById(R.id.text_view_therapies_date);
     }
 }
