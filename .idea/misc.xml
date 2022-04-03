@@ -3,8 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/ktrnk/Documents/diatra/app/src/main/res/drawable/ic_burnt.xml" value="0.2825" />
+        <entry key="..\:/Users/ktrnk/Documents/diatra/app/src/main/res/drawable/ic_distance.xml" value="0.2785" />
+        <entry key="..\:/Users/ktrnk/Documents/diatra/app/src/main/res/drawable/ic_fire.xml" value="0.2785" />
+        <entry key="..\:/Users/ktrnk/Documents/diatra/app/src/main/res/drawable/ic_time.xml" value="0.2785" />
         <entry key="..\:/Users/ktrnk/Documents/diatra/app/src/main/res/layout/fragment_add_user.xml" value="0.278125" />
-        <entry key="..\:/Users/ktrnk/Documents/diatra/app/src/main/res/layout/fragment_physical_activity.xml" value="0.1259259259259259" />
+        <entry key="..\:/Users/ktrnk/Documents/diatra/app/src/main/res/layout/fragment_home.xml" value="0.33" />
+        <entry key="..\:/Users/ktrnk/Documents/diatra/app/src/main/res/layout/fragment_physical_activity.xml" value="0.33" />
+        <entry key="..\:/Users/ktrnk/Documents/diatra/app/src/main/res/layout/fragment_therapy.xml" value="0.278125" />
+        <entry key="..\:/Users/ktrnk/Documents/diatra/app/src/main/res/layout/physical_activity_item.xml" value="0.33" />
+        <entry key="..\:/Users/ktrnk/Documents/diatra/app/src/main/res/layout/therapy_item.xml" value="0.278125" />
       </map>
     </option>
   </component>
