@@ -1,0 +1,26 @@
+package com.unipu.mobapp.diatra.data;
+
+import androidx.lifecycle.LiveData;
+import androidx.room.Dao;
+import androidx.room.Delete;
+import androidx.room.Insert;
+import androidx.room.Query;
+import androidx.room.Update;
+
+import java.util.List;
+
+@Dao
+public interface PhysicalActivityDao {
+
+    @Insert
+    void insert(PhysicalActivity physicalActivity);
+
+    @Update
+    void update(PhysicalActivity physicalActivity);
+
+    @Delete
+    void delete(PhysicalActivity physicalActivity);
+
+    @Query("SELECT * FROM physical_activity_table WHERE date==:date ORDER BY time DESC")
+    LiveData<List<PhysicalActivity>> getDayPhysicalActivities(String date);
+}
