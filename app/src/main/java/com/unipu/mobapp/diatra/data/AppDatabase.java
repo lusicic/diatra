@@ -15,11 +15,12 @@ import org.jetbrains.annotations.NotNull;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-@Database(entities = {Therapy.class, User.class}, version = 1)
+@Database(entities = {Therapy.class, User.class, PhysicalActivity.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract TherapyDao therapyDao();
     public abstract UserDao userDao();
+    public abstract PhysicalActivityDao physicalActivityDao();
 
     private static AppDatabase instance;
 
@@ -45,6 +46,7 @@ public abstract class AppDatabase extends RoomDatabase {
     private static class PopulateDbAsyncTask extends AsyncTask<Void, Void, Void> {
         private TherapyDao therapyDao;
         private UserDao userDao;
+        private PhysicalActivityDao physicalActivityDao;
 
         private PopulateDbAsyncTask(AppDatabase db){
             therapyDao = db.therapyDao();
