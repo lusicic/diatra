@@ -342,7 +342,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/activityCard"
+                android:id="@+id/physicalActivityCard"
                 android:layout_width="157dp"
                 android:layout_height="128dp"
                 android:layout_margin="8dp"

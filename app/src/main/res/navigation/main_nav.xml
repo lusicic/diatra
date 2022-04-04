@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_homeFragment_to_addTherapyFragment"
             app:destination="@id/addTherapyFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_physicalActivityFragment"
+            app:destination="@id/physicalActivityFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -52,9 +55,6 @@
             app:destination="@id/therapyFragment"
             app:popUpTo="@id/addTherapyFragment"
             app:popUpToInclusive="true" />
-        <action
-            android:id="@+id/action_addTherapyFragment_to_datePickerFragment"
-            app:destination="@id/datePickerFragment" />
     </fragment>
     <fragment
         android:id="@+id/welcomeFragment"
@@ -69,9 +69,10 @@
             android:id="@+id/action_addUserFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
     </fragment>
-    <dialog
-        android:id="@+id/datePickerFragment"
-        android:name="com.unipu.mobapp.diatra.DatePickerFragment"
-        android:label="DatePickerFragment" />
+    <fragment
+        android:id="@+id/physicalActivityFragment"
+        android:name="com.unipu.mobapp.diatra.PhysicalActivityFragment"
+        android:label="Activities"
+        tools:layout="@layout/fragment_physical_activity" />
 
 </navigation>

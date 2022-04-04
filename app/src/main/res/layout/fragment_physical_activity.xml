@@ -17,7 +17,7 @@ tools:context=".PhysicalActivityFragment">
     android:paddingBottom="30dp">
 
     <TextView
-        android:id="@+id/text_view_activites_date"
+        android:id="@+id/text_view_physical_activity_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="35dp"
@@ -29,7 +29,7 @@ tools:context=".PhysicalActivityFragment">
         app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/button_new_activity"
+        android:id="@+id/button_new_physical_activity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right|top"
@@ -67,7 +67,7 @@ tools:context=".PhysicalActivityFragment">
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
+            android:layout_marginLeft="20dp"
             android:orientation="vertical">
 
             <TextView
@@ -79,7 +79,7 @@ tools:context=".PhysicalActivityFragment">
                 android:textSize="22dp" />
 
             <TextView
-                android:id="@+id/text_view_therapies_number"
+                android:id="@+id/text_view_physical_activity_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="100"

@@ -10,15 +10,15 @@ public class PhysicalActivity {
     private int id;
 
     private String typeOfActivity;
-    private String duration;
-    private String distance;
-    private String burntCalories;
+    private Double duration;
+    private Double distance;
+    private Double burntCalories;
 
     private String date;
     private String time;
 
-    public PhysicalActivity(String typeOfActivity, String duration, String distance,
-                            String burntCalories, String date, String time) {
+    public PhysicalActivity(String typeOfActivity, Double duration, Double distance,
+                            Double burntCalories, String date, String time) {
         this.typeOfActivity = typeOfActivity;
         this.duration = duration;
         this.distance = distance;
@@ -39,15 +39,15 @@ public class PhysicalActivity {
         return typeOfActivity;
     }
 
-    public String getDuration() {
+    public Double getDuration() {
         return duration;
     }
 
-    public String getDistance() {
+    public Double getDistance() {
         return distance;
     }
 
-    public String getBurntCalories() {
+    public Double getBurntCalories() {
         return burntCalories;
     }
 

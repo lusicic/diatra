@@ -50,6 +50,7 @@ public abstract class AppDatabase extends RoomDatabase {
 
         private PopulateDbAsyncTask(AppDatabase db){
             therapyDao = db.therapyDao();
+            physicalActivityDao = db.physicalActivityDao();
             //userDao = db.userDao();
         }
 
@@ -63,8 +64,12 @@ public abstract class AppDatabase extends RoomDatabase {
         protected Void doInBackground(Void... voids) {
             therapyDao.insert(new Therapy("orally", 15.00, formatter.format(time), formatter2.format(date)));
             therapyDao.insert(new Therapy("orally", 20.00, "14:15", formatter2.format(date)));
-            therapyDao.insert(new Therapy("continuously", 10.00, "18:00", "28/02/2022"));
+            therapyDao.insert(new Therapy("continuously", 10.00, "18:00", "03/04/2022"));
 
+            physicalActivityDao.insert(new PhysicalActivity("walking", 2.0, 15.00, 300.0, "03/04/2022", "14:45"));
+            physicalActivityDao.insert(new PhysicalActivity("running", 1.0, 20.00, 189.0, formatter2.format(date), formatter.format(time)));
+            physicalActivityDao.insert(new PhysicalActivity("walking", 2.0, 15.00, 340.0, formatter2.format(date), formatter.format(time)));
+            physicalActivityDao.insert(new PhysicalActivity("yoga", 1.0, 0.00, 100.0, formatter2.format(date), "18:55"));
             //userDao.insert(new User("", "", 0.00, 0.00, ""));
             return null;
         }
