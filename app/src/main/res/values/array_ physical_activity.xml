@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="array_physical_activity">
+        <item>Choose activity</item>
+        <item>walking</item>
+        <item>running</item>
+        <item>bicycling</item>
+        <item>yoga</item>
+        <item>other</item>
+    </string-array>
+</resources>

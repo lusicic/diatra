@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_homeFragment_to_physicalActivityFragment"
             app:destination="@id/physicalActivityFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_addPhysicalActivityFragment"
+            app:destination="@id/addPhysicalActivityFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -73,6 +76,15 @@
         android:id="@+id/physicalActivityFragment"
         android:name="com.unipu.mobapp.diatra.PhysicalActivityFragment"
         android:label="Activities"
-        tools:layout="@layout/fragment_physical_activity" />
+        tools:layout="@layout/fragment_physical_activity" >
+        <action
+            android:id="@+id/action_physicalActivityFragment_to_addPhysicalActivityFragment"
+            app:destination="@id/addPhysicalActivityFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addPhysicalActivityFragment"
+        android:name="com.unipu.mobapp.diatra.AddPhysicalActivityFragment"
+        android:label="Add new activity"
+        tools:layout="@layout/fragment_add_physical_activity" />
 
 </navigation>

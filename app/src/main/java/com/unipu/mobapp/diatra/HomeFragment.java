@@ -48,7 +48,7 @@ public class HomeFragment extends Fragment implements CalendarAdapter.OnItemList
     CardView therapyCardView;
     CardView physicalActivityCardView;
     CardView newTherapyCardView;
-
+    CardView newActivityCardView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -76,6 +76,7 @@ public class HomeFragment extends Fragment implements CalendarAdapter.OnItemList
         therapyCardView.setOnClickListener(this::toTherapies);
         physicalActivityCardView.setOnClickListener(this::toActivities);
         newTherapyCardView.setOnClickListener(this::newTherapy);
+        newActivityCardView.setOnClickListener(this::newActivity);
 
         dayViewModel.getDayTherapies().observe(getActivity(), new Observer<List<Therapy>>() {
             @Override
@@ -94,6 +95,7 @@ public class HomeFragment extends Fragment implements CalendarAdapter.OnItemList
         therapyCardView = view.findViewById(R.id.therapyCard);
         physicalActivityCardView = view.findViewById(R.id.physicalActivityCard);
         newTherapyCardView = view.findViewById(R.id.newTherapyCard);
+        newActivityCardView = view.findViewById(R.id.newActivityCard);
 
         btnBack = view.findViewById(R.id.button_calendar_back);
         btnNext = view.findViewById(R.id.button_calendar_next);
@@ -150,6 +152,10 @@ public class HomeFragment extends Fragment implements CalendarAdapter.OnItemList
     public void newTherapy(View view)
     {
         Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_addTherapyFragment);
+    }
+
+    public void newActivity(View view){
+        Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_addPhysicalActivityFragment);
     }
 
     @Override

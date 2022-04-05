@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -64,6 +65,13 @@ public class PhysicalActivityFragment extends Fragment {
             }
         });
 
+        buttonNewPhysicalActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.action_physicalActivityFragment_to_addPhysicalActivityFragment);
+            }
+        });
+
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
@@ -81,6 +89,7 @@ public class PhysicalActivityFragment extends Fragment {
             @Override
             public void onItemClick(PhysicalActivity physicalActivity) {
                 dayViewModel.setSPhysicalActivity(physicalActivity);
+                Navigation.findNavController(view).navigate(R.id.action_physicalActivityFragment_to_addPhysicalActivityFragment);
             }
         });
     }

@@ -20,6 +20,14 @@ public class CalendarUtils {
         return date.format(formatter);
     }
 
+    public static String convertDate(int input) {
+        if (input >= 10) {
+            return String.valueOf(input);
+        } else {
+            return "0" + String.valueOf(input);
+        }
+    }
+
     public static ArrayList<LocalDate> showDaysInWeek(LocalDate selectedDate)
     {
         ArrayList<LocalDate> days = new ArrayList<>();
