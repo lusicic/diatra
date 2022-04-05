@@ -35,22 +35,22 @@ import java.util.Calendar;
 
 public class AddTherapyFragment extends Fragment {
 
-    DayViewModel dayViewModel;
+    private DayViewModel dayViewModel;
 
     private EditText editTextTherapyTime;
     private EditText editTextDose;
     private EditText editTextTherapyDate;
 
-    Spinner spinnerType;
-    String therapyType;
+    private Spinner spinnerType;
+    private String therapyType;
 
     private Button buttonAddTherapy;
 
-    String date;
+    private String date;
     private TimePickerDialog.OnTimeSetListener onTimeSetListener;
     private DatePickerDialog.OnDateSetListener onDateSetListener;
 
-    ArrayAdapter<CharSequence> adapter;
+    private ArrayAdapter<CharSequence> adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -119,34 +119,6 @@ public class AddTherapyFragment extends Fragment {
             }
         });
 
-        dayViewModel.getSTherapy().observe(getViewLifecycleOwner(), new Observer<Therapy>() {
-            @Override
-            public void onChanged(Therapy therapy) {
-                if (therapy != null) {
-                    editTextTherapyTime.setText(therapy.getTime());
-                    editTextTherapyDate.setText(therapy.getDate());
-                    buttonAddTherapy.setText("Save edit");
-
-                    if(therapy.getDosage() == 0.0){
-                        editTextDose.setText("");
-                    }
-                    else {
-                        editTextDose.setText(String.valueOf(therapy.getDosage()));
-                    }
-
-                    spinnerType.setSelection(adapter.getPosition(therapy.getType()));
-
-                    buttonAddTherapy.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            int id = therapy.getId();
-                            editTherapy(id);
-                            Navigation.findNavController(view).popBackStack();
-                        }
-                    });
-                }
-            }
-        });
     }
 
     @Override
