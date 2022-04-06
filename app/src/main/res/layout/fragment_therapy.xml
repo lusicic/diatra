@@ -55,9 +55,9 @@
 
             <ImageView
                 android:id="@+id/image_view1"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/ic_therapies"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/ic_heart"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView1"
@@ -73,7 +73,6 @@
                     android:id="@+id/text_view_therapies_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:text="n"
                     android:textSize="30dp"
                     android:textStyle="bold"
