@@ -32,7 +32,6 @@ public class AddUserFragment extends Fragment {
 
     UserViewModel userViewModel;
 
-    private EditText editTextName;
     private EditText editTextDateOfBirth;
     private EditText editTextHeight;
     private EditText editTextWeight;
@@ -40,6 +39,10 @@ public class AddUserFragment extends Fragment {
     private Button buttonAddUser;
 
     private DatePickerDialog.OnDateSetListener onDateSetListener;
+
+    private Spinner spinnerGender;
+    private ArrayAdapter<CharSequence> genderAdapter;
+    private String gender;
 
     private Spinner spinnerTypeOfDiabetes;
     private ArrayAdapter<CharSequence> typeAdapter;
@@ -59,6 +62,23 @@ public class AddUserFragment extends Fragment {
         initWidgets(view);
 
         editTextDateOfBirth.setOnClickListener(this::showDate);
+
+        spinnerGender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if(adapterView.getItemAtPosition(i).equals("Choose category")){
+                    return;
+                }
+                else{
+                    gender = adapterView.getItemAtPosition(i).toString();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         spinnerTypeOfDiabetes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -80,7 +100,9 @@ public class AddUserFragment extends Fragment {
         buttonAddUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 saveUser();
+                Navigation.findNavController(view).popBackStack();
             }
         });
 
@@ -88,7 +110,7 @@ public class AddUserFragment extends Fragment {
             @Override
             public void onChanged(User user) {
                 if(user!=null) {
-                    editTextName.setText(user.getName());
+                    spinnerGender.setSelection(genderAdapter.getPosition(user.getGender()));
                     editTextDateOfBirth.setText(user.getDateOfBirth());
                     editTextHeight.setText(String.valueOf(user.getHeight()));
                     editTextWeight.setText(String.valueOf(user.getWeight()));
@@ -99,7 +121,7 @@ public class AddUserFragment extends Fragment {
                         @Override
                         public void onClick(View view) {
                             editUser(id);
-                            Navigation.findNavController(view).navigate(R.id.action_addUserFragment_to_profileFragment);
+                            Navigation.findNavController(view).popBackStack();
                         }
                     });
                 }
@@ -122,7 +144,6 @@ public class AddUserFragment extends Fragment {
     private void initWidgets(View view){
         buttonAddUser = view.findViewById(R.id.button_save_edit_user);
 
-        editTextName = view.findViewById(R.id.edit_text_name);
         editTextDateOfBirth = view.findViewById(R.id.edit_text_date_of_birth);
         editTextHeight = view.findViewById(R.id.edit_text_height);
         editTextWeight = view.findViewById(R.id.edit_text_weight);
@@ -131,27 +152,33 @@ public class AddUserFragment extends Fragment {
         typeAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.diabetes_type_array, android.R.layout.simple_spinner_item);
         typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerTypeOfDiabetes.setAdapter(typeAdapter);
+
+        spinnerGender = view.findViewById(R.id.spinner_gender);
+        genderAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.array_gender, android.R.layout.simple_spinner_item);
+        genderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerGender.setAdapter(genderAdapter);
+
     }
 
     private void saveUser() {
-        String name = editTextName.getText().toString();
+        String ggender = gender;
         String dateOfBirth = editTextDateOfBirth.getText().toString();
         Double height = Double.parseDouble(editTextHeight.getText().toString());
         Double weight = Double.parseDouble(editTextWeight.getText().toString());
         String typeOfDiabetes = diabetesType;
 
-        User user = new User(name, dateOfBirth, height, weight, typeOfDiabetes);
+        User user = new User(ggender, dateOfBirth, height, weight, typeOfDiabetes);
         userViewModel.insert(user);
     }
 
     private void editUser(int id) {
-        String name = editTextName.getText().toString();
+        String ggender = gender;
         String dateOfBirth = editTextDateOfBirth.getText().toString();
         Double height = Double.parseDouble(editTextHeight.getText().toString());
         Double weight = Double.parseDouble(editTextWeight.getText().toString());
         String typeOfDiabetes = diabetesType;
 
-        User user = new User(name, dateOfBirth, height, weight, typeOfDiabetes);
+        User user = new User(gender, dateOfBirth, height, weight, typeOfDiabetes);
         user.setUserId(id);
         userViewModel.update(user);
     }

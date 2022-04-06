@@ -9,14 +9,14 @@ public class User {
     @PrimaryKey(autoGenerate = true)
     private int userId;
 
-    private String name;
+    private String gender;
     private String dateOfBirth;
     private Double height;
     private Double weight;
     private String typeOfDiabetes;
 
-    public User(String name, String dateOfBirth, Double height, Double weight, String typeOfDiabetes) {
-        this.name = name;
+    public User(String gender, String dateOfBirth, Double height, Double weight, String typeOfDiabetes) {
+        this.gender = gender;
         this.dateOfBirth = dateOfBirth;
         this.height = height;
         this.weight = weight;
@@ -31,9 +31,7 @@ public class User {
         return userId;
     }
 
-    public String getName() {
-        return name;
-    }
+    public String getGender() { return gender; }
 
     public String getDateOfBirth() {
         return dateOfBirth;
