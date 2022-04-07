@@ -22,6 +22,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -41,6 +42,8 @@ public class AddPhysicalActivityFragment extends Fragment {
     private EditText editTextPhyActDuration;
     private EditText editTextPhyActDistance;
     private EditText editTextPhyActBurntCalories;
+
+    private TextView textViewDistance;
 
     private Spinner spinnerPhyActType;
     private String phyActType;
@@ -80,6 +83,12 @@ public class AddPhysicalActivityFragment extends Fragment {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if(adapterView.getItemAtPosition(i).equals("Choose activity")){
                     return;
+                }
+                else if(adapterView.getItemAtPosition(i).equals("yoga")){
+                    phyActType = adapterView.getItemAtPosition(i).toString();
+                    editTextPhyActDistance.setText(String.valueOf(0));
+                    editTextPhyActDistance.setVisibility(View.GONE);
+                    textViewDistance.setVisibility(View.GONE);
                 }
                 else{
                     phyActType = adapterView.getItemAtPosition(i).toString();
@@ -156,6 +165,8 @@ public class AddPhysicalActivityFragment extends Fragment {
         editTextPhyActDuration = view.findViewById(R.id.edit_text_physical_activity_duration);
         editTextPhyActDistance = view.findViewById(R.id.edit_text_physical_activity_distance);
         editTextPhyActBurntCalories = view.findViewById(R.id.edit_text_physical_activity_burnt_calories);
+
+        textViewDistance = view.findViewById(R.id.text_view_add_user_distance);
 
         spinnerPhyActType = view.findViewById(R.id.spinner_physical_activity_type);
 

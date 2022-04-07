@@ -10,14 +10,14 @@ public class User {
     private int userId;
 
     private String gender;
-    private String dateOfBirth;
+    private Integer age;
     private Double height;
     private Double weight;
     private String typeOfDiabetes;
 
-    public User(String gender, String dateOfBirth, Double height, Double weight, String typeOfDiabetes) {
+    public User(String gender, Integer age, Double height, Double weight, String typeOfDiabetes) {
         this.gender = gender;
-        this.dateOfBirth = dateOfBirth;
+        this.age = age;
         this.height = height;
         this.weight = weight;
         this.typeOfDiabetes = typeOfDiabetes;
@@ -33,9 +33,7 @@ public class User {
 
     public String getGender() { return gender; }
 
-    public String getDateOfBirth() {
-        return dateOfBirth;
-    }
+    public Integer getAge() { return age; }
 
     public Double getHeight() {
         return height;

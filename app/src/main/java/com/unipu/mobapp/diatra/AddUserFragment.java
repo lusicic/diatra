@@ -32,13 +32,11 @@ public class AddUserFragment extends Fragment {
 
     UserViewModel userViewModel;
 
-    private EditText editTextDateOfBirth;
+    private EditText editTextAge;
     private EditText editTextHeight;
     private EditText editTextWeight;
 
     private Button buttonAddUser;
-
-    private DatePickerDialog.OnDateSetListener onDateSetListener;
 
     private Spinner spinnerGender;
     private ArrayAdapter<CharSequence> genderAdapter;
@@ -60,8 +58,6 @@ public class AddUserFragment extends Fragment {
 
         initViewModel();
         initWidgets(view);
-
-        editTextDateOfBirth.setOnClickListener(this::showDate);
 
         spinnerGender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -111,7 +107,7 @@ public class AddUserFragment extends Fragment {
             public void onChanged(User user) {
                 if(user!=null) {
                     spinnerGender.setSelection(genderAdapter.getPosition(user.getGender()));
-                    editTextDateOfBirth.setText(user.getDateOfBirth());
+                    editTextAge.setText(String.valueOf(user.getAge()));
                     editTextHeight.setText(String.valueOf(user.getHeight()));
                     editTextWeight.setText(String.valueOf(user.getWeight()));
                     spinnerTypeOfDiabetes.setSelection(typeAdapter.getPosition(user.getTypeOfDiabetes()));
@@ -128,13 +124,6 @@ public class AddUserFragment extends Fragment {
             }
         });
 
-        onDateSetListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int day) {
-                String newDate = convertDate(day) + "/" + convertDate(month+1) + "/" + convertDate(year);
-                editTextDateOfBirth.setText(newDate);
-            }
-        };
     }
 
     private void initViewModel() {
@@ -144,7 +133,7 @@ public class AddUserFragment extends Fragment {
     private void initWidgets(View view){
         buttonAddUser = view.findViewById(R.id.button_save_edit_user);
 
-        editTextDateOfBirth = view.findViewById(R.id.edit_text_date_of_birth);
+        editTextAge = view.findViewById(R.id.edit_text_age);
         editTextHeight = view.findViewById(R.id.edit_text_height);
         editTextWeight = view.findViewById(R.id.edit_text_weight);
 
@@ -162,43 +151,25 @@ public class AddUserFragment extends Fragment {
 
     private void saveUser() {
         String ggender = gender;
-        String dateOfBirth = editTextDateOfBirth.getText().toString();
+        Integer age = Integer.parseInt(editTextAge.getText().toString());
         Double height = Double.parseDouble(editTextHeight.getText().toString());
         Double weight = Double.parseDouble(editTextWeight.getText().toString());
         String typeOfDiabetes = diabetesType;
 
-        User user = new User(ggender, dateOfBirth, height, weight, typeOfDiabetes);
+        User user = new User(ggender, age, height, weight, typeOfDiabetes);
         userViewModel.insert(user);
     }
 
     private void editUser(int id) {
         String ggender = gender;
-        String dateOfBirth = editTextDateOfBirth.getText().toString();
+        Integer age = Integer.parseInt(editTextAge.getText().toString());
         Double height = Double.parseDouble(editTextHeight.getText().toString());
         Double weight = Double.parseDouble(editTextWeight.getText().toString());
         String typeOfDiabetes = diabetesType;
 
-        User user = new User(gender, dateOfBirth, height, weight, typeOfDiabetes);
+        User user = new User(gender, age, height, weight, typeOfDiabetes);
         user.setUserId(id);
         userViewModel.update(user);
     }
 
-    public void showDate(View v) {
-        final Calendar c = Calendar.getInstance();
-
-        int day = c.get(Calendar.DAY_OF_MONTH);
-        int month = c.get(Calendar.MONTH);
-        int year = c.get(Calendar.YEAR);
-
-        DatePickerDialog datePicker = new DatePickerDialog(getActivity(), AlertDialog.THEME_HOLO_LIGHT, onDateSetListener, year, month, day);
-        datePicker.show();
-    }
-
-    public String convertDate(int input) {
-        if (input >= 10) {
-            return String.valueOf(input);
-        } else {
-            return "0" + String.valueOf(input);
-        }
-    }
 }

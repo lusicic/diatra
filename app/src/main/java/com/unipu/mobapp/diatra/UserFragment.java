@@ -25,7 +25,7 @@ public class UserFragment extends Fragment {
     UserViewModel userViewModel;
 
     private TextView textViewGender;
-    private TextView textViewDateOfBirth;
+    private TextView textViewAge;
     private TextView textViewHeight;
     private TextView textViewWeight;
     private TextView textViewTypeOfDiabetes;
@@ -57,7 +57,7 @@ public class UserFragment extends Fragment {
 
             private void updateTextViews(User user) {
                 textViewGender.setText(user.getGender());
-                textViewDateOfBirth.setText(user.getDateOfBirth());
+                textViewAge.setText(String.valueOf(user.getAge()));
                 textViewHeight.setText(String.valueOf(user.getHeight()));
                 textViewWeight.setText(String.valueOf(user.getWeight()));
                 textViewTypeOfDiabetes.setText(user.getTypeOfDiabetes());
@@ -75,7 +75,7 @@ public class UserFragment extends Fragment {
         buttonEditUser = view.findViewById(R.id.button_edit_user);
 
         textViewGender = view.findViewById(R.id.text_view_gender);
-        textViewDateOfBirth = view.findViewById(R.id.text_view_date_of_birth);
+        textViewAge = view.findViewById(R.id.text_view_age);
         textViewHeight = view.findViewById(R.id.text_view_height);
         textViewWeight = view.findViewById(R.id.text_view_weight);
         textViewTypeOfDiabetes = view.findViewById(R.id.text_view_type_of_diabetes);

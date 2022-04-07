@@ -7,6 +7,7 @@ android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:orientation="vertical"
 android:padding="30dp"
+android:focusableInTouchMode="true"
 tools:context=".AddPhysicalActivityFragment">
 
 <TextView
@@ -34,9 +35,6 @@ tools:context=".AddPhysicalActivityFragment">
     android:id="@+id/textView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:clickable="true"
-    android:focusable="false"
-    android:inputType="none"
     android:text="Time"
     app:layout_constraintTop_toBottomOf="@id/edit_text_physical_activity_date"
     android:layout_marginBottom="20dp"
@@ -46,6 +44,9 @@ tools:context=".AddPhysicalActivityFragment">
     android:id="@+id/edit_text_physical_activity_time"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="false"
+    android:inputType="none"
     android:onClick="showTimePickerDialog"
     android:hint="@string/time"
     app:layout_constraintTop_toBottomOf="@+id/textView"
@@ -85,7 +86,7 @@ tools:context=".AddPhysicalActivityFragment">
     app:layout_constraintTop_toBottomOf="@+id/textView3"/>
 
 <TextView
-    android:id="@+id/textView4"
+    android:id="@+id/text_view_add_user_distance"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="10dp"
@@ -99,7 +100,7 @@ tools:context=".AddPhysicalActivityFragment">
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:hint="Distance"
-    app:layout_constraintTop_toBottomOf="@+id/textView4"/>
+    app:layout_constraintTop_toBottomOf="@+id/text_view_add_user_distance"/>
 
 <TextView
     android:id="@+id/textView5"

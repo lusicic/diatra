@@ -3,6 +3,7 @@ package com.unipu.mobapp.diatra.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -34,7 +35,14 @@ public class PhysicalActivityAdapter extends RecyclerView.Adapter<PhysicalActivi
         PhysicalActivity currentPhysicalActivity = physicalActivities.get(position);
         holder.textViewTypeOfPhysicalActivity.setText(currentPhysicalActivity.getTypeOfActivity());
         holder.textViewDuration.setText(String.valueOf(currentPhysicalActivity.getDuration()));
-        holder.textViewDistance.setText(String.valueOf(currentPhysicalActivity.getDistance()));
+
+        if(currentPhysicalActivity.getTypeOfActivity().equals("yoga")){
+            holder.imageViewDistance.setVisibility(View.GONE);
+            holder.textViewDistance.setVisibility(View.GONE);
+        }
+        else
+            holder.textViewDistance.setText(String.valueOf(currentPhysicalActivity.getDistance()));
+
         holder.textViewBurntCalories.setText(String.valueOf(currentPhysicalActivity.getBurntCalories()));
         holder.textViewPhysicalActivityTime.setText(currentPhysicalActivity.getTime());
     }
@@ -60,6 +68,8 @@ public class PhysicalActivityAdapter extends RecyclerView.Adapter<PhysicalActivi
         private TextView textViewBurntCalories;
         private TextView textViewPhysicalActivityTime;
 
+        private ImageView imageViewDistance;
+
         public PhysicalActivityHolder(@NonNull @NotNull View itemView) {
             super(itemView);
             textViewTypeOfPhysicalActivity = itemView.findViewById(R.id.text_view_type_of_physical_activity);
@@ -67,6 +77,8 @@ public class PhysicalActivityAdapter extends RecyclerView.Adapter<PhysicalActivi
             textViewDuration = itemView.findViewById(R.id.text_view_duration);
             textViewBurntCalories = itemView.findViewById(R.id.text_view_burnt_calories);
             textViewPhysicalActivityTime = itemView.findViewById(R.id.text_view_physical_activity_time);
+
+            imageViewDistance = itemView.findViewById(R.id.image_distance);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
