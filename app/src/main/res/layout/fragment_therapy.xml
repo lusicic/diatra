@@ -24,7 +24,7 @@
             android:layout_marginBottom="10dp"
             android:text="Date"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="@color/light_gray"
+            android:textColor="@color/light_gray_2"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout"
             app:layout_constraintStart_toStartOf="parent" />
 

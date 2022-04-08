@@ -5,7 +5,6 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 
-import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -186,7 +185,7 @@ public class AddTherapyFragment extends Fragment {
         }
 
         Therapy therapy = new Therapy(type, dose, therapyTime, date);
-        dayViewModel.insert(therapy);
+        dayViewModel.insertTherapy(therapy);
     }
 
     private void editTherapy(int id) {
@@ -202,7 +201,7 @@ public class AddTherapyFragment extends Fragment {
 
         Therapy therapy = new Therapy(type, dose, therapyTime, date);
         therapy.setId(id);
-        dayViewModel.update(therapy);
+        dayViewModel.updateTherapy(therapy);
     }
 
     public void showTimePickerDialog(View v) {

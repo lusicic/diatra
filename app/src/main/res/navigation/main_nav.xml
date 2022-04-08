@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_homeFragment_to_addPhysicalActivityFragment"
             app:destination="@id/addPhysicalActivityFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_foodFragment"
+            app:destination="@id/foodFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -86,5 +89,10 @@
         android:name="com.unipu.mobapp.diatra.AddPhysicalActivityFragment"
         android:label="Add new activity"
         tools:layout="@layout/fragment_add_physical_activity" />
+    <fragment
+        android:id="@+id/foodFragment"
+        android:name="com.unipu.mobapp.diatra.FoodFragment"
+        android:label="Meals"
+        tools:layout="@layout/fragment_food" />
 
 </navigation>

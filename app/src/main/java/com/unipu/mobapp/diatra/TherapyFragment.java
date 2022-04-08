@@ -84,7 +84,7 @@ public class TherapyFragment extends Fragment {
 
             @Override
             public void onSwiped(@NonNull @NotNull RecyclerView.ViewHolder viewHolder, int direction) {
-                dayViewModel.delete(therapyAdapter.getTherapyAt(viewHolder.getAdapterPosition()));
+                dayViewModel.deleteTherapy(therapyAdapter.getTherapyAt(viewHolder.getAdapterPosition()));
                 Toast.makeText(getActivity().getApplicationContext(), "Therapy deleted", Toast.LENGTH_SHORT).show();
             }
         }).attachToRecyclerView(recyclerViewTherapy);

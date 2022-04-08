@@ -4,17 +4,22 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/ktrnk/Documents/diatra/app/src/main/res/drawable/ic_apple.xml" value="0.2565" />
+        <entry key="..\:/Users/ktrnk/Documents/diatra/app/src/main/res/drawable/ic_bread.xml" value="0.197" />
         <entry key="..\:/Users/ktrnk/Documents/diatra/app/src/main/res/drawable/ic_burnt.xml" value="0.2825" />
+        <entry key="..\:/Users/ktrnk/Documents/diatra/app/src/main/res/drawable/ic_dish.xml" value="0.197" />
         <entry key="..\:/Users/ktrnk/Documents/diatra/app/src/main/res/drawable/ic_distance.xml" value="0.2785" />
         <entry key="..\:/Users/ktrnk/Documents/diatra/app/src/main/res/drawable/ic_fire.xml" value="0.2785" />
         <entry key="..\:/Users/ktrnk/Documents/diatra/app/src/main/res/drawable/ic_heart.xml" value="0.2565" />
+        <entry key="..\:/Users/ktrnk/Documents/diatra/app/src/main/res/drawable/ic_scales.xml" value="0.197" />
         <entry key="..\:/Users/ktrnk/Documents/diatra/app/src/main/res/drawable/ic_sneaker.xml" value="0.2565" />
         <entry key="..\:/Users/ktrnk/Documents/diatra/app/src/main/res/drawable/ic_therapies.xml" value="0.2825" />
         <entry key="..\:/Users/ktrnk/Documents/diatra/app/src/main/res/drawable/ic_therapy.xml" value="0.2565" />
         <entry key="..\:/Users/ktrnk/Documents/diatra/app/src/main/res/drawable/ic_time.xml" value="0.2785" />
+        <entry key="..\:/Users/ktrnk/Documents/diatra/app/src/main/res/layout/food_item.xml" value="0.5" />
         <entry key="..\:/Users/ktrnk/Documents/diatra/app/src/main/res/layout/fragment_add_physical_activity.xml" value="0.25" />
         <entry key="..\:/Users/ktrnk/Documents/diatra/app/src/main/res/layout/fragment_add_therapy.xml" value="0.1" />
         <entry key="..\:/Users/ktrnk/Documents/diatra/app/src/main/res/layout/fragment_add_user.xml" value="0.278125" />
+        <entry key="..\:/Users/ktrnk/Documents/diatra/app/src/main/res/layout/fragment_food.xml" value="0.22" />
         <entry key="..\:/Users/ktrnk/Documents/diatra/app/src/main/res/layout/fragment_home.xml" value="0.33" />
         <entry key="..\:/Users/ktrnk/Documents/diatra/app/src/main/res/layout/fragment_physical_activity.xml" value="0.33" />
         <entry key="..\:/Users/ktrnk/Documents/diatra/app/src/main/res/layout/fragment_therapy.xml" value="0.278125" />

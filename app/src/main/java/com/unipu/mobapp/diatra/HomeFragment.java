@@ -47,6 +47,7 @@ public class HomeFragment extends Fragment implements CalendarAdapter.OnItemList
 
     CardView therapyCardView;
     CardView physicalActivityCardView;
+    CardView foodCardView;
     CardView newTherapyCardView;
     CardView newActivityCardView;
 
@@ -75,6 +76,7 @@ public class HomeFragment extends Fragment implements CalendarAdapter.OnItemList
 
         therapyCardView.setOnClickListener(this::toTherapies);
         physicalActivityCardView.setOnClickListener(this::toActivities);
+        foodCardView.setOnClickListener(this::toFood);
         newTherapyCardView.setOnClickListener(this::newTherapy);
         newActivityCardView.setOnClickListener(this::newActivity);
 
@@ -94,6 +96,7 @@ public class HomeFragment extends Fragment implements CalendarAdapter.OnItemList
     private void initWidgets(View view){
         therapyCardView = view.findViewById(R.id.therapyCard);
         physicalActivityCardView = view.findViewById(R.id.physicalActivityCard);
+        foodCardView = view.findViewById(R.id.mealCard);
         newTherapyCardView = view.findViewById(R.id.newTherapyCard);
         newActivityCardView = view.findViewById(R.id.newActivityCard);
 
@@ -147,6 +150,10 @@ public class HomeFragment extends Fragment implements CalendarAdapter.OnItemList
     public void toActivities(View view)
     {
         Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_physicalActivityFragment);
+    }
+
+    public void toFood(View view){
+        Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_foodFragment);
     }
 
     public void newTherapy(View view)

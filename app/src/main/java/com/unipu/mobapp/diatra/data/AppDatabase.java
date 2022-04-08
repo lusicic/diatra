@@ -15,12 +15,13 @@ import org.jetbrains.annotations.NotNull;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-@Database(entities = {Therapy.class, User.class, PhysicalActivity.class}, version = 1)
+@Database(entities = {Therapy.class, User.class, PhysicalActivity.class, Food.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract TherapyDao therapyDao();
     public abstract UserDao userDao();
     public abstract PhysicalActivityDao physicalActivityDao();
+    public abstract FoodDao foodDao();
 
     private static AppDatabase instance;
 
@@ -47,10 +48,12 @@ public abstract class AppDatabase extends RoomDatabase {
         private TherapyDao therapyDao;
         private UserDao userDao;
         private PhysicalActivityDao physicalActivityDao;
+        private FoodDao foodDao;
 
         private PopulateDbAsyncTask(AppDatabase db){
             therapyDao = db.therapyDao();
             physicalActivityDao = db.physicalActivityDao();
+            foodDao = db.foodDao();
             //userDao = db.userDao();
         }
 
@@ -70,6 +73,15 @@ public abstract class AppDatabase extends RoomDatabase {
             physicalActivityDao.insert(new PhysicalActivity("running", 1.0, 20.00, 189.0, formatter2.format(date), formatter.format(time)));
             physicalActivityDao.insert(new PhysicalActivity("walking", 2.0, 15.00, 340.0, formatter2.format(date), formatter.format(time)));
             physicalActivityDao.insert(new PhysicalActivity("yoga", 1.0, 0.00, 100.0, formatter2.format(date), "18:55"));
+
+
+            foodDao.insert(new Food("chicken", 150, 100, 50, "03/04/2022", "14:45"));
+            foodDao.insert(new Food("chicken", 120, 100, 20, formatter2.format(date), formatter.format(time)));
+            foodDao.insert(new Food("salad", 200, 30, 5, formatter2.format(date), formatter.format(time)));
+            foodDao.insert(new Food("pasta", 120, 250, 150, formatter2.format(date), "18:22"));
+            foodDao.insert(new Food("banana", 120, 250, 150, formatter2.format(date), "12:01"));
+
+
             //userDao.insert(new User("", "", 0.00, 0.00, ""));
             return null;
         }

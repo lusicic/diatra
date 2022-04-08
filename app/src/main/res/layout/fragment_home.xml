@@ -39,7 +39,7 @@
                 android:textSize="15sp"
                 android:padding="8sp"
                 android:textAlignment="center"
-                android:textColor="@color/light_gray"
+                android:textColor="@color/light_gray_2"
                 android:textAppearance="@android:style/TextAppearance.Small"
                 android:textStyle="bold"/>
 

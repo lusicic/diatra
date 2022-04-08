@@ -8,8 +8,9 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
 
+import com.unipu.mobapp.diatra.data.Food;
+import com.unipu.mobapp.diatra.data.FoodRepository;
 import com.unipu.mobapp.diatra.data.PhysicalActivity;
-import com.unipu.mobapp.diatra.data.PhysicalActivityDao;
 import com.unipu.mobapp.diatra.data.PhysicalActivityRepository;
 import com.unipu.mobapp.diatra.data.Therapy;
 import com.unipu.mobapp.diatra.data.TherapyRepository;
@@ -21,25 +22,31 @@ import java.util.List;
 
 public class DayViewModel extends AndroidViewModel {
 
-    private TherapyRepository repo;
+    private TherapyRepository therapyRepo;
     private PhysicalActivityRepository physicalActivityRepository;
+    private FoodRepository foodRepo;
 
     private MutableLiveData<String> date = new MutableLiveData<>();
 
     private LiveData<List<Therapy>> dayTherapies;
     private LiveData<List<PhysicalActivity>> dayPhysicalActivities;
+    private LiveData<List<Food>> dayFood;
 
     private SingleLiveEvent<Therapy> sTherapy = new SingleLiveEvent<>();
     private SingleLiveEvent<PhysicalActivity> sPhysicalActivity = new SingleLiveEvent<>();
+    private SingleLiveEvent<Food> sFood = new SingleLiveEvent<>();
 
     public DayViewModel(@NonNull @NotNull Application application) {
         super(application);
-        repo = new TherapyRepository(application);
+        therapyRepo = new TherapyRepository(application);
         physicalActivityRepository = new PhysicalActivityRepository(application);
+        foodRepo = new FoodRepository(application);
         dayTherapies = Transformations.switchMap(date,
-                date -> repo.getDayTherapies(date));
+                date -> therapyRepo.getDayTherapies(date));
         dayPhysicalActivities = Transformations.switchMap(date,
                 date -> physicalActivityRepository.getDayPhysicalActivities(date));
+        dayFood = Transformations.switchMap(date,
+                date -> foodRepo.getDayFood(date));
     }
 
     // za dohvat terapije na odredeni datum
@@ -50,6 +57,7 @@ public class DayViewModel extends AndroidViewModel {
     // dohvat liste po danu
     public LiveData<List<Therapy>> getDayTherapies() { return dayTherapies; }
     public LiveData<List<PhysicalActivity>> getDayPhysicalActivities() { return dayPhysicalActivities; }
+    public LiveData<List<Food>> getDayFood() { return dayFood;}
 
     // za edit pojedinacne stavke
     public SingleLiveEvent<Therapy> getSTherapy() {
@@ -62,18 +70,26 @@ public class DayViewModel extends AndroidViewModel {
     public SingleLiveEvent<PhysicalActivity> getSPhysicalActivity() {return sPhysicalActivity;}
     public void setSPhysicalActivity(PhysicalActivity physicalActivity){sPhysicalActivity.setValue(physicalActivity);}
 
+    public SingleLiveEvent<Food> getsFood() { return sFood;}
+    public void setSFood(Food food) { sFood.setValue(food);}
+
     // za bazu
-    public void insert(Therapy therapy){
-        repo.insertTherapy(therapy);
+    public void insertTherapy(Therapy therapy){
+        therapyRepo.insertTherapy(therapy);
     }
-    public void update(Therapy therapy){
-        repo.updateTherapy(therapy);
+    public void updateTherapy(Therapy therapy){
+        therapyRepo.updateTherapy(therapy);
     }
-    public void delete(Therapy therapy){
-        repo.deleteTherapy(therapy);
+    public void deleteTherapy(Therapy therapy){
+        therapyRepo.deleteTherapy(therapy);
     }
 
     public void insertPhysicalActivity(PhysicalActivity physicalActivity) {physicalActivityRepository.insertPhysicalActivity(physicalActivity);}
     public void updatePhysicalActivity(PhysicalActivity physicalActivity) {physicalActivityRepository.updatePhysicalActivity(physicalActivity);}
     public void deletePhysicalActivity(PhysicalActivity physicalActivity) {physicalActivityRepository.deletePhysicalActivity(physicalActivity);}
+
+    public void insertFood(Food food) { foodRepo.insertFood(food);}
+    public void updateFood(Food food) { foodRepo.updateFood(food);}
+    public void deleteFood(Food food) { foodRepo.deleteFood(food);}
+
 }
