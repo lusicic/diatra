@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_homeFragment_to_foodFragment"
             app:destination="@id/foodFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_addNewFoodFragment"
+            app:destination="@id/addNewFoodFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -93,6 +96,15 @@
         android:id="@+id/foodFragment"
         android:name="com.unipu.mobapp.diatra.FoodFragment"
         android:label="Meals"
-        tools:layout="@layout/fragment_food" />
+        tools:layout="@layout/fragment_food" >
+        <action
+            android:id="@+id/action_foodFragment_to_addNewFoodFragment"
+            app:destination="@id/addNewFoodFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addNewFoodFragment"
+        android:name="com.unipu.mobapp.diatra.AddNewFoodFragment"
+        android:label="fragment_add_new_food"
+        tools:layout="@layout/fragment_add_new_food" />
 
 </navigation>

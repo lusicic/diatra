@@ -76,6 +76,7 @@ tools:context=".FoodFragment">
                 android:layout_height="wrap_content"
                 android:text="intake"
                 android:textStyle="bold"
+                android:textColor="@color/black"
                 android:textSize="22dp" />
 
             <TextView
@@ -106,6 +107,7 @@ tools:context=".FoodFragment">
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="carbs"
+                android:textColor="@color/black"
                 android:textStyle="bold"
                 android:textSize="22dp" />
 

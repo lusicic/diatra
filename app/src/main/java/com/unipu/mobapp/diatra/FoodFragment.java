@@ -70,7 +70,8 @@ public class FoodFragment extends Fragment {
         buttonNewFood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                return;
+
+                Navigation.findNavController(view).navigate(R.id.action_foodFragment_to_addNewFoodFragment);
             }
         });
 
@@ -90,7 +91,9 @@ public class FoodFragment extends Fragment {
         foodAdapter.setOnItemClickListener(new FoodAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Food food) {
+
                 dayViewModel.setSFood(food);
+                Navigation.findNavController(view).navigate(R.id.action_foodFragment_to_addNewFoodFragment);
             }
         });
     }

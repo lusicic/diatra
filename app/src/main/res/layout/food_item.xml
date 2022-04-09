@@ -15,24 +15,33 @@
         android:background="@drawable/item_background">
 
         <TextView
-            android:id="@+id/text_view_food_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:text="16.00"
-            android:textColor="@color/grey"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-
-        <TextView
             android:id="@+id/text_view_food_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:layout_below="@+id/text_view_food_time"
             android:textStyle="bold"
-            android:textColor="@color/gray"
             android:text="chicken"
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        <TextView
+            android:id="@+id/text_view_at"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/text_view_food_type"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/text_view_food_type"
+            android:text="at"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+
+        <TextView
+            android:id="@+id/text_view_food_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/text_view_at"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/text_view_at"
+            android:text="14:45"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 
         <ImageView
             android:id="@+id/image_scales"
