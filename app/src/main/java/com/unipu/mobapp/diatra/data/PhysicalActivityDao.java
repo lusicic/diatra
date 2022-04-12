@@ -21,6 +21,6 @@ public interface PhysicalActivityDao {
     @Delete
     void delete(PhysicalActivity physicalActivity);
 
-    @Query("SELECT * FROM physical_activity_table WHERE date==:date ORDER BY time DESC")
+    @Query("SELECT * FROM physical_activity WHERE date==:date ORDER BY time DESC")
     LiveData<List<PhysicalActivity>> getDayPhysicalActivities(String date);
 }

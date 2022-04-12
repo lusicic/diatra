@@ -3,25 +3,25 @@ package com.unipu.mobapp.diatra.data;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity (tableName = "food_table")
-public class Food {
+@Entity (tableName = "food")
+public class Food{
 
     @PrimaryKey (autoGenerate = true)
     private int id;
 
-    private String foodType;
+    private String name;
     private Integer amount;
-    private Integer calories;
-    private Integer carbs;
+    private Integer totalCalories;
+    private Integer totalCarbs;
 
     private String date;
     private String time;
 
-    public Food(String foodType, Integer amount, Integer calories, Integer carbs, String date, String time) {
-        this.foodType = foodType;
+    public Food(String name, Integer amount, Integer totalCalories, Integer totalCarbs, String date, String time) {
+        this.name = name;
         this.amount = amount;
-        this.calories = calories;
-        this.carbs = carbs;
+        this.totalCalories = totalCalories;
+        this.totalCarbs = totalCarbs;
         this.date = date;
         this.time = time;
     }
@@ -34,20 +34,20 @@ public class Food {
         return id;
     }
 
-    public String getFoodType() {
-        return foodType;
+    public String getName() {
+        return name;
     }
 
     public Integer getAmount() {
         return amount;
     }
 
-    public Integer getCalories() {
-        return calories;
+    public Integer getTotalCalories() {
+        return totalCalories;
     }
 
-    public Integer getCarbs() {
-        return carbs;
+    public Integer getTotalCarbs() {
+        return totalCarbs;
     }
 
     public String getDate() {

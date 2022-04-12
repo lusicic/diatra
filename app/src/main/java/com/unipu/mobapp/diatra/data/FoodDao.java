@@ -21,6 +21,9 @@ public interface FoodDao {
     @Delete
     void delete(Food food);
 
-    @Query("SELECT * FROM food_table WHERE date==:date ORDER BY time ASC")
+    @Query("SELECT * FROM food WHERE date==:date ORDER BY time ASC")
     LiveData<List<Food>> getDayFood(String date);
+
+    @Query("SELECT * FROM food_type ORDER BY name ASC")
+    LiveData<List<FoodType>> getAllFoodTypes();
 }

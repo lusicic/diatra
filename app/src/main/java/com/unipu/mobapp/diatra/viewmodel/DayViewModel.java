@@ -10,6 +10,7 @@ import androidx.lifecycle.Transformations;
 
 import com.unipu.mobapp.diatra.data.Food;
 import com.unipu.mobapp.diatra.data.FoodRepository;
+import com.unipu.mobapp.diatra.data.FoodType;
 import com.unipu.mobapp.diatra.data.PhysicalActivity;
 import com.unipu.mobapp.diatra.data.PhysicalActivityRepository;
 import com.unipu.mobapp.diatra.data.Therapy;
@@ -31,6 +32,7 @@ public class DayViewModel extends AndroidViewModel {
     private LiveData<List<Therapy>> dayTherapies;
     private LiveData<List<PhysicalActivity>> dayPhysicalActivities;
     private LiveData<List<Food>> dayFood;
+    private LiveData<List<FoodType>> allFoodTypes;
 
     private SingleLiveEvent<Therapy> sTherapy = new SingleLiveEvent<>();
     private SingleLiveEvent<PhysicalActivity> sPhysicalActivity = new SingleLiveEvent<>();
@@ -41,6 +43,7 @@ public class DayViewModel extends AndroidViewModel {
         therapyRepo = new TherapyRepository(application);
         physicalActivityRepository = new PhysicalActivityRepository(application);
         foodRepo = new FoodRepository(application);
+        allFoodTypes = foodRepo.getAllFoodTypes();
         dayTherapies = Transformations.switchMap(date,
                 date -> therapyRepo.getDayTherapies(date));
         dayPhysicalActivities = Transformations.switchMap(date,
@@ -58,6 +61,7 @@ public class DayViewModel extends AndroidViewModel {
     public LiveData<List<Therapy>> getDayTherapies() { return dayTherapies; }
     public LiveData<List<PhysicalActivity>> getDayPhysicalActivities() { return dayPhysicalActivities; }
     public LiveData<List<Food>> getDayFood() { return dayFood;}
+    public LiveData<List<FoodType>> getAllFoodTypes() { return allFoodTypes; }
 
     // za edit pojedinacne stavke
     public SingleLiveEvent<Therapy> getSTherapy() {

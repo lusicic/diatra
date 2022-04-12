@@ -104,7 +104,7 @@
     <fragment
         android:id="@+id/addNewFoodFragment"
         android:name="com.unipu.mobapp.diatra.AddNewFoodFragment"
-        android:label="fragment_add_new_food"
+        android:label="Add new meal"
         tools:layout="@layout/fragment_add_new_food" />
 
 </navigation>

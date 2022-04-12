@@ -10,11 +10,13 @@ import java.util.List;
 public class FoodRepository {
 
     private FoodDao foodDao;
-    private LiveData<List<Food>> dayFood;
+
+    private LiveData<List<FoodType>> allFoodTypes;
 
     public FoodRepository(Application application){
         AppDatabase database = AppDatabase.getInstance(application);
         foodDao = database.foodDao();
+        foodDao.getAllFoodTypes();
     }
 
     public void insertFood(Food food){
@@ -28,6 +30,8 @@ public class FoodRepository {
     public void deleteFood(Food food){
         new DeleteFoodAsyncTask(foodDao).execute(food);
     }
+
+    public LiveData<List<FoodType>> getAllFoodTypes() { return foodDao.getAllFoodTypes(); }
 
     public LiveData<List<Food>> getDayFood(String date){
         return foodDao.getDayFood(date);

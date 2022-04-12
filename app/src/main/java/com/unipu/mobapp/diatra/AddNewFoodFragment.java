@@ -2,7 +2,10 @@ package com.unipu.mobapp.diatra;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,6 +15,8 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,16 +26,20 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.unipu.mobapp.diatra.data.Food;
-import com.unipu.mobapp.diatra.data.Therapy;
+import com.unipu.mobapp.diatra.data.FoodType;
 import com.unipu.mobapp.diatra.utils.CalendarUtils;
 import com.unipu.mobapp.diatra.viewmodel.DayViewModel;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class AddNewFoodFragment extends Fragment {
 
@@ -40,9 +49,12 @@ public class AddNewFoodFragment extends Fragment {
     private EditText editTextDate;
     private EditText editTextAmount;
 
-    private Spinner spinnerType;
-    private String foodType;
-    private ArrayAdapter<CharSequence> adapter;
+    private TextView textViewFoodType;
+    private ArrayList<String> foodTypeList;
+    private ListView listView;
+    private ArrayAdapter<String> adapterFoodType;
+    private Dialog searchDialog;
+    private EditText editTextSearch;
 
     private Button buttonAdd;
 
@@ -64,28 +76,15 @@ public class AddNewFoodFragment extends Fragment {
         initWidgets(view);
         initObservers();
 
+        foodTypeList=new ArrayList<>();
+
         date = dayViewModel.getDate().getValue();
         editTextDate.setText(date);
 
         editTextDate.setOnClickListener(this::showDatePickerDialog);
         editTextTime.setOnClickListener(this::showTimePickerDialog);
 
-        spinnerType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if(adapterView.getItemAtPosition(i).equals("Choose type")){
-
-                }
-                else{
-                    foodType = adapterView.getItemAtPosition(i).toString();
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
+        textViewFoodType.setOnClickListener(this::showSearchDialog);
 
         onDateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -123,14 +122,25 @@ public class AddNewFoodFragment extends Fragment {
         editTextDate = view.findViewById(R.id.edit_text_food_date);
         editTextTime = view.findViewById(R.id.edit_text_food_time);
         editTextAmount = view.findViewById(R.id.edit_text_amount);
+        editTextSearch = view.findViewById(R.id.edit_text_search);
 
-        spinnerType = view.findViewById(R.id.spinner_food_type);
-        adapter = ArrayAdapter.createFromResource(getActivity(), R.array.array_food, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerType.setAdapter(adapter);
+        textViewFoodType = view.findViewById(R.id.text_view_type);
+
     }
 
     private void initObservers() {
+
+        dayViewModel.getAllFoodTypes().observe(getViewLifecycleOwner(), new Observer<List<FoodType>>() {
+            @Override
+            public void onChanged(List<FoodType> foodTypes) {
+                for (FoodType ft : foodTypes){
+                    foodTypeList.add(ft.getName());
+                }
+                dayViewModel.getAllFoodTypes().removeObserver(this::onChanged);
+            }
+
+        });
+
         dayViewModel.getsFood().observe(this, new Observer<Food>() {
             @Override
             public void onChanged(Food food) {
@@ -151,7 +161,8 @@ public class AddNewFoodFragment extends Fragment {
             editTextAmount.setText(String.valueOf(food.getAmount()));
         }
 
-        spinnerType.setSelection(adapter.getPosition(food.getFoodType()));
+        textViewFoodType.setTextColor(Color.parseColor("#000000"));
+        textViewFoodType.setText(food.getName());
 
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -186,10 +197,52 @@ public class AddNewFoodFragment extends Fragment {
         datePicker.show();
     }
 
+    public void showSearchDialog(View view){
+        searchDialog = new Dialog(getActivity());
+        searchDialog.setContentView(R.layout.dialog_searchable_spinner);
+        searchDialog.getWindow().setLayout(800,1000);
+
+        searchDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        searchDialog.show();
+
+        EditText editText= searchDialog.findViewById(R.id.edit_text_search);
+        ListView listView= searchDialog.findViewById(R.id.search_list_view);
+
+        ArrayAdapter<String> adapter=new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, foodTypeList);
+
+        listView.setAdapter(adapter);
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                adapter.getFilter().filter(s);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                textViewFoodType.setTextColor(Color.parseColor("#000000"));
+                textViewFoodType.setText(adapter.getItem(position));
+                searchDialog.dismiss();
+            }
+        });
+
+    }
+
     private void saveFood() {
         String date = editTextDate.getText().toString();
         String time = editTextTime.getText().toString();
-        String type = foodType;
+        String type = textViewFoodType.getText().toString();
         Integer amount = Integer.parseInt(editTextAmount.getText().toString());
 
         if(time.trim().isEmpty() || type.trim().isEmpty()){
@@ -204,7 +257,7 @@ public class AddNewFoodFragment extends Fragment {
     private void editFood(int id) {
         String date = editTextDate.getText().toString();
         String time = editTextTime.getText().toString();
-        String type = foodType;
+        String type = textViewFoodType.getText().toString();
         Integer amount = Integer.parseInt(editTextAmount.getText().toString());
 
         if(time.trim().isEmpty() || type.trim().isEmpty()){

@@ -3,7 +3,7 @@ package com.unipu.mobapp.diatra.data;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "physical_activity_table")
+@Entity(tableName = "physical_activity")
 public class PhysicalActivity {
 
     @PrimaryKey(autoGenerate = true)

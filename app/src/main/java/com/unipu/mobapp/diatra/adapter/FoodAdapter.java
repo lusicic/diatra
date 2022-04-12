@@ -34,10 +34,10 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodHolder> {
     public void onBindViewHolder(@NonNull FoodHolder holder, int position) {
         Food currentFood = foods.get(position);
         holder.textViewTime.setText(currentFood.getTime());
-        holder.textViewType.setText(currentFood.getFoodType());
+        holder.textViewType.setText(currentFood.getName());
         holder.textViewAmount.setText(String.valueOf(currentFood.getAmount()));
-        holder.textViewIntake.setText(String.valueOf(currentFood.getCalories()));
-        holder.textViewCarbs.setText(String.valueOf(currentFood.getCarbs()));
+        holder.textViewIntake.setText(String.valueOf(currentFood.getTotalCalories()));
+        holder.textViewCarbs.setText(String.valueOf(currentFood.getTotalCarbs()));
     }
 
     @Override
