@@ -40,6 +40,7 @@ import com.unipu.mobapp.diatra.viewmodel.DayViewModel;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class AddNewFoodFragment extends Fragment {
 
@@ -50,11 +51,11 @@ public class AddNewFoodFragment extends Fragment {
     private EditText editTextAmount;
 
     private TextView textViewFoodType;
-    private ArrayList<String> foodTypeList;
-    private ListView listView;
-    private ArrayAdapter<String> adapterFoodType;
+    private ArrayList<FoodType> foodTypeList;
+    private Double calories;
+    private Double carbs;
+
     private Dialog searchDialog;
-    private EditText editTextSearch;
 
     private Button buttonAdd;
 
@@ -122,7 +123,6 @@ public class AddNewFoodFragment extends Fragment {
         editTextDate = view.findViewById(R.id.edit_text_food_date);
         editTextTime = view.findViewById(R.id.edit_text_food_time);
         editTextAmount = view.findViewById(R.id.edit_text_amount);
-        editTextSearch = view.findViewById(R.id.edit_text_search);
 
         textViewFoodType = view.findViewById(R.id.text_view_type);
 
@@ -134,7 +134,7 @@ public class AddNewFoodFragment extends Fragment {
             @Override
             public void onChanged(List<FoodType> foodTypes) {
                 for (FoodType ft : foodTypes){
-                    foodTypeList.add(ft.getName());
+                    foodTypeList.add(ft);
                 }
                 dayViewModel.getAllFoodTypes().removeObserver(this::onChanged);
             }
@@ -163,6 +163,9 @@ public class AddNewFoodFragment extends Fragment {
 
         textViewFoodType.setTextColor(Color.parseColor("#000000"));
         textViewFoodType.setText(food.getName());
+
+        calories = food.getTotalCalories()/food.getAmount();
+        carbs = food.getTotalCarbs()/food.getAmount();
 
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -208,7 +211,7 @@ public class AddNewFoodFragment extends Fragment {
         EditText editText= searchDialog.findViewById(R.id.edit_text_search);
         ListView listView= searchDialog.findViewById(R.id.search_list_view);
 
-        ArrayAdapter<String> adapter=new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, foodTypeList);
+        ArrayAdapter<FoodType> adapter = new ArrayAdapter<FoodType>(getActivity(), android.R.layout.simple_list_item_1, foodTypeList);
 
         listView.setAdapter(adapter);
         editText.addTextChangedListener(new TextWatcher() {
@@ -232,12 +235,15 @@ public class AddNewFoodFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 textViewFoodType.setTextColor(Color.parseColor("#000000"));
-                textViewFoodType.setText(adapter.getItem(position));
+                textViewFoodType.setText(adapter.getItem(position).getName());
+                calories = adapter.getItem(position).getCalories();
+                carbs = adapter.getItem(position).getCarbs();
                 searchDialog.dismiss();
             }
         });
 
     }
+
 
     private void saveFood() {
         String date = editTextDate.getText().toString();
@@ -250,7 +256,8 @@ public class AddNewFoodFragment extends Fragment {
             return;
         }
 
-        Food food = new Food(type, amount, 100, 100, date, time);
+
+        Food food = new Food(type, amount, calories*amount, carbs*amount, date, time);
         dayViewModel.insertFood(food);
     }
 
@@ -265,7 +272,7 @@ public class AddNewFoodFragment extends Fragment {
             return;
         }
 
-        Food food = new Food(type, amount, 100, 100, date, time);
+        Food food = new Food(type, amount, calories*amount, carbs*amount, date, time);
         food.setId(id);
         dayViewModel.updateFood(food);
     }

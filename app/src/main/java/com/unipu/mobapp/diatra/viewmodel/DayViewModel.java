@@ -19,6 +19,7 @@ import com.unipu.mobapp.diatra.utils.SingleLiveEvent;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class DayViewModel extends AndroidViewModel {
@@ -44,6 +45,7 @@ public class DayViewModel extends AndroidViewModel {
         physicalActivityRepository = new PhysicalActivityRepository(application);
         foodRepo = new FoodRepository(application);
         allFoodTypes = foodRepo.getAllFoodTypes();
+
         dayTherapies = Transformations.switchMap(date,
                 date -> therapyRepo.getDayTherapies(date));
         dayPhysicalActivities = Transformations.switchMap(date,
@@ -64,17 +66,14 @@ public class DayViewModel extends AndroidViewModel {
     public LiveData<List<FoodType>> getAllFoodTypes() { return allFoodTypes; }
 
     // za edit pojedinacne stavke
-    public SingleLiveEvent<Therapy> getSTherapy() {
-        return sTherapy;
-    }
+    public SingleLiveEvent<Therapy> getSTherapy() { return sTherapy; }
+    public SingleLiveEvent<PhysicalActivity> getSPhysicalActivity() {return sPhysicalActivity;}
+    public SingleLiveEvent<Food> getsFood() { return sFood;}
+
     public void setSTherapy(Therapy therapy) {
         sTherapy.setValue(therapy);
     }
-
-    public SingleLiveEvent<PhysicalActivity> getSPhysicalActivity() {return sPhysicalActivity;}
     public void setSPhysicalActivity(PhysicalActivity physicalActivity){sPhysicalActivity.setValue(physicalActivity);}
-
-    public SingleLiveEvent<Food> getsFood() { return sFood;}
     public void setSFood(Food food) { sFood.setValue(food);}
 
     // za bazu
@@ -92,8 +91,15 @@ public class DayViewModel extends AndroidViewModel {
     public void updatePhysicalActivity(PhysicalActivity physicalActivity) {physicalActivityRepository.updatePhysicalActivity(physicalActivity);}
     public void deletePhysicalActivity(PhysicalActivity physicalActivity) {physicalActivityRepository.deletePhysicalActivity(physicalActivity);}
 
-    public void insertFood(Food food) { foodRepo.insertFood(food);}
-    public void updateFood(Food food) { foodRepo.updateFood(food);}
+    public void insertFood(Food food) {
+        foodRepo.insertFood(food);
+    }
+    public void updateFood(Food food) {
+        foodRepo.updateFood(food);
+    }
+
     public void deleteFood(Food food) { foodRepo.deleteFood(food);}
+
+
 
 }

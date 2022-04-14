@@ -39,4 +39,10 @@ public class FoodType {
         return carbs;
     }
 
+    @Override
+    public String toString() {
+        return this.name.toString();
+    }
+
+
 }

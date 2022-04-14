@@ -1,23 +1,25 @@
 package com.unipu.mobapp.diatra.data;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity (tableName = "food")
 public class Food{
 
+    @ColumnInfo(name = "food_id")
     @PrimaryKey (autoGenerate = true)
     private int id;
 
     private String name;
     private Integer amount;
-    private Integer totalCalories;
-    private Integer totalCarbs;
+    private Double totalCalories;
+    private Double totalCarbs;
 
     private String date;
     private String time;
 
-    public Food(String name, Integer amount, Integer totalCalories, Integer totalCarbs, String date, String time) {
+    public Food(String name, Integer amount, Double totalCalories, Double totalCarbs, String date, String time) {
         this.name = name;
         this.amount = amount;
         this.totalCalories = totalCalories;
@@ -34,19 +36,17 @@ public class Food{
         return id;
     }
 
-    public String getName() {
-        return name;
-    }
+    public String getName() { return name; }
 
     public Integer getAmount() {
         return amount;
     }
 
-    public Integer getTotalCalories() {
+    public Double getTotalCalories() {
         return totalCalories;
     }
 
-    public Integer getTotalCarbs() {
+    public Double getTotalCarbs() {
         return totalCarbs;
     }
 
