@@ -16,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
@@ -51,6 +52,9 @@ public class AddNewFoodFragment extends Fragment {
     private EditText editTextAmount;
 
     private TextView textViewFoodType;
+    private TextView textViewTotalCalories;
+    private TextView textViewTotalCarbs;
+
     private ArrayList<FoodType> foodTypeList;
     private Double calories;
     private Double carbs;
@@ -133,9 +137,7 @@ public class AddNewFoodFragment extends Fragment {
         dayViewModel.getAllFoodTypes().observe(getViewLifecycleOwner(), new Observer<List<FoodType>>() {
             @Override
             public void onChanged(List<FoodType> foodTypes) {
-                for (FoodType ft : foodTypes){
-                    foodTypeList.add(ft);
-                }
+                foodTypeList.addAll(foodTypes);
                 dayViewModel.getAllFoodTypes().removeObserver(this::onChanged);
             }
 
@@ -164,8 +166,11 @@ public class AddNewFoodFragment extends Fragment {
         textViewFoodType.setTextColor(Color.parseColor("#000000"));
         textViewFoodType.setText(food.getName());
 
-        calories = food.getTotalCalories()/food.getAmount();
-        carbs = food.getTotalCarbs()/food.getAmount();
+        textViewTotalCalories.setText(String.valueOf(food.getTotalCalories()));
+        textViewTotalCarbs.setText(String.valueOf(food.getTotalCarbs()));
+
+        calories = food.getCalories();
+        carbs = food.getCarbs();
 
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -256,8 +261,7 @@ public class AddNewFoodFragment extends Fragment {
             return;
         }
 
-
-        Food food = new Food(type, amount, calories*amount, carbs*amount, date, time);
+        Food food = new Food(type, amount, calories, carbs, date, time);
         dayViewModel.insertFood(food);
     }
 
@@ -272,7 +276,7 @@ public class AddNewFoodFragment extends Fragment {
             return;
         }
 
-        Food food = new Food(type, amount, calories*amount, carbs*amount, date, time);
+        Food food = new Food(type, amount, calories, carbs, date, time);
         food.setId(id);
         dayViewModel.updateFood(food);
     }

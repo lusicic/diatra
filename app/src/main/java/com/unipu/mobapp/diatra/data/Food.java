@@ -13,17 +13,17 @@ public class Food{
 
     private String name;
     private Integer amount;
-    private Double totalCalories;
-    private Double totalCarbs;
+    private Double calories;
+    private Double carbs;
 
     private String date;
     private String time;
 
-    public Food(String name, Integer amount, Double totalCalories, Double totalCarbs, String date, String time) {
+    public Food(String name, Integer amount, Double calories, Double carbs, String date, String time) {
         this.name = name;
         this.amount = amount;
-        this.totalCalories = totalCalories;
-        this.totalCarbs = totalCarbs;
+        this.calories = calories;
+        this.carbs = carbs;
         this.date = date;
         this.time = time;
     }
@@ -42,12 +42,12 @@ public class Food{
         return amount;
     }
 
-    public Double getTotalCalories() {
-        return totalCalories;
+    public Double getCalories() {
+        return calories;
     }
 
-    public Double getTotalCarbs() {
-        return totalCarbs;
+    public Double getCarbs() {
+        return carbs;
     }
 
     public String getDate() {
@@ -56,5 +56,15 @@ public class Food{
 
     public String getTime() {
         return time;
+    }
+
+    public Double getTotalCalories() {
+
+        return amount*calories;
+    }
+
+    public Double getTotalCarbs() {
+
+        return amount*carbs;
     }
 }

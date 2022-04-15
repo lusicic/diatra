@@ -70,16 +70,12 @@ public class DayViewModel extends AndroidViewModel {
     public SingleLiveEvent<PhysicalActivity> getSPhysicalActivity() {return sPhysicalActivity;}
     public SingleLiveEvent<Food> getsFood() { return sFood;}
 
-    public void setSTherapy(Therapy therapy) {
-        sTherapy.setValue(therapy);
-    }
+    public void setSTherapy(Therapy therapy) { sTherapy.setValue(therapy); }
     public void setSPhysicalActivity(PhysicalActivity physicalActivity){sPhysicalActivity.setValue(physicalActivity);}
     public void setSFood(Food food) { sFood.setValue(food);}
 
     // za bazu
-    public void insertTherapy(Therapy therapy){
-        therapyRepo.insertTherapy(therapy);
-    }
+    public void insertTherapy(Therapy therapy) { therapyRepo.insertTherapy(therapy); }
     public void updateTherapy(Therapy therapy){
         therapyRepo.updateTherapy(therapy);
     }
