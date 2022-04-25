@@ -1,12 +1,14 @@
-package com.unipu.mobapp.diatra.data;
+package com.unipu.mobapp.diatra.data.therapy;
 
 import android.app.Application;
 import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 
-import java.time.LocalDate;
+import com.unipu.mobapp.diatra.data.AppDatabase;
+import com.unipu.mobapp.diatra.data.therapy.Therapy;
+import com.unipu.mobapp.diatra.data.therapy.TherapyDao;
+
 import java.util.List;
 
 public class TherapyRepository {

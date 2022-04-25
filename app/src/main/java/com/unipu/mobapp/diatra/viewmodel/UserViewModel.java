@@ -5,11 +5,9 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 
-import com.unipu.mobapp.diatra.data.Therapy;
-import com.unipu.mobapp.diatra.data.User;
-import com.unipu.mobapp.diatra.data.UserRepository;
+import com.unipu.mobapp.diatra.data.user.User;
+import com.unipu.mobapp.diatra.data.user.UserRepository;
 
 import org.jetbrains.annotations.NotNull;
 

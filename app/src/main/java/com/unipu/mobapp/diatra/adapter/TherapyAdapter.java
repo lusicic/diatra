@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.unipu.mobapp.diatra.R;
-import com.unipu.mobapp.diatra.data.Therapy;
+import com.unipu.mobapp.diatra.data.therapy.Therapy;
 
 import org.jetbrains.annotations.NotNull;
 

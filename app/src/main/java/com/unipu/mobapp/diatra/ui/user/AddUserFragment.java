@@ -1,7 +1,5 @@
-package com.unipu.mobapp.diatra;
+package com.unipu.mobapp.diatra.ui.user;
 
-import android.app.AlertDialog;
-import android.app.DatePickerDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,16 +15,14 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import com.unipu.mobapp.diatra.data.User;
+import com.unipu.mobapp.diatra.R;
+import com.unipu.mobapp.diatra.data.user.User;
 import com.unipu.mobapp.diatra.viewmodel.UserViewModel;
 
 import org.jetbrains.annotations.NotNull;
-
-import java.util.Calendar;
 
 public class AddUserFragment extends Fragment {
 

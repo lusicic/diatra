@@ -1,4 +1,4 @@
-package com.unipu.mobapp.diatra;
+package com.unipu.mobapp.diatra.ui.physicalActivity;
 
 import android.os.Bundle;
 
@@ -19,8 +19,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.unipu.mobapp.diatra.R;
 import com.unipu.mobapp.diatra.adapter.PhysicalActivityAdapter;
-import com.unipu.mobapp.diatra.data.PhysicalActivity;
+import com.unipu.mobapp.diatra.data.physicalActivity.PhysicalActivity;
 import com.unipu.mobapp.diatra.viewmodel.DayViewModel;
 
 import java.util.List;

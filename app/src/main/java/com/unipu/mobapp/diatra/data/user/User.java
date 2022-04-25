@@ -1,4 +1,4 @@
-package com.unipu.mobapp.diatra.data;
+package com.unipu.mobapp.diatra.data.user;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;

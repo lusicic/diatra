@@ -1,6 +1,5 @@
 package com.unipu.mobapp.diatra.data;
 
-import android.content.AsyncQueryHandler;
 import android.content.Context;
 import android.os.AsyncTask;
 
@@ -9,6 +8,16 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
+
+import com.unipu.mobapp.diatra.data.food.Food;
+import com.unipu.mobapp.diatra.data.food.FoodDao;
+import com.unipu.mobapp.diatra.data.food.FoodType;
+import com.unipu.mobapp.diatra.data.physicalActivity.PhysicalActivity;
+import com.unipu.mobapp.diatra.data.physicalActivity.PhysicalActivityDao;
+import com.unipu.mobapp.diatra.data.therapy.Therapy;
+import com.unipu.mobapp.diatra.data.therapy.TherapyDao;
+import com.unipu.mobapp.diatra.data.user.User;
+import com.unipu.mobapp.diatra.data.user.UserDao;
 
 import org.jetbrains.annotations.NotNull;
 

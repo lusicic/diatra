@@ -1,4 +1,4 @@
-package com.unipu.mobapp.diatra;
+package com.unipu.mobapp.diatra.ui;
 
 import android.os.Bundle;
 
@@ -18,8 +18,9 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.unipu.mobapp.diatra.R;
 import com.unipu.mobapp.diatra.adapter.CalendarAdapter;
-import com.unipu.mobapp.diatra.data.Therapy;
+import com.unipu.mobapp.diatra.data.therapy.Therapy;
 import com.unipu.mobapp.diatra.utils.CalendarUtils;
 import com.unipu.mobapp.diatra.viewmodel.DayViewModel;
 

@@ -1,4 +1,4 @@
-package com.unipu.mobapp.diatra;
+package com.unipu.mobapp.diatra.ui.user;
 
 import android.os.Bundle;
 
@@ -15,7 +15,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.unipu.mobapp.diatra.data.User;
+import com.unipu.mobapp.diatra.R;
+import com.unipu.mobapp.diatra.data.user.User;
 import com.unipu.mobapp.diatra.viewmodel.UserViewModel;
 
 import org.jetbrains.annotations.NotNull;

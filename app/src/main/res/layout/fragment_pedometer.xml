@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="#fff"
     android:backgroundTint="#FFFFFF"
-    tools:context=".PedometerFragment">
+    tools:context=".ui.physicalActivity.PedometerFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

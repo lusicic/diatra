@@ -8,18 +8,17 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
 
-import com.unipu.mobapp.diatra.data.Food;
-import com.unipu.mobapp.diatra.data.FoodRepository;
-import com.unipu.mobapp.diatra.data.FoodType;
-import com.unipu.mobapp.diatra.data.PhysicalActivity;
-import com.unipu.mobapp.diatra.data.PhysicalActivityRepository;
-import com.unipu.mobapp.diatra.data.Therapy;
-import com.unipu.mobapp.diatra.data.TherapyRepository;
+import com.unipu.mobapp.diatra.data.food.Food;
+import com.unipu.mobapp.diatra.data.food.FoodRepository;
+import com.unipu.mobapp.diatra.data.food.FoodType;
+import com.unipu.mobapp.diatra.data.physicalActivity.PhysicalActivity;
+import com.unipu.mobapp.diatra.data.physicalActivity.PhysicalActivityRepository;
+import com.unipu.mobapp.diatra.data.therapy.Therapy;
+import com.unipu.mobapp.diatra.data.therapy.TherapyRepository;
 import com.unipu.mobapp.diatra.utils.SingleLiveEvent;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.text.DecimalFormat;
 import java.util.List;
 
 public class DayViewModel extends AndroidViewModel {

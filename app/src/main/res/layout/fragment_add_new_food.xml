@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:padding="30dp"
     android:focusableInTouchMode="true"
-    tools:context=".AddNewFoodFragment">
+    tools:context=".ui.food.AddNewFoodFragment">
 
     <TextView
     android:id="@+id/textView6"

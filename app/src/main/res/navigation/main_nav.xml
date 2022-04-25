@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.unipu.mobapp.diatra.HomeFragment"
+        android:name="com.unipu.mobapp.diatra.ui.HomeFragment"
         android:label="Home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -37,7 +37,7 @@
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.unipu.mobapp.diatra.UserFragment"
+        android:name="com.unipu.mobapp.diatra.ui.user.UserFragment"
         android:label="Profile"
         tools:layout="@layout/fragment_user" >
         <action
@@ -46,12 +46,12 @@
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.unipu.mobapp.diatra.SettingsFragment"
+        android:name="com.unipu.mobapp.diatra.ui.SettingsFragment"
         android:label="Settings"
         tools:layout="@layout/fragment_settings" />
     <fragment
         android:id="@+id/therapyFragment"
-        android:name="com.unipu.mobapp.diatra.TherapyFragment"
+        android:name="com.unipu.mobapp.diatra.ui.therapy.TherapyFragment"
         android:label="Therapies"
         tools:layout="@layout/fragment_therapy" >
         <action
@@ -60,7 +60,7 @@
     </fragment>
     <fragment
         android:id="@+id/addTherapyFragment"
-        android:name="com.unipu.mobapp.diatra.AddTherapyFragment"
+        android:name="com.unipu.mobapp.diatra.ui.therapy.AddTherapyFragment"
         android:label="Add new therapy" >
         <action
             android:id="@+id/action_addTherapyFragment_to_therapyFragment"
@@ -70,12 +70,12 @@
     </fragment>
     <fragment
         android:id="@+id/welcomeFragment"
-        android:name="com.unipu.mobapp.diatra.WelcomeFragment"
+        android:name="com.unipu.mobapp.diatra.ui.WelcomeFragment"
         android:label="fragment_welcome"
         tools:layout="@layout/fragment_welcome" />
     <fragment
         android:id="@+id/addUserFragment"
-        android:name="com.unipu.mobapp.diatra.AddUserFragment"
+        android:name="com.unipu.mobapp.diatra.ui.user.AddUserFragment"
         android:label="Edit profile" >
         <action
             android:id="@+id/action_addUserFragment_to_profileFragment"
@@ -83,7 +83,7 @@
     </fragment>
     <fragment
         android:id="@+id/physicalActivityFragment"
-        android:name="com.unipu.mobapp.diatra.PhysicalActivityFragment"
+        android:name="com.unipu.mobapp.diatra.ui.physicalActivity.PhysicalActivityFragment"
         android:label="Activities"
         tools:layout="@layout/fragment_physical_activity" >
         <action
@@ -92,12 +92,12 @@
     </fragment>
     <fragment
         android:id="@+id/addPhysicalActivityFragment"
-        android:name="com.unipu.mobapp.diatra.AddPhysicalActivityFragment"
+        android:name="com.unipu.mobapp.diatra.ui.physicalActivity.AddPhysicalActivityFragment"
         android:label="Add new activity"
         tools:layout="@layout/fragment_add_physical_activity" />
     <fragment
         android:id="@+id/foodFragment"
-        android:name="com.unipu.mobapp.diatra.FoodFragment"
+        android:name="com.unipu.mobapp.diatra.ui.food.FoodFragment"
         android:label="Meals"
         tools:layout="@layout/fragment_food" >
         <action
@@ -106,12 +106,12 @@
     </fragment>
     <fragment
         android:id="@+id/addNewFoodFragment"
-        android:name="com.unipu.mobapp.diatra.AddNewFoodFragment"
+        android:name="com.unipu.mobapp.diatra.ui.food.AddNewFoodFragment"
         android:label="Add new meal"
         tools:layout="@layout/fragment_add_new_food" />
     <fragment
         android:id="@+id/pedometerFragment"
-        android:name="com.unipu.mobapp.diatra.PedometerFragment"
+        android:name="com.unipu.mobapp.diatra.ui.physicalActivity.PedometerFragment"
         android:label="Steps"
         tools:layout="@layout/fragment_pedometer" />
 

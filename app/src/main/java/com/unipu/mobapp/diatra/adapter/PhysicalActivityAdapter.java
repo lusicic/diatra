@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.unipu.mobapp.diatra.R;
-import com.unipu.mobapp.diatra.data.PhysicalActivity;
+import com.unipu.mobapp.diatra.data.physicalActivity.PhysicalActivity;
 
 import org.jetbrains.annotations.NotNull;
 

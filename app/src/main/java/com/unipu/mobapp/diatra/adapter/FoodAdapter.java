@@ -9,11 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.unipu.mobapp.diatra.R;
-import com.unipu.mobapp.diatra.data.Food;
-import com.unipu.mobapp.diatra.data.Therapy;
-
-import org.jetbrains.annotations.NotNull;
-import org.w3c.dom.Text;
+import com.unipu.mobapp.diatra.data.food.Food;
 
 import java.util.ArrayList;
 import java.util.List;

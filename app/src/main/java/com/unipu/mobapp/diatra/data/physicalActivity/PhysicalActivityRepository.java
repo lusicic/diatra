@@ -1,9 +1,13 @@
-package com.unipu.mobapp.diatra.data;
+package com.unipu.mobapp.diatra.data.physicalActivity;
 
 import android.app.Application;
 import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
+
+import com.unipu.mobapp.diatra.data.AppDatabase;
+import com.unipu.mobapp.diatra.data.physicalActivity.PhysicalActivity;
+import com.unipu.mobapp.diatra.data.physicalActivity.PhysicalActivityDao;
 
 import java.util.List;
 

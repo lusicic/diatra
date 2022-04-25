@@ -1,4 +1,4 @@
-package com.unipu.mobapp.diatra;
+package com.unipu.mobapp.diatra.ui.physicalActivity;
 
 import android.os.Bundle;
 
@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.unipu.mobapp.diatra.R;
 import com.unipu.mobapp.diatra.utils.PreferencesUtils;
 import com.unipu.mobapp.diatra.viewmodel.DayViewModel;
 

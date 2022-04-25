@@ -9,7 +9,7 @@
     android:orientation="vertical"
     android:padding="30dp"
     android:focusableInTouchMode="true"
-    tools:context=".AddTherapyFragment">
+    tools:context=".ui.therapy.AddTherapyFragment">
 
     <TextView
         android:id="@+id/textView6"

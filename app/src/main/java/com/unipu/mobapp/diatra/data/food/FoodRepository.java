@@ -1,9 +1,11 @@
-package com.unipu.mobapp.diatra.data;
+package com.unipu.mobapp.diatra.data.food;
 
 import android.app.Application;
 import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
+
+import com.unipu.mobapp.diatra.data.AppDatabase;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.unipu.mobapp.diatra;
+package com.unipu.mobapp.diatra.ui;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.unipu.mobapp.diatra.R;
 import com.unipu.mobapp.diatra.utils.CalendarUtils;
 import com.unipu.mobapp.diatra.viewmodel.DayViewModel;
 import com.unipu.mobapp.diatra.viewmodel.UserViewModel;

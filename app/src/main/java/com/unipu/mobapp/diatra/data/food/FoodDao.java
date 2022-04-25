@@ -1,4 +1,4 @@
-package com.unipu.mobapp.diatra.data;
+package com.unipu.mobapp.diatra.data.food;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;

@@ -1,4 +1,4 @@
-package com.unipu.mobapp.diatra;
+package com.unipu.mobapp.diatra.ui.food;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -16,7 +16,6 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
@@ -28,20 +27,19 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.unipu.mobapp.diatra.data.Food;
-import com.unipu.mobapp.diatra.data.FoodType;
+import com.unipu.mobapp.diatra.R;
+import com.unipu.mobapp.diatra.data.food.Food;
+import com.unipu.mobapp.diatra.data.food.FoodType;
 import com.unipu.mobapp.diatra.utils.CalendarUtils;
 import com.unipu.mobapp.diatra.viewmodel.DayViewModel;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class AddNewFoodFragment extends Fragment {
 
@@ -52,8 +50,6 @@ public class AddNewFoodFragment extends Fragment {
     private EditText editTextAmount;
 
     private TextView textViewFoodType;
-    private TextView textViewTotalCalories;
-    private TextView textViewTotalCarbs;
 
     private ArrayList<FoodType> foodTypeList;
     private Double calories;
@@ -165,9 +161,6 @@ public class AddNewFoodFragment extends Fragment {
 
         textViewFoodType.setTextColor(Color.parseColor("#000000"));
         textViewFoodType.setText(food.getName());
-
-        textViewTotalCalories.setText(String.valueOf(food.getTotalCalories()));
-        textViewTotalCarbs.setText(String.valueOf(food.getTotalCarbs()));
 
         calories = food.getCalories();
         carbs = food.getCarbs();

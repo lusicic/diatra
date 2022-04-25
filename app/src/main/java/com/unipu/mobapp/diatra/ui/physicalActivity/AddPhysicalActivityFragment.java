@@ -1,4 +1,4 @@
-package com.unipu.mobapp.diatra;
+package com.unipu.mobapp.diatra.ui.physicalActivity;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -26,8 +26,8 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.unipu.mobapp.diatra.data.PhysicalActivity;
-import com.unipu.mobapp.diatra.data.Therapy;
+import com.unipu.mobapp.diatra.R;
+import com.unipu.mobapp.diatra.data.physicalActivity.PhysicalActivity;
 import com.unipu.mobapp.diatra.utils.CalendarUtils;
 import com.unipu.mobapp.diatra.viewmodel.DayViewModel;
 

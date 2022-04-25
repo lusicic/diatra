@@ -1,4 +1,4 @@
-package com.unipu.mobapp.diatra;
+package com.unipu.mobapp.diatra.ui.food;
 
 import android.os.Bundle;
 
@@ -19,9 +19,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.unipu.mobapp.diatra.R;
 import com.unipu.mobapp.diatra.adapter.FoodAdapter;
-import com.unipu.mobapp.diatra.adapter.TherapyAdapter;
-import com.unipu.mobapp.diatra.data.Food;
+import com.unipu.mobapp.diatra.data.food.Food;
 import com.unipu.mobapp.diatra.viewmodel.DayViewModel;
 
 import java.util.List;
