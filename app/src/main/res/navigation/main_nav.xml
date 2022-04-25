@@ -31,6 +31,9 @@
         <action
             android:id="@+id/action_homeFragment_to_addNewFoodFragment"
             app:destination="@id/addNewFoodFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_pedometerFragment"
+            app:destination="@id/pedometerFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -106,5 +109,10 @@
         android:name="com.unipu.mobapp.diatra.AddNewFoodFragment"
         android:label="Add new meal"
         tools:layout="@layout/fragment_add_new_food" />
+    <fragment
+        android:id="@+id/pedometerFragment"
+        android:name="com.unipu.mobapp.diatra.PedometerFragment"
+        android:label="Steps"
+        tools:layout="@layout/fragment_pedometer" />
 
 </navigation>

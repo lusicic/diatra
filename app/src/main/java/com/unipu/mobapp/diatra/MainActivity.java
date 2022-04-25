@@ -1,7 +1,6 @@
 package com.unipu.mobapp.diatra;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProvider;
@@ -11,12 +10,12 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import android.content.Context;
-import android.content.SharedPreferences;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.unipu.mobapp.diatra.utils.CalendarUtils;
 import com.unipu.mobapp.diatra.viewmodel.DayViewModel;
 import com.unipu.mobapp.diatra.viewmodel.UserViewModel;
 
@@ -24,7 +23,10 @@ import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDate;
 
-public class MainActivity extends AppCompatActivity {
+import com.unipu.mobapp.diatra.services.StepsService;
+
+
+public class MainActivity extends AppCompatActivity{
 
     DayViewModel dayViewModel;
     UserViewModel userViewModel;
@@ -35,11 +37,15 @@ public class MainActivity extends AppCompatActivity {
 
         initViewModels();
 
-        dayViewModel.setDate(String.valueOf(LocalDate.now()));
+        dayViewModel.setDate(String.valueOf(CalendarUtils.formattedDate(LocalDate.now())));
         userViewModel.getUser();
 
         setContentView(R.layout.activity_main);
         setUpNavigation();
+
+        Intent i = new Intent(MainActivity.this, StepsService.class);
+        startService(i);
+
     }
 
     private void initViewModels() {
@@ -76,17 +82,4 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-
-    public void checkFirstRun() {
-        SharedPreferences myPref = this.getSharedPreferences(
-                "prefName", Context.MODE_PRIVATE);
-        boolean firstLaunch = myPref.getBoolean("firstLaunch", true);
-
-        if(firstLaunch){
-            getSupportFragmentManager().beginTransaction()
-                    .add(android.R.id.content, new WelcomeFragment()).commit();
-        }
-        myPref.edit().putBoolean("firstLaunch", false).commit();
-    }
-
 }

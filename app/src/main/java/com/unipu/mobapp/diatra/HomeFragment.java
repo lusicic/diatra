@@ -41,6 +41,7 @@ public class HomeFragment extends Fragment implements CalendarAdapter.OnItemList
     private RecyclerView calendarRecyclerView;
 
     private TextView textViewTest;
+    private TextView textViewTotalSteps;
 
     ImageButton btnBack;
     ImageButton btnNext;
@@ -51,11 +52,11 @@ public class HomeFragment extends Fragment implements CalendarAdapter.OnItemList
     CardView newTherapyCardView;
     CardView newActivityCardView;
     CardView newFoodCardView;
+    CardView stepsCardView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         return view;
     }
@@ -81,6 +82,7 @@ public class HomeFragment extends Fragment implements CalendarAdapter.OnItemList
         newTherapyCardView.setOnClickListener(this::newTherapy);
         newActivityCardView.setOnClickListener(this::newActivity);
         newFoodCardView.setOnClickListener(this::newFood);
+        stepsCardView.setOnClickListener(this::toSteps);
 
         dayViewModel.getDayTherapies().observe(getActivity(), new Observer<List<Therapy>>() {
             @Override
@@ -89,6 +91,12 @@ public class HomeFragment extends Fragment implements CalendarAdapter.OnItemList
             }
         });
 
+        dayViewModel.getTotalSteps().observe(getViewLifecycleOwner(), new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                textViewTotalSteps.setText(String.valueOf(integer));
+            }
+        });
     }
 
     private void initViewModel(){
@@ -102,6 +110,7 @@ public class HomeFragment extends Fragment implements CalendarAdapter.OnItemList
         newTherapyCardView = view.findViewById(R.id.newTherapyCard);
         newActivityCardView = view.findViewById(R.id.newActivityCard);
         newFoodCardView = view.findViewById(R.id.newFoodCard);
+        stepsCardView = view.findViewById(R.id.stepsCard);
 
         btnBack = view.findViewById(R.id.button_calendar_back);
         btnNext = view.findViewById(R.id.button_calendar_next);
@@ -110,11 +119,11 @@ public class HomeFragment extends Fragment implements CalendarAdapter.OnItemList
         monthYearText = view.findViewById(R.id.monthYearTV);
 
         textViewTest = view.findViewById(R.id.text_view_test);
+        textViewTotalSteps = view.findViewById(R.id.text_view_number_of_steps);
     }
 
 
     private void setUpCalendar(){
-
         monthYearText.setText(monthYear(CalendarUtils.selectedDate));
         ArrayList<LocalDate> days = showDaysInWeek(CalendarUtils.selectedDate);
 
@@ -122,7 +131,6 @@ public class HomeFragment extends Fragment implements CalendarAdapter.OnItemList
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getActivity().getApplicationContext(), 7);
         calendarRecyclerView.setLayoutManager(layoutManager);
         calendarRecyclerView.setAdapter(calendarAdapter);
-
     }
 
     public void previousWeekAction(View view)
@@ -170,6 +178,10 @@ public class HomeFragment extends Fragment implements CalendarAdapter.OnItemList
 
     public void newFood(View view){
         Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_addNewFoodFragment);
+    }
+
+    public void toSteps(View view){
+        Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_pedometerFragment);
     }
 
     @Override

@@ -29,6 +29,7 @@ public class DayViewModel extends AndroidViewModel {
     private FoodRepository foodRepo;
 
     private MutableLiveData<String> date = new MutableLiveData<>();
+    private MutableLiveData<Integer> totalSteps =  new MutableLiveData<>();
 
     private LiveData<List<Therapy>> dayTherapies;
     private LiveData<List<PhysicalActivity>> dayPhysicalActivities;
@@ -58,6 +59,13 @@ public class DayViewModel extends AndroidViewModel {
     // (promjena oznacenog datuma trigera promijenu liste terapije)
     public void setDate(String newDate) { date.setValue(newDate);}
     public LiveData<String> getDate() { return date;}
+
+    public LiveData<Integer> getTotalSteps() {
+        return totalSteps;
+    }
+    public void setTotalSteps(Integer newTotalSteps) {
+        totalSteps.setValue(newTotalSteps);
+    }
 
     // dohvat liste po danu
     public LiveData<List<Therapy>> getDayTherapies() { return dayTherapies; }
