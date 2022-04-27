@@ -4,6 +4,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class CalendarUtils {
 
@@ -19,6 +20,15 @@ public class CalendarUtils {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         return date.format(formatter);
     }
+
+    public static String dayMonth(String dateToFormat)
+    {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate date = LocalDate.parse(dateToFormat, formatter);
+        DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd MMMM");
+        return date.format(formatter2);
+    }
+
 
     public static String convertDate(int input) {
         if (input >= 10) {

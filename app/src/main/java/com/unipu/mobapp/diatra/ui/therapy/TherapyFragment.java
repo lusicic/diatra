@@ -21,6 +21,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.unipu.mobapp.diatra.R;
 import com.unipu.mobapp.diatra.adapter.TherapyAdapter;
 import com.unipu.mobapp.diatra.data.therapy.Therapy;
+import com.unipu.mobapp.diatra.utils.CalendarUtils;
 import com.unipu.mobapp.diatra.viewmodel.DayViewModel;
 
 import org.jetbrains.annotations.NotNull;
@@ -58,8 +59,9 @@ public class TherapyFragment extends Fragment {
 
         dayViewModel = new ViewModelProvider(requireActivity()).get(DayViewModel.class);
 
-        String date = dayViewModel.getDate().getValue();
+        String date = CalendarUtils.dayMonth(dayViewModel.getDate().getValue());
         textViewTherapiesDate.setText(date);
+
 
         dayViewModel.getDayTherapies().observe(getActivity(), new Observer<List<Therapy>>() {
             @Override

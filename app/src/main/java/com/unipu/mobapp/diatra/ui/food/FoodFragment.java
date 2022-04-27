@@ -22,6 +22,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.unipu.mobapp.diatra.R;
 import com.unipu.mobapp.diatra.adapter.FoodAdapter;
 import com.unipu.mobapp.diatra.data.food.Food;
+import com.unipu.mobapp.diatra.utils.CalendarUtils;
 import com.unipu.mobapp.diatra.viewmodel.DayViewModel;
 
 import java.util.List;
@@ -50,7 +51,7 @@ public class FoodFragment extends Fragment {
         initViewModel();
         initWidgets(view);
 
-        String date = dayViewModel.getDate().getValue();
+        String date = CalendarUtils.dayMonth(dayViewModel.getDate().getValue());
         textViewFoodDate.setText(date);
 
         recyclerViewFood.setLayoutManager(new LinearLayoutManager(getContext()));

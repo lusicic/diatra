@@ -22,6 +22,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.unipu.mobapp.diatra.R;
 import com.unipu.mobapp.diatra.adapter.PhysicalActivityAdapter;
 import com.unipu.mobapp.diatra.data.physicalActivity.PhysicalActivity;
+import com.unipu.mobapp.diatra.utils.CalendarUtils;
 import com.unipu.mobapp.diatra.viewmodel.DayViewModel;
 
 import java.util.List;
@@ -39,7 +40,6 @@ public class PhysicalActivityFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_physical_activity, container, false);
     }
 
@@ -56,7 +56,7 @@ public class PhysicalActivityFragment extends Fragment {
         PhysicalActivityAdapter physicalActivityAdapter = new PhysicalActivityAdapter();
         recyclerViewPhysicalActivity.setAdapter(physicalActivityAdapter);
 
-        String date = dayViewModel.getDate().getValue();
+        String date = CalendarUtils.dayMonth(dayViewModel.getDate().getValue());
         textViewPhysicalActivitiesDate.setText(date);
 
         dayViewModel.getDayPhysicalActivities().observe(getViewLifecycleOwner(), new Observer<List<PhysicalActivity>>() {
