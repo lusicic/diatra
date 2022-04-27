@@ -28,12 +28,14 @@ public class DayViewModel extends AndroidViewModel {
     private FoodRepository foodRepo;
 
     private MutableLiveData<String> date = new MutableLiveData<>();
-    private MutableLiveData<Integer> totalSteps =  new MutableLiveData<>();
 
     private LiveData<List<Therapy>> dayTherapies;
     private LiveData<List<PhysicalActivity>> dayPhysicalActivities;
     private LiveData<List<Food>> dayFood;
     private LiveData<List<FoodType>> allFoodTypes;
+
+    private MutableLiveData<Integer> totalDayCalories = new MutableLiveData<>();
+    private MutableLiveData<Integer> totalDayCarbs = new MutableLiveData<>();
 
     private SingleLiveEvent<Therapy> sTherapy = new SingleLiveEvent<>();
     private SingleLiveEvent<PhysicalActivity> sPhysicalActivity = new SingleLiveEvent<>();
@@ -59,18 +61,17 @@ public class DayViewModel extends AndroidViewModel {
     public void setDate(String newDate) { date.setValue(newDate);}
     public LiveData<String> getDate() { return date;}
 
-    public LiveData<Integer> getTotalSteps() {
-        return totalSteps;
-    }
-    public void setTotalSteps(Integer newTotalSteps) {
-        totalSteps.setValue(newTotalSteps);
-    }
-
     // dohvat liste po danu
     public LiveData<List<Therapy>> getDayTherapies() { return dayTherapies; }
     public LiveData<List<PhysicalActivity>> getDayPhysicalActivities() { return dayPhysicalActivities; }
     public LiveData<List<Food>> getDayFood() { return dayFood;}
     public LiveData<List<FoodType>> getAllFoodTypes() { return allFoodTypes; }
+
+    public void setTotalDayCalories(Integer calories) { totalDayCalories.setValue(calories); }
+    public LiveData<Integer> getTotalDayCalories() { return totalDayCalories; }
+
+    public void setTotalDayCarbs(Integer carbs) { totalDayCarbs.setValue(carbs); }
+    public LiveData<Integer> getTotalDayCarbs() { return totalDayCarbs; }
 
     // za edit pojedinacne stavke
     public SingleLiveEvent<Therapy> getSTherapy() { return sTherapy; }
@@ -83,26 +84,15 @@ public class DayViewModel extends AndroidViewModel {
 
     // za bazu
     public void insertTherapy(Therapy therapy) { therapyRepo.insertTherapy(therapy); }
-    public void updateTherapy(Therapy therapy){
-        therapyRepo.updateTherapy(therapy);
-    }
-    public void deleteTherapy(Therapy therapy){
-        therapyRepo.deleteTherapy(therapy);
-    }
+    public void updateTherapy(Therapy therapy){ therapyRepo.updateTherapy(therapy); }
+    public void deleteTherapy(Therapy therapy){ therapyRepo.deleteTherapy(therapy); }
 
     public void insertPhysicalActivity(PhysicalActivity physicalActivity) {physicalActivityRepository.insertPhysicalActivity(physicalActivity);}
     public void updatePhysicalActivity(PhysicalActivity physicalActivity) {physicalActivityRepository.updatePhysicalActivity(physicalActivity);}
     public void deletePhysicalActivity(PhysicalActivity physicalActivity) {physicalActivityRepository.deletePhysicalActivity(physicalActivity);}
 
-    public void insertFood(Food food) {
-        foodRepo.insertFood(food);
-    }
-    public void updateFood(Food food) {
-        foodRepo.updateFood(food);
-    }
-
+    public void insertFood(Food food) { foodRepo.insertFood(food); }
+    public void updateFood(Food food) { foodRepo.updateFood(food); }
     public void deleteFood(Food food) { foodRepo.deleteFood(food);}
-
-
 
 }

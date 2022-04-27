@@ -19,6 +19,9 @@ public class Food{
     private String date;
     private String time;
 
+    public Double totalCalories;
+    public Double totalCarbs;
+
     public Food(String name, Integer amount, Double calories, Double carbs, String date, String time) {
         this.name = name;
         this.amount = amount;
@@ -59,12 +62,12 @@ public class Food{
     }
 
     public Double getTotalCalories() {
-
-        return amount*calories;
+        totalCalories = amount*calories;
+        return totalCalories;
     }
 
     public Double getTotalCarbs() {
-
-        return amount*carbs;
+        totalCarbs = amount*carbs;
+        return totalCarbs;
     }
 }

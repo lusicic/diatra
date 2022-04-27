@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.unipu.mobapp.diatra.R;
 import com.unipu.mobapp.diatra.adapter.CalendarAdapter;
+import com.unipu.mobapp.diatra.data.food.Food;
 import com.unipu.mobapp.diatra.data.therapy.Therapy;
 import com.unipu.mobapp.diatra.utils.CalendarUtils;
 import com.unipu.mobapp.diatra.viewmodel.DayViewModel;
@@ -43,6 +44,7 @@ public class HomeFragment extends Fragment implements CalendarAdapter.OnItemList
 
     private TextView textViewTest;
     private TextView textViewTotalSteps;
+    private TextView textViewTotalCalories;
 
     ImageButton btnBack;
     ImageButton btnNext;
@@ -92,12 +94,22 @@ public class HomeFragment extends Fragment implements CalendarAdapter.OnItemList
             }
         });
 
-        dayViewModel.getTotalSteps().observe(getViewLifecycleOwner(), new Observer<Integer>() {
+        dayViewModel.getDayFood().observe(getViewLifecycleOwner(), new Observer<List<Food>>() {
             @Override
-            public void onChanged(Integer integer) {
-                textViewTotalSteps.setText(String.valueOf(integer));
+            public void onChanged(List<Food> foods) {
+                int sumCalories=0;
+                int sumCarbs=0;
+                for (Food food : foods)
+                {
+                    sumCalories+=food.getTotalCalories();
+                    sumCarbs+=food.getTotalCarbs();
+                }
+                textViewTotalCalories.setText(String.valueOf(sumCalories));
+                dayViewModel.setTotalDayCalories(sumCalories);
+                dayViewModel.setTotalDayCarbs(sumCarbs);
             }
         });
+
     }
 
     private void initViewModel(){
@@ -121,6 +133,7 @@ public class HomeFragment extends Fragment implements CalendarAdapter.OnItemList
 
         textViewTest = view.findViewById(R.id.text_view_test);
         textViewTotalSteps = view.findViewById(R.id.text_view_number_of_steps);
+        textViewTotalCalories = view.findViewById(R.id.text_view_taken_calories);
     }
 
 

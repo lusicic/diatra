@@ -54,6 +54,9 @@ public class FoodFragment extends Fragment {
         String date = CalendarUtils.dayMonth(dayViewModel.getDate().getValue());
         textViewFoodDate.setText(date);
 
+        textViewIntakeSum.setText(String.valueOf(dayViewModel.getTotalDayCalories().getValue()));
+        textViewCarbsSum.setText(String.valueOf(dayViewModel.getTotalDayCarbs().getValue()));
+
         recyclerViewFood.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerViewFood.setHasFixedSize(true);
         recyclerViewFood.setOverScrollMode(View.OVER_SCROLL_NEVER);

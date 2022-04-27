@@ -26,4 +26,6 @@ public interface FoodDao {
 
     @Query("SELECT * FROM food_type ORDER BY name ASC")
     LiveData<List<FoodType>> getAllFoodTypes();
+
+
 }

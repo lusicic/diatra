@@ -32,8 +32,8 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodHolder> {
         holder.textViewTime.setText(currentFood.getTime());
         holder.textViewType.setText(currentFood.getName());
         holder.textViewAmount.setText(String.valueOf(currentFood.getAmount()));
-        holder.textViewIntake.setText(String.valueOf(currentFood.getTotalCalories()));
-        holder.textViewCarbs.setText(String.valueOf(currentFood.getTotalCarbs()));
+        holder.textViewIntake.setText(String.valueOf(Math.round(currentFood.getTotalCalories())));
+        holder.textViewCarbs.setText(String.valueOf(Math.round(currentFood.getTotalCarbs())));
     }
 
     @Override
