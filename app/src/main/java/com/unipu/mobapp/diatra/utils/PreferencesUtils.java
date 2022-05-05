@@ -31,5 +31,4 @@ public class PreferencesUtils {
         return prefs.getString(key,"DNF");
     }
 
-
 }

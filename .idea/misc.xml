@@ -5,6 +5,7 @@
       <map>
         <entry key="..\:/Users/ktrnk/AppData/Local/Android/sdk/platforms/android-30/data/res/drawable/editbox_background.xml" value="0.2515" />
         <entry key="..\:/Users/ktrnk/AppData/Local/Android/sdk/platforms/android-30/data/res/layout/simple_list_item_1.xml" value="0.13541666666666666" />
+        <entry key="..\:/Users/ktrnk/Documents/diatra/app/src/main/res/drawable/bottom_border.xml" value="0.297" />
         <entry key="..\:/Users/ktrnk/Documents/diatra/app/src/main/res/drawable/ic_apple.xml" value="0.2565" />
         <entry key="..\:/Users/ktrnk/Documents/diatra/app/src/main/res/drawable/ic_bread.xml" value="0.197" />
         <entry key="..\:/Users/ktrnk/Documents/diatra/app/src/main/res/drawable/ic_burnt.xml" value="0.2825" />
@@ -30,7 +31,7 @@
         <entry key="..\:/Users/ktrnk/Documents/diatra/app/src/main/res/layout/fragment_pedometer.xml" value="0.14583333333333334" />
         <entry key="..\:/Users/ktrnk/Documents/diatra/app/src/main/res/layout/fragment_physical_activity.xml" value="0.33" />
         <entry key="..\:/Users/ktrnk/Documents/diatra/app/src/main/res/layout/fragment_therapy.xml" value="0.278125" />
-        <entry key="..\:/Users/ktrnk/Documents/diatra/app/src/main/res/layout/fragment_user.xml" value="0.278125" />
+        <entry key="..\:/Users/ktrnk/Documents/diatra/app/src/main/res/layout/fragment_user.xml" value="0.5" />
         <entry key="..\:/Users/ktrnk/Documents/diatra/app/src/main/res/layout/physical_activity_item.xml" value="0.33" />
         <entry key="..\:/Users/ktrnk/Documents/diatra/app/src/main/res/layout/therapy_item.xml" value="0.278125" />
       </map>

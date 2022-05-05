@@ -59,8 +59,8 @@ public class UserFragment extends Fragment {
             private void updateTextViews(User user) {
                 textViewGender.setText(user.getGender());
                 textViewAge.setText(String.valueOf(user.getAge()));
-                textViewHeight.setText(String.valueOf(user.getHeight()));
-                textViewWeight.setText(String.valueOf(user.getWeight()));
+                textViewHeight.setText(String.valueOf(Math.round(user.getHeight())) + " cm");
+                textViewWeight.setText(String.valueOf(Math.round(user.getWeight())) + " kg");
                 textViewTypeOfDiabetes.setText(user.getTypeOfDiabetes());
             }
         });

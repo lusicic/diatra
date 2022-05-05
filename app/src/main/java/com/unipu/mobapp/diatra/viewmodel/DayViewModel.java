@@ -23,23 +23,25 @@ import java.util.List;
 
 public class DayViewModel extends AndroidViewModel {
 
+    // Therapy
     private TherapyRepository therapyRepo;
-    private PhysicalActivityRepository physicalActivityRepository;
-    private FoodRepository foodRepo;
-
-    private MutableLiveData<String> date = new MutableLiveData<>();
-
     private LiveData<List<Therapy>> dayTherapies;
+    private SingleLiveEvent<Therapy> sTherapy = new SingleLiveEvent<>();
+
+    // Physical activity
+    private PhysicalActivityRepository physicalActivityRepository;
     private LiveData<List<PhysicalActivity>> dayPhysicalActivities;
+    private SingleLiveEvent<PhysicalActivity> sPhysicalActivity = new SingleLiveEvent<>();
+
+    // Food
+    private FoodRepository foodRepo;
     private LiveData<List<Food>> dayFood;
     private LiveData<List<FoodType>> allFoodTypes;
-
     private MutableLiveData<Integer> totalDayCalories = new MutableLiveData<>();
     private MutableLiveData<Integer> totalDayCarbs = new MutableLiveData<>();
-
-    private SingleLiveEvent<Therapy> sTherapy = new SingleLiveEvent<>();
-    private SingleLiveEvent<PhysicalActivity> sPhysicalActivity = new SingleLiveEvent<>();
     private SingleLiveEvent<Food> sFood = new SingleLiveEvent<>();
+
+    private MutableLiveData<String> date = new MutableLiveData<>();
 
     public DayViewModel(@NonNull @NotNull Application application) {
         super(application);
@@ -56,14 +58,31 @@ public class DayViewModel extends AndroidViewModel {
                 date -> foodRepo.getDayFood(date));
     }
 
-    // za dohvat terapije na odredeni datum
-    // (promjena oznacenog datuma trigera promijenu liste terapije)
     public void setDate(String newDate) { date.setValue(newDate);}
     public LiveData<String> getDate() { return date;}
 
-    // dohvat liste po danu
+    // Therapy
     public LiveData<List<Therapy>> getDayTherapies() { return dayTherapies; }
+
+    public void setSTherapy(Therapy therapy) { sTherapy.setValue(therapy); }
+    public SingleLiveEvent<Therapy> getSTherapy() { return sTherapy; }
+
+    public void insertTherapy(Therapy therapy) { therapyRepo.insertTherapy(therapy); }
+    public void updateTherapy(Therapy therapy){ therapyRepo.updateTherapy(therapy); }
+    public void deleteTherapy(Therapy therapy){ therapyRepo.deleteTherapy(therapy); }
+
+    //Physical activity
     public LiveData<List<PhysicalActivity>> getDayPhysicalActivities() { return dayPhysicalActivities; }
+
+    public void setSPhysicalActivity(PhysicalActivity physicalActivity){sPhysicalActivity.setValue(physicalActivity);}
+    public SingleLiveEvent<PhysicalActivity> getSPhysicalActivity() {return sPhysicalActivity;}
+
+    public void insertPhysicalActivity(PhysicalActivity physicalActivity) {physicalActivityRepository.insertPhysicalActivity(physicalActivity);}
+    public void updatePhysicalActivity(PhysicalActivity physicalActivity) {physicalActivityRepository.updatePhysicalActivity(physicalActivity);}
+    public void deletePhysicalActivity(PhysicalActivity physicalActivity) {physicalActivityRepository.deletePhysicalActivity(physicalActivity);}
+
+
+    // Food
     public LiveData<List<Food>> getDayFood() { return dayFood;}
     public LiveData<List<FoodType>> getAllFoodTypes() { return allFoodTypes; }
 
@@ -73,23 +92,8 @@ public class DayViewModel extends AndroidViewModel {
     public void setTotalDayCarbs(Integer carbs) { totalDayCarbs.setValue(carbs); }
     public LiveData<Integer> getTotalDayCarbs() { return totalDayCarbs; }
 
-    // za edit pojedinacne stavke
-    public SingleLiveEvent<Therapy> getSTherapy() { return sTherapy; }
-    public SingleLiveEvent<PhysicalActivity> getSPhysicalActivity() {return sPhysicalActivity;}
-    public SingleLiveEvent<Food> getsFood() { return sFood;}
-
-    public void setSTherapy(Therapy therapy) { sTherapy.setValue(therapy); }
-    public void setSPhysicalActivity(PhysicalActivity physicalActivity){sPhysicalActivity.setValue(physicalActivity);}
     public void setSFood(Food food) { sFood.setValue(food);}
-
-    // za bazu
-    public void insertTherapy(Therapy therapy) { therapyRepo.insertTherapy(therapy); }
-    public void updateTherapy(Therapy therapy){ therapyRepo.updateTherapy(therapy); }
-    public void deleteTherapy(Therapy therapy){ therapyRepo.deleteTherapy(therapy); }
-
-    public void insertPhysicalActivity(PhysicalActivity physicalActivity) {physicalActivityRepository.insertPhysicalActivity(physicalActivity);}
-    public void updatePhysicalActivity(PhysicalActivity physicalActivity) {physicalActivityRepository.updatePhysicalActivity(physicalActivity);}
-    public void deletePhysicalActivity(PhysicalActivity physicalActivity) {physicalActivityRepository.deletePhysicalActivity(physicalActivity);}
+    public SingleLiveEvent<Food> getsFood() { return sFood;}
 
     public void insertFood(Food food) { foodRepo.insertFood(food); }
     public void updateFood(Food food) { foodRepo.updateFood(food); }
