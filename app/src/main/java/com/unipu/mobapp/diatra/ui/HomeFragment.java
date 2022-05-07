@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.unipu.mobapp.diatra.R;
 import com.unipu.mobapp.diatra.adapter.CalendarAdapter;
 import com.unipu.mobapp.diatra.data.food.Food;
+import com.unipu.mobapp.diatra.data.physicalActivity.PhysicalActivity;
 import com.unipu.mobapp.diatra.data.therapy.Therapy;
 import com.unipu.mobapp.diatra.utils.CalendarUtils;
 import com.unipu.mobapp.diatra.viewmodel.DayViewModel;
@@ -45,6 +46,7 @@ public class HomeFragment extends Fragment implements CalendarAdapter.OnItemList
     private TextView textViewTest;
     private TextView textViewTotalSteps;
     private TextView textViewTotalCalories;
+    private TextView textViewTotalTimeActive;
 
     ImageButton btnBack;
     ImageButton btnNext;
@@ -110,6 +112,26 @@ public class HomeFragment extends Fragment implements CalendarAdapter.OnItemList
             }
         });
 
+        dayViewModel.getDayPhysicalActivities().observe(getViewLifecycleOwner(), new Observer<List<PhysicalActivity>>() {
+            @Override
+            public void onChanged(List<PhysicalActivity> physicalActivities) {
+                int tm = 0;
+                for (PhysicalActivity physicalActivity: physicalActivities){
+                    String[] arr = physicalActivity.getDuration().split(":");
+                    tm += 60 * Integer.parseInt(arr[1]);
+                    tm += 3600 * Integer.parseInt(arr[0]);
+                }
+
+                int hh = tm / 3600;
+                tm %= 3600;
+                int mm = tm / 60;
+
+                String totalTimeActive = CalendarUtils.convertDate(hh) + ":" + CalendarUtils.convertDate(mm);
+                textViewTotalTimeActive.setText(totalTimeActive);
+                dayViewModel.setTotalDayActive(totalTimeActive);
+            }
+        });
+
     }
 
     private void initViewModel(){
@@ -134,6 +156,7 @@ public class HomeFragment extends Fragment implements CalendarAdapter.OnItemList
         textViewTest = view.findViewById(R.id.text_view_test);
         textViewTotalSteps = view.findViewById(R.id.text_view_number_of_steps);
         textViewTotalCalories = view.findViewById(R.id.text_view_taken_calories);
+        textViewTotalTimeActive = view.findViewById(R.id.text_view_total_time_active);
     }
 
 

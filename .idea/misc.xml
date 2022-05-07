@@ -6,6 +6,7 @@
         <entry key="..\:/Users/ktrnk/AppData/Local/Android/sdk/platforms/android-30/data/res/drawable/editbox_background.xml" value="0.2515" />
         <entry key="..\:/Users/ktrnk/AppData/Local/Android/sdk/platforms/android-30/data/res/layout/simple_list_item_1.xml" value="0.13541666666666666" />
         <entry key="..\:/Users/ktrnk/Documents/diatra/app/src/main/res/drawable/bottom_border.xml" value="0.297" />
+        <entry key="..\:/Users/ktrnk/Documents/diatra/app/src/main/res/drawable/ic_active.xml" value="0.169" />
         <entry key="..\:/Users/ktrnk/Documents/diatra/app/src/main/res/drawable/ic_apple.xml" value="0.2565" />
         <entry key="..\:/Users/ktrnk/Documents/diatra/app/src/main/res/drawable/ic_bread.xml" value="0.197" />
         <entry key="..\:/Users/ktrnk/Documents/diatra/app/src/main/res/drawable/ic_burnt.xml" value="0.2825" />
@@ -23,7 +24,7 @@
         <entry key="..\:/Users/ktrnk/Documents/diatra/app/src/main/res/layout/food_item.xml" value="0.3824091778202677" />
         <entry key="..\:/Users/ktrnk/Documents/diatra/app/src/main/res/layout/foodtype_item.xml" value="0.278125" />
         <entry key="..\:/Users/ktrnk/Documents/diatra/app/src/main/res/layout/fragment_add_new_food.xml" value="0.278125" />
-        <entry key="..\:/Users/ktrnk/Documents/diatra/app/src/main/res/layout/fragment_add_physical_activity.xml" value="0.25" />
+        <entry key="..\:/Users/ktrnk/Documents/diatra/app/src/main/res/layout/fragment_add_physical_activity.xml" value="0.33" />
         <entry key="..\:/Users/ktrnk/Documents/diatra/app/src/main/res/layout/fragment_add_therapy.xml" value="0.1" />
         <entry key="..\:/Users/ktrnk/Documents/diatra/app/src/main/res/layout/fragment_add_user.xml" value="0.278125" />
         <entry key="..\:/Users/ktrnk/Documents/diatra/app/src/main/res/layout/fragment_food.xml" value="0.22" />

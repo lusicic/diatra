@@ -32,7 +32,7 @@ public class PhysicalActivityFragment extends Fragment {
     private DayViewModel dayViewModel;
 
     private FloatingActionButton buttonNewPhysicalActivity;
-    private TextView textViewPhysicalActivitiesNumber;
+    private TextView textViewTotalTimeActive;
     private TextView textViewPhysicalActivitiesDate;
 
     RecyclerView recyclerViewPhysicalActivity;
@@ -58,6 +58,8 @@ public class PhysicalActivityFragment extends Fragment {
 
         String date = CalendarUtils.dayMonth(dayViewModel.getDate().getValue());
         textViewPhysicalActivitiesDate.setText(date);
+
+        textViewTotalTimeActive.setText(dayViewModel.getTotalDayActive().getValue());
 
         dayViewModel.getDayPhysicalActivities().observe(getViewLifecycleOwner(), new Observer<List<PhysicalActivity>>() {
             @Override
@@ -102,7 +104,7 @@ public class PhysicalActivityFragment extends Fragment {
     private void initWidgets(View view) {
         recyclerViewPhysicalActivity = view.findViewById(R.id.recycler_view_physical_activity);
         buttonNewPhysicalActivity = view.findViewById(R.id.button_new_physical_activity);
-        textViewPhysicalActivitiesNumber = view.findViewById(R.id.text_view_physical_activity_number);
+        textViewTotalTimeActive = view.findViewById(R.id.text_view_physical_activity_total_time_active);
         textViewPhysicalActivitiesDate = view.findViewById(R.id.text_view_physical_activity_date);
     }
 }

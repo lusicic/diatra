@@ -39,9 +39,9 @@ public class AddPhysicalActivityFragment extends Fragment {
 
     private EditText editTextPhyActDate;
     private EditText editTextPhyActTime;
-    private EditText editTextPhyActDuration;
+    private EditText editTextPhyActDurationHour;
+    private EditText editTextPhyActDurationMinute;
     private EditText editTextPhyActDistance;
-    private EditText editTextPhyActBurntCalories;
 
     private TextView textViewDistance;
 
@@ -139,9 +139,8 @@ public class AddPhysicalActivityFragment extends Fragment {
     private void setSPhysicalActivity(PhysicalActivity physicalActivity) {
         editTextPhyActDate.setText(physicalActivity.getDate());
         editTextPhyActTime.setText(physicalActivity.getTime());
-        editTextPhyActDuration.setText(String.valueOf(physicalActivity.getDuration()));
+        editTextPhyActDurationHour.setText(String.valueOf(physicalActivity.getDuration()));
         editTextPhyActDistance.setText(String.valueOf(physicalActivity.getDistance()));
-        editTextPhyActBurntCalories.setText(String.valueOf(physicalActivity.getBurntCalories()));
 
         spinnerPhyActType.setSelection(adapterActivities.getPosition(physicalActivity.getTypeOfActivity()));
 
@@ -162,9 +161,9 @@ public class AddPhysicalActivityFragment extends Fragment {
     private void initWidgets(View view) {
         editTextPhyActDate = view.findViewById(R.id.edit_text_physical_activity_date);
         editTextPhyActTime = view.findViewById(R.id.edit_text_physical_activity_time);
-        editTextPhyActDuration = view.findViewById(R.id.edit_text_physical_activity_duration);
+        editTextPhyActDurationHour = view.findViewById(R.id.edit_text_physical_activity_duration_hour);
+        editTextPhyActDurationMinute = view.findViewById(R.id.edit_text_physical_activity_duration_minute);
         editTextPhyActDistance = view.findViewById(R.id.edit_text_physical_activity_distance);
-        editTextPhyActBurntCalories = view.findViewById(R.id.edit_text_physical_activity_burnt_calories);
 
         textViewDistance = view.findViewById(R.id.text_view_add_user_distance);
 
@@ -181,16 +180,15 @@ public class AddPhysicalActivityFragment extends Fragment {
         String date = editTextPhyActDate.getText().toString();
         String time = editTextPhyActTime.getText().toString();
         String type = phyActType;
-        Double duration = Double.parseDouble(editTextPhyActDuration.getText().toString());
+        String duration = editTextPhyActDurationHour.getText().toString() + ":" + editTextPhyActDurationMinute.getText().toString();
         Double distance = Double.parseDouble(editTextPhyActDistance.getText().toString());
-        Double burntCalories = Double.parseDouble(editTextPhyActBurntCalories.getText().toString());
 
         if(time.trim().isEmpty() || type.trim().isEmpty()){
             Toast.makeText(getActivity(), "time or type is empty", Toast.LENGTH_SHORT);
             return;
         }
 
-        PhysicalActivity physicalActivity = new PhysicalActivity(type, duration, distance, burntCalories, date, time);
+        PhysicalActivity physicalActivity = new PhysicalActivity(type, duration, distance, date, time);
         dayViewModel.insertPhysicalActivity(physicalActivity);
     }
 
@@ -198,16 +196,15 @@ public class AddPhysicalActivityFragment extends Fragment {
         String date = editTextPhyActDate.getText().toString();
         String time = editTextPhyActTime.getText().toString();
         String type = phyActType;
-        Double duration = Double.parseDouble(editTextPhyActDuration.getText().toString());
+        String duration = editTextPhyActDurationHour.getText().toString() + ":" + editTextPhyActDurationMinute.getText().toString();
         Double distance = Double.parseDouble(editTextPhyActDistance.getText().toString());
-        Double burntCalories = Double.parseDouble(editTextPhyActBurntCalories.getText().toString());
 
         if(time.trim().isEmpty() || type.trim().isEmpty()){
             Toast.makeText(getActivity(), "time or type is empty", Toast.LENGTH_SHORT);
             return;
         }
 
-        PhysicalActivity physicalActivity = new PhysicalActivity(type, duration, distance, burntCalories, date, time);
+        PhysicalActivity physicalActivity = new PhysicalActivity(type, duration, distance, date, time);
         physicalActivity.setId(id);
         dayViewModel.updatePhysicalActivity(physicalActivity);
     }

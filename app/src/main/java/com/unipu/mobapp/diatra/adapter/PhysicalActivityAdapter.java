@@ -39,11 +39,11 @@ public class PhysicalActivityAdapter extends RecyclerView.Adapter<PhysicalActivi
         if(currentPhysicalActivity.getTypeOfActivity().equals("yoga")){
             holder.imageViewDistance.setVisibility(View.GONE);
             holder.textViewDistance.setVisibility(View.GONE);
+            holder.textViewKilometres.setVisibility(View.GONE);
         }
         else
             holder.textViewDistance.setText(String.valueOf(currentPhysicalActivity.getDistance()));
 
-        holder.textViewBurntCalories.setText(String.valueOf(currentPhysicalActivity.getBurntCalories()));
         holder.textViewPhysicalActivityTime.setText(currentPhysicalActivity.getTime());
     }
 
@@ -65,8 +65,8 @@ public class PhysicalActivityAdapter extends RecyclerView.Adapter<PhysicalActivi
         private TextView textViewTypeOfPhysicalActivity;
         private TextView textViewDistance;
         private TextView textViewDuration;
-        private TextView textViewBurntCalories;
         private TextView textViewPhysicalActivityTime;
+        private TextView textViewKilometres;
 
         private ImageView imageViewDistance;
 
@@ -75,10 +75,10 @@ public class PhysicalActivityAdapter extends RecyclerView.Adapter<PhysicalActivi
             textViewTypeOfPhysicalActivity = itemView.findViewById(R.id.text_view_type_of_physical_activity);
             textViewDistance = itemView.findViewById(R.id.text_view_distance);
             textViewDuration = itemView.findViewById(R.id.text_view_duration);
-            textViewBurntCalories = itemView.findViewById(R.id.text_view_burnt_calories);
             textViewPhysicalActivityTime = itemView.findViewById(R.id.text_view_physical_activity_time);
 
             imageViewDistance = itemView.findViewById(R.id.image_distance);
+            textViewKilometres = itemView.findViewById(R.id.text_view_kilometres);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

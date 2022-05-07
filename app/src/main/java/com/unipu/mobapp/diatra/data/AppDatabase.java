@@ -79,10 +79,10 @@ public abstract class AppDatabase extends RoomDatabase {
             //therapyDao.insert(new Therapy("orally", 20.00, "14:15", formatter2.format(date)));
             //therapyDao.insert(new Therapy("continuously", 10.00, "18:00", "03/04/2022"));
 
-            physicalActivityDao.insert(new PhysicalActivity("walking", 2.0, 15.00, 300.0, "03/04/2022", "14:45"));
-            physicalActivityDao.insert(new PhysicalActivity("running", 1.0, 20.00, 189.0, formatter2.format(date), formatter.format(time)));
-            physicalActivityDao.insert(new PhysicalActivity("walking", 2.0, 15.00, 340.0, formatter2.format(date), formatter.format(time)));
-            physicalActivityDao.insert(new PhysicalActivity("yoga", 1.0, 0.00, 100.0, formatter2.format(date), "18:55"));
+            physicalActivityDao.insert(new PhysicalActivity("walking", "02:00", 15.00,"03/04/2022", "14:45"));
+            physicalActivityDao.insert(new PhysicalActivity("running", "01:00", 20.00, formatter2.format(date), formatter.format(time)));
+            physicalActivityDao.insert(new PhysicalActivity("walking", "00:35", 15.00, formatter2.format(date), formatter.format(time)));
+            physicalActivityDao.insert(new PhysicalActivity("yoga", "00:15", 0.00, formatter2.format(date), "18:55"));
 
             /*foodDao.insert(new Food("chicken", 150, 100, 50, "03/04/2022", "14:45"));
             foodDao.insert(new Food("chicken", 120, 100, 20, formatter2.format(date), formatter.format(time)));

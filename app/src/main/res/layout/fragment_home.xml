@@ -212,7 +212,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="3dp"
                                 android:textSize="20dp"
-                                android:text="10"
+                                android:text="0"
                                 android:textStyle="bold"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -297,7 +297,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="3dp"
                             android:textSize="20dp"
-                            android:text="1000"
+                            android:text="0"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -392,7 +392,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="3dp"
-                            android:text="900"
+                            android:text="0"
                             android:textSize="20dp"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -437,7 +437,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="left"
-                        android:text="burnt"
+                        android:text="active"
                         android:textColor="@color/black"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textStyle="bold"
@@ -455,7 +455,7 @@
 
                         <ImageView
                             android:id="@+id/image_view22"
-                            android:src="@drawable/ic_fire"
+                            android:src="@drawable/ic_active"
                             android:layout_width="48dp"
                             android:layout_height="48dp"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -470,12 +470,12 @@
                             android:orientation="vertical">
 
                             <TextView
-                                android:id="@+id/text_view_total_burnt_cal"
+                                android:id="@+id/text_view_total_time_active"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="3dp"
                                 android:textSize="20dp"
-                                android:text="100"
+                                android:text="00:00"
                                 android:textStyle="bold"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -487,7 +487,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:textSize="13dp"
-                                android:text="kcal" />
+                                android:text="hours" />
 
                         </LinearLayout>
 
