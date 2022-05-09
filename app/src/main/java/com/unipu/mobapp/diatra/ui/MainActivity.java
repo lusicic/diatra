@@ -16,6 +16,7 @@ import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.unipu.mobapp.diatra.R;
+import com.unipu.mobapp.diatra.data.physicalActivity.PhysicalActivityRepository;
 import com.unipu.mobapp.diatra.utils.CalendarUtils;
 import com.unipu.mobapp.diatra.utils.PreferencesUtils;
 import com.unipu.mobapp.diatra.viewmodel.DayViewModel;
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity{
 
     DayViewModel dayViewModel;
     UserViewModel userViewModel;
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,8 +49,11 @@ public class MainActivity extends AppCompatActivity{
         Intent i = new Intent(MainActivity.this, StepsService.class);
         startService(i);
 
-        PreferencesUtils.getInt(this, "DeltaSteps");
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
     }
 
     private void initViewModels() {
