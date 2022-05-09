@@ -132,6 +132,18 @@ public class HomeFragment extends Fragment implements CalendarAdapter.OnItemList
             }
         });
 
+        dayViewModel.getDaySteps().observe(getViewLifecycleOwner(), new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                if(integer == null) {
+                    textViewTotalSteps.setText(String.valueOf(0));
+                }
+                else{
+                    textViewTotalSteps.setText(String.valueOf(integer));
+                }
+            }
+        });
+
     }
 
     private void initViewModel(){

@@ -34,6 +34,9 @@ public class DayViewModel extends AndroidViewModel {
     private MutableLiveData<String> totalDayActive = new MutableLiveData<>();
     private SingleLiveEvent<PhysicalActivity> sPhysicalActivity = new SingleLiveEvent<>();
 
+    //Steps
+    private LiveData<Integer> daySteps;
+
     // Food
     private FoodRepository foodRepo;
     private LiveData<List<Food>> dayFood;
@@ -49,12 +52,15 @@ public class DayViewModel extends AndroidViewModel {
         therapyRepo = new TherapyRepository(application);
         physicalActivityRepository = new PhysicalActivityRepository(application);
         foodRepo = new FoodRepository(application);
+
         allFoodTypes = foodRepo.getAllFoodTypes();
 
         dayTherapies = Transformations.switchMap(date,
                 date -> therapyRepo.getDayTherapies(date));
         dayPhysicalActivities = Transformations.switchMap(date,
                 date -> physicalActivityRepository.getDayPhysicalActivities(date));
+        daySteps = Transformations.switchMap(date,
+                date -> physicalActivityRepository.getDaySteps(date));
         dayFood = Transformations.switchMap(date,
                 date -> foodRepo.getDayFood(date));
     }
@@ -84,6 +90,10 @@ public class DayViewModel extends AndroidViewModel {
     public void insertPhysicalActivity(PhysicalActivity physicalActivity) {physicalActivityRepository.insertPhysicalActivity(physicalActivity);}
     public void updatePhysicalActivity(PhysicalActivity physicalActivity) {physicalActivityRepository.updatePhysicalActivity(physicalActivity);}
     public void deletePhysicalActivity(PhysicalActivity physicalActivity) {physicalActivityRepository.deletePhysicalActivity(physicalActivity);}
+
+    // Steps
+
+    public LiveData<Integer> getDaySteps() { return daySteps; }
 
     // Food
     public LiveData<List<Food>> getDayFood() { return dayFood;}

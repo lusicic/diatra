@@ -17,6 +17,7 @@ import android.view.View;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.unipu.mobapp.diatra.R;
 import com.unipu.mobapp.diatra.utils.CalendarUtils;
+import com.unipu.mobapp.diatra.utils.PreferencesUtils;
 import com.unipu.mobapp.diatra.viewmodel.DayViewModel;
 import com.unipu.mobapp.diatra.viewmodel.UserViewModel;
 
@@ -46,6 +47,8 @@ public class MainActivity extends AppCompatActivity{
 
         Intent i = new Intent(MainActivity.this, StepsService.class);
         startService(i);
+
+        PreferencesUtils.getInt(this, "DeltaSteps");
 
     }
 

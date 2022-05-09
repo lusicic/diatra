@@ -25,4 +25,5 @@ public interface PhysicalActivityDao {
 
     @Query("SELECT * FROM physical_activity WHERE date==:date ORDER BY time DESC")
     LiveData<List<PhysicalActivity>> getDayPhysicalActivities(String date);
+
 }

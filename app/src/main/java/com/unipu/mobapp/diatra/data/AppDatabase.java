@@ -12,6 +12,8 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import com.unipu.mobapp.diatra.data.food.Food;
 import com.unipu.mobapp.diatra.data.food.FoodDao;
 import com.unipu.mobapp.diatra.data.food.FoodType;
+import com.unipu.mobapp.diatra.data.physicalActivity.Pedometer;
+import com.unipu.mobapp.diatra.data.physicalActivity.PedometerDao;
 import com.unipu.mobapp.diatra.data.physicalActivity.PhysicalActivity;
 import com.unipu.mobapp.diatra.data.physicalActivity.PhysicalActivityDao;
 import com.unipu.mobapp.diatra.data.therapy.Therapy;
@@ -24,12 +26,13 @@ import org.jetbrains.annotations.NotNull;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-@Database(entities = {Therapy.class, User.class, PhysicalActivity.class, Food.class, FoodType.class}, version = 1)
+@Database(entities = {Therapy.class, User.class, PhysicalActivity.class, Pedometer.class, Food.class, FoodType.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract TherapyDao therapyDao();
     public abstract UserDao userDao();
     public abstract PhysicalActivityDao physicalActivityDao();
+    public abstract PedometerDao pedometerDao();
     public abstract FoodDao foodDao();
 
     private static AppDatabase instance;
