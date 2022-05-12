@@ -40,7 +40,6 @@ public class DayViewModel extends AndroidViewModel {
     // Food
     private FoodRepository foodRepo;
     private LiveData<List<Food>> dayFood;
-    private LiveData<List<FoodType>> allFoodTypes;
     private MutableLiveData<Integer> totalDayCalories = new MutableLiveData<>();
     private MutableLiveData<Integer> totalDayCarbs = new MutableLiveData<>();
     private SingleLiveEvent<Food> sFood = new SingleLiveEvent<>();
@@ -52,8 +51,6 @@ public class DayViewModel extends AndroidViewModel {
         therapyRepo = new TherapyRepository(application);
         physicalActivityRepository = new PhysicalActivityRepository(application);
         foodRepo = new FoodRepository(application);
-
-        allFoodTypes = foodRepo.getAllFoodTypes();
 
         dayTherapies = Transformations.switchMap(date,
                 date -> therapyRepo.getDayTherapies(date));
@@ -97,7 +94,7 @@ public class DayViewModel extends AndroidViewModel {
 
     // Food
     public LiveData<List<Food>> getDayFood() { return dayFood;}
-    public LiveData<List<FoodType>> getAllFoodTypes() { return allFoodTypes; }
+    public LiveData<List<FoodType>> getAllFoodTypes(String language) { return foodRepo.getAllFoodTypes(language); }
 
     public void setTotalDayCalories(Integer calories) { totalDayCalories.setValue(calories); }
     public LiveData<Integer> getTotalDayCalories() { return totalDayCalories; }

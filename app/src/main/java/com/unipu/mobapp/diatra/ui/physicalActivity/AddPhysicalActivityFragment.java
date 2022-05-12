@@ -84,7 +84,7 @@ public class AddPhysicalActivityFragment extends Fragment {
                 if(adapterView.getItemAtPosition(i).equals("Choose activity")){
                     return;
                 }
-                else if(adapterView.getItemAtPosition(i).equals("yoga")){
+                else if(adapterView.getItemAtPosition(i).equals(R.string.yoga)){
                     phyActType = adapterView.getItemAtPosition(i).toString();
                     editTextPhyActDistance.setText(String.valueOf(0));
                     editTextPhyActDistance.setVisibility(View.GONE);

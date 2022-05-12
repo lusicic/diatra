@@ -46,8 +46,6 @@ public class UserFragment extends Fragment {
         initViewModel();
         initWidgets(view);
 
-        userViewModel.getUser();
-
         userViewModel.getUser().observe(getActivity(), new Observer<User>() {
                 @Override
                 public void onChanged(User user) {

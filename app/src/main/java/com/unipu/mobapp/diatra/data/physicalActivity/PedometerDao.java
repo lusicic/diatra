@@ -18,4 +18,8 @@ public interface PedometerDao {
 
     @Query("SELECT steps FROM pedometer WHERE date==:date")
     LiveData<Integer> getDaySteps(String date);
+
+    @Query("SELECT * FROM pedometer ORDER BY date DESC LIMIT 1")
+    Pedometer getLatest();
+
 }

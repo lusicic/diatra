@@ -36,7 +36,7 @@
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Time"
+        android:text="@string/time"
         app:layout_constraintTop_toBottomOf="@id/edit_text_therapy_date"
         android:layout_marginBottom="20dp"
         android:textAppearance="@android:style/TextAppearance.Medium"/>
@@ -57,7 +57,7 @@
         android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Type"
+        android:text="@string/type"
         app:layout_constraintTop_toBottomOf="@+id/edit_text_therapy_time"
         android:textAppearance="@android:style/TextAppearance.Medium"/>
 
@@ -74,7 +74,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Dose"
+        android:text="@string/dose"
         android:textAppearance="@android:style/TextAppearance.Medium"
         app:layout_constraintTop_toBottomOf="@+id/type_spinner"
         tools:layout_editor_absoluteX="30dp" />

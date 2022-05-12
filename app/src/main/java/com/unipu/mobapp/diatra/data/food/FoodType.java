@@ -12,11 +12,13 @@ public class FoodType {
     private String name;
     private Double calories;
     private Double carbs;
+    private String language;
 
-    public FoodType(String name, Double calories, Double carbs) {
+    public FoodType(String name, Double calories, Double carbs, String language) {
         this.name = name;
         this.calories = calories;
         this.carbs = carbs;
+        this.language = language;
     }
 
     public void setId(int id) {
@@ -39,10 +41,11 @@ public class FoodType {
         return carbs;
     }
 
+    public String getLanguage() { return language; }
+
     @Override
     public String toString() {
         return this.name.toString();
     }
-
 
 }

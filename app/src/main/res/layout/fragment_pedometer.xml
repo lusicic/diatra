@@ -14,14 +14,56 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/totalsteps"
+            android:id="@+id/text_view_steps_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="total steps"
+            android:layout_marginStart="40dp"
+            android:layout_marginBottom="30dp"
+            android:text="@string/date"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/light_gray_2"
+            app:layout_constraintBottom_toTopOf="@+id/image_view_steps"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.235" />
+
+        <ImageView
+            android:id="@+id/image_view_steps"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_sneaker"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.252" />
+
+        <TextView
+            android:id="@+id/text_view_total_steps"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textColor="@color/gray"
+            android:textStyle="bold"
+            android:textSize="50dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            app:layout_constraintTop_toBottomOf="@+id/image_view_steps" />
+
+        <TextView
+            android:id="@+id/text_view_steps"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/steps_genitive"
+            android:textColor="@color/gray"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_total_steps" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

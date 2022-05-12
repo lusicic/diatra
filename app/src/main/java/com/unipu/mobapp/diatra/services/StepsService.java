@@ -11,6 +11,7 @@ import android.os.IBinder;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.room.Room;
 
 import com.unipu.mobapp.diatra.data.AppDatabase;
 import com.unipu.mobapp.diatra.data.physicalActivity.Pedometer;
@@ -25,10 +26,6 @@ public class StepsService extends Service implements SensorEventListener {
 
     private SensorManager sensorManager;
     private Sensor sensor;
-
-    PhysicalActivityRepository repo;
-
-    PedometerDao pedometerDao;
 
     @Override
     public void onCreate() {
@@ -55,19 +52,22 @@ public class StepsService extends Service implements SensorEventListener {
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-         repo = new PhysicalActivityRepository(getApplication());
 
+        Toast.makeText(this, PreferencesUtils.getInt(this, "DeltaSteps") + " steps", Toast.LENGTH_SHORT).show();
         int eventSteps = Math.round(event.values[0]);
 
         if (!PreferencesUtils.getStr(this, "Today").equals(today())) {
             PreferencesUtils.saveString(this, "Today", today());
             PreferencesUtils.saveInt(this, "Steps", eventSteps);
-            repo.insertSteps(new Pedometer(today(), 0));
         } else {
             int deltaSteps = eventSteps - PreferencesUtils.getInt(this,"Steps");
             PreferencesUtils.saveInt(this, "DeltaSteps", deltaSteps);
-            repo.updateSteps(deltaSteps);
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 
     @Override

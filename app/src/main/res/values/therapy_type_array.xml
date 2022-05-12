@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="type_array">
+        <item>@string/choose_therapy_type</item>
+        <item>@string/continuously</item>
+        <item>@string/intravenously</item>
+        <item>@string/orally</item>
+    </string-array>
+</resources>

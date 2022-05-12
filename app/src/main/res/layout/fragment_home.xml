@@ -60,69 +60,77 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/home_first_day"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Mon"
+                android:text="@string/day_1"
                 android:textAlignment="center"
                 android:textColor="@color/gray"
                 android:textSize="16sp" />
 
             <TextView
+                android:id="@+id/home_second_day"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Tue"
+                android:text="@string/day_2"
                 android:textAlignment="center"
                 android:textColor="@color/gray"
                 android:textSize="16sp" />
 
             <TextView
+                android:id="@+id/home_third_day"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Wed"
+                android:text="@string/day_3"
                 android:textAlignment="center"
                 android:textColor="@color/gray"
                 android:textSize="16sp" />
 
             <TextView
+                android:id="@+id/home_fourth_day"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Thur"
+                android:text="@string/day_4"
                 android:textAlignment="center"
                 android:textColor="@color/gray"
                 android:textSize="16sp" />
 
             <TextView
+                android:id="@+id/home_fifth_day"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Fri"
+                android:text="@string/day_5"
                 android:textAlignment="center"
                 android:textColor="@color/gray"
                 android:textSize="16sp" />
 
             <TextView
+                android:id="@+id/home_sixth_day"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Sat"
+                android:text="@string/day_6"
                 android:textAlignment="center"
                 android:textColor="@color/gray"
                 android:textSize="16sp" />
 
             <TextView
+                android:id="@+id/home_seventh_day"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Sun"
+                android:text="@string/day_7"
                 android:textAlignment="center"
                 android:textColor="@color/gray"
                 android:textSize="16sp" />
@@ -130,20 +138,20 @@
 
         </LinearLayout>
 
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/calendarRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_weight="0.5"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:layout_weight="1"
             android:gravity="center" />
 
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1.5"
             android:gravity="center_horizontal"
             android:orientation="horizontal"
             android:weightSum="2"
@@ -154,7 +162,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/therapyCard"
                 android:layout_width="157dp"
-                android:layout_height="128dp"
+                android:layout_height="match_parent"
                 android:layout_margin="8dp"
                 android:layout_marginEnd="16dp"
                 android:clickable="true"
@@ -174,10 +182,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="left"
-                        android:text="therapy"
+                        android:text="@string/therapy_title"
                         android:textColor="@color/black"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textStyle="bold"
+                        android:textAllCaps="false"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -224,7 +233,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:textSize="13dp"
-                                android:text="taken" />
+                                android:text="@string/taken" />
 
                         </LinearLayout>
 
@@ -239,7 +248,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/stepsCard"
                 android:layout_width="157dp"
-                android:layout_height="128dp"
+                android:layout_height="match_parent"
                 android:layout_margin="8dp"
                 android:layout_marginStart="16dp"
                 android:clickable="true"
@@ -258,7 +267,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="left"
-                        android:text="steps"
+                        android:text="@string/steps_title"
                         android:textColor="@color/black"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textStyle="bold"
@@ -309,7 +318,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textSize="13dp"
-                            android:text="steps" />
+                            android:text="@string/steps_genitive" />
 
                     </LinearLayout>
 
@@ -324,7 +333,8 @@
         <LinearLayout
             android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1.5"
             android:gravity="center_horizontal"
             android:orientation="horizontal"
             android:weightSum="2"
@@ -335,7 +345,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/mealCard"
                 android:layout_width="157dp"
-                android:layout_height="128dp"
+                android:layout_height="match_parent"
                 android:layout_margin="8dp"
                 android:layout_marginEnd="16dp"
                 android:clickable="true"
@@ -354,7 +364,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="left"
-                        android:text="intake"
+                        android:text="@string/food_title"
                         android:textColor="@color/black"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textStyle="bold"
@@ -405,7 +415,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textSize="13dp"
-                            android:text="kcal" />
+                            android:text="@string/kcal" />
                     </LinearLayout>
 
                     </LinearLayout>
@@ -418,7 +428,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/physicalActivityCard"
                 android:layout_width="157dp"
-                android:layout_height="128dp"
+                android:layout_height="match_parent"
                 android:layout_margin="8dp"
                 android:layout_marginStart="16dp"
                 android:clickable="true"
@@ -437,7 +447,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="left"
-                        android:text="active"
+                        android:text="@string/activity_title"
                         android:textColor="@color/black"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textStyle="bold"
@@ -487,7 +497,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:textSize="13dp"
-                                android:text="hours" />
+                                android:text="@string/hours_genitive" />
 
                         </LinearLayout>
 
@@ -501,7 +511,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:gravity="center_horizontal"
             android:orientation="horizontal"
             android:weightSum="2"
@@ -512,7 +523,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/newTherapyCard"
                 android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_height="match_parent"
                 android:layout_margin="8dp"
                 android:layout_marginStart="16dp"
                 app:cardBackgroundColor="@color/purple"
@@ -532,7 +543,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="right"
                         android:paddingRight="5dp"
-                        android:text="therapy"
+                        android:text="@string/therapy_small_title"
                         android:textColor="@color/darkPurple"
                         android:textSize="14sp"
                         android:textStyle="bold"
@@ -563,7 +574,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/newFoodCard"
                 android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_height="match_parent"
                 android:layout_margin="8dp"
                 android:layout_marginStart="16dp"
                 app:cardBackgroundColor="@color/keroseneBlue"
@@ -583,7 +594,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="right"
                         android:paddingRight="5dp"
-                        android:text="meal"
+                        android:text="@string/meal_small_title"
                         android:textColor="@color/darkKeroseneBlue"
                         android:textSize="14sp"
                         android:textStyle="bold"
@@ -613,7 +624,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/newActivityCard"
                 android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_height="match_parent"
                 android:layout_margin="8dp"
                 android:layout_marginEnd="16dp"
                 app:cardBackgroundColor="@color/lavender"
@@ -633,7 +644,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="right"
                         android:paddingRight="5dp"
-                        android:text="activity"
+                        android:text="@string/activity_small_title"
                         android:textColor="@color/darkLavender"
                         android:textSize="14sp"
                         android:textStyle="bold"

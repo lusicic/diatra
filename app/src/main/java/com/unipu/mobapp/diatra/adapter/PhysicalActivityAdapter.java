@@ -36,7 +36,7 @@ public class PhysicalActivityAdapter extends RecyclerView.Adapter<PhysicalActivi
         holder.textViewTypeOfPhysicalActivity.setText(currentPhysicalActivity.getTypeOfActivity());
         holder.textViewDuration.setText(String.valueOf(currentPhysicalActivity.getDuration()));
 
-        if(currentPhysicalActivity.getTypeOfActivity().equals("yoga")){
+        if(currentPhysicalActivity.getTypeOfActivity().equals(R.string.yoga)){
             holder.imageViewDistance.setVisibility(View.GONE);
             holder.textViewDistance.setVisibility(View.GONE);
             holder.textViewKilometres.setVisibility(View.GONE);

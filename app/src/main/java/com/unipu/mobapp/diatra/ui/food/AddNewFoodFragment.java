@@ -1,9 +1,11 @@
 package com.unipu.mobapp.diatra.ui.food;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -35,6 +37,7 @@ import com.unipu.mobapp.diatra.R;
 import com.unipu.mobapp.diatra.data.food.Food;
 import com.unipu.mobapp.diatra.data.food.FoodType;
 import com.unipu.mobapp.diatra.utils.CalendarUtils;
+import com.unipu.mobapp.diatra.utils.PreferencesUtils;
 import com.unipu.mobapp.diatra.viewmodel.DayViewModel;
 
 import java.util.ArrayList;
@@ -130,11 +133,11 @@ public class AddNewFoodFragment extends Fragment {
 
     private void initObservers() {
 
-        dayViewModel.getAllFoodTypes().observe(getViewLifecycleOwner(), new Observer<List<FoodType>>() {
+        dayViewModel.getAllFoodTypes(whichLanguage()).observe(getViewLifecycleOwner(), new Observer<List<FoodType>>() {
             @Override
             public void onChanged(List<FoodType> foodTypes) {
                 foodTypeList.addAll(foodTypes);
-                dayViewModel.getAllFoodTypes().removeObserver(this::onChanged);
+                dayViewModel.getAllFoodTypes(whichLanguage()).removeObserver(this::onChanged);
             }
 
         });
@@ -272,5 +275,17 @@ public class AddNewFoodFragment extends Fragment {
         Food food = new Food(type, amount, calories, carbs, date, time);
         food.setId(id);
         dayViewModel.updateFood(food);
+    }
+
+    private String whichLanguage(){
+        String langPref = "Language";
+        SharedPreferences prefs = getContext().getSharedPreferences("CommonPrefs",
+                Activity.MODE_PRIVATE);
+        String language = prefs.getString(langPref, "");
+
+        if(language.isEmpty()){
+            language="en";
+        }
+        return language;
     }
 }

@@ -10,15 +10,18 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import android.app.ActionBar;
+import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.unipu.mobapp.diatra.R;
-import com.unipu.mobapp.diatra.data.physicalActivity.PhysicalActivityRepository;
 import com.unipu.mobapp.diatra.utils.CalendarUtils;
-import com.unipu.mobapp.diatra.utils.PreferencesUtils;
+import com.unipu.mobapp.diatra.utils.LanguageUtils;
 import com.unipu.mobapp.diatra.viewmodel.DayViewModel;
 import com.unipu.mobapp.diatra.viewmodel.UserViewModel;
 
@@ -33,27 +36,22 @@ public class MainActivity extends AppCompatActivity{
 
     DayViewModel dayViewModel;
     UserViewModel userViewModel;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        LanguageUtils.loadLocale(this);
         initViewModels();
 
         dayViewModel.setDate(String.valueOf(CalendarUtils.formattedDate(LocalDate.now())));
         userViewModel.getUser();
 
         setContentView(R.layout.activity_main);
+
         setUpNavigation();
 
         Intent i = new Intent(MainActivity.this, StepsService.class);
         startService(i);
-
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
     }
 
     private void initViewModels() {

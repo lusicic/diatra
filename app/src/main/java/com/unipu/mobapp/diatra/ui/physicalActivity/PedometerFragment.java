@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.unipu.mobapp.diatra.R;
+import com.unipu.mobapp.diatra.utils.CalendarUtils;
 import com.unipu.mobapp.diatra.utils.PreferencesUtils;
 import com.unipu.mobapp.diatra.viewmodel.DayViewModel;
 
@@ -22,10 +23,11 @@ public class PedometerFragment extends Fragment {
 
     private DayViewModel dayViewModel;
     private TextView textViewTotalSteps;
+    private TextView textViewDate;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_pedometer, container, false);
     }
 
@@ -33,13 +35,20 @@ public class PedometerFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        textViewTotalSteps = view.findViewById(R.id.totalsteps);
-
         initViewModel();
+        initWidgets(view);
 
+        String date = CalendarUtils.dayMonth(dayViewModel.getDate().getValue());
+        textViewDate.setText(date);
     }
 
     private void initViewModel(){
         dayViewModel = new ViewModelProvider(requireActivity()).get(DayViewModel.class);
     }
+
+    private void initWidgets(View view) {
+        textViewTotalSteps = view.findViewById(R.id.text_view_total_steps);
+        textViewDate = view.findViewById(R.id.text_view_steps_date);
+    }
+
 }

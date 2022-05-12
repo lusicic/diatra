@@ -24,8 +24,7 @@ public interface FoodDao {
     @Query("SELECT * FROM food WHERE date==:date ORDER BY time ASC")
     LiveData<List<Food>> getDayFood(String date);
 
-    @Query("SELECT * FROM food_type ORDER BY name ASC")
-    LiveData<List<FoodType>> getAllFoodTypes();
-
+    @Query("SELECT * FROM food_type WHERE language==:language ORDER BY name ASC")
+    LiveData<List<FoodType>> getAllFoodTypes(String language);
 
 }

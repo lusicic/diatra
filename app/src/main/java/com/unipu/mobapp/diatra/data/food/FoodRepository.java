@@ -18,7 +18,6 @@ public class FoodRepository {
     public FoodRepository(Application application){
         AppDatabase database = AppDatabase.getInstance(application);
         foodDao = database.foodDao();
-        foodDao.getAllFoodTypes();
     }
 
     public void insertFood(Food food){
@@ -33,7 +32,7 @@ public class FoodRepository {
         new DeleteFoodAsyncTask(foodDao).execute(food);
     }
 
-    public LiveData<List<FoodType>> getAllFoodTypes() { return foodDao.getAllFoodTypes(); }
+    public LiveData<List<FoodType>> getAllFoodTypes(String language) { return foodDao.getAllFoodTypes(language); }
 
     public LiveData<List<Food>> getDayFood(String date){
         return foodDao.getDayFood(date);

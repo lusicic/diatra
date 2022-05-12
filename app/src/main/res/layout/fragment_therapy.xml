@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="35dp"
             android:layout_marginBottom="10dp"
-            android:text="Date"
+            android:text="@string/date"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/light_gray_2"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout"
@@ -73,7 +73,7 @@
                     android:id="@+id/text_view_therapies_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="n"
+                    android:text="0"
                     android:textSize="30dp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -85,7 +85,7 @@
                     android:id="@+id/textView7"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="taken"
+                    android:text="@string/taken"
                     android:textSize="18dp" />
 
 
@@ -98,7 +98,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="left"
-            android:text="timeline"
+            android:text="@string/timeline"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="@color/gray"
             android:textStyle="bold"
