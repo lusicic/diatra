@@ -2,6 +2,8 @@ package com.unipu.mobapp.diatra.data.therapy;
 
 import android.app.Application;
 import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Looper;
 
 import androidx.lifecycle.LiveData;
 
@@ -10,11 +12,16 @@ import com.unipu.mobapp.diatra.data.therapy.Therapy;
 import com.unipu.mobapp.diatra.data.therapy.TherapyDao;
 
 import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class TherapyRepository {
 
     private TherapyDao therapyDao;
     private LiveData<List<Therapy>> allTherapies;
+
+    private Executor executor = Executors.newSingleThreadExecutor();
 
     public TherapyRepository(Application application){
         AppDatabase database = AppDatabase.getInstance(application);
@@ -23,15 +30,31 @@ public class TherapyRepository {
     }
 
     public void insertTherapy(Therapy therapy){
-        new InsertTherapyAsyncTask(therapyDao).execute(therapy);
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                therapyDao.insert(therapy);
+            }
+        });
     }
 
+
     public void updateTherapy(Therapy therapy){
-        new UpdateTherapyAsyncTask(therapyDao).execute(therapy);
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                therapyDao.update(therapy);
+            }
+        });
     }
 
     public void deleteTherapy(Therapy therapy){
-        new DeleteTherapyAsyncTask(therapyDao).execute(therapy);
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                therapyDao.delete(therapy);
+            }
+        });
     }
 
     public LiveData<List<Therapy>> getAllTherapies(){
@@ -40,48 +63,6 @@ public class TherapyRepository {
 
     public LiveData<List<Therapy>> getDayTherapies(String date) {
         return therapyDao.getDayTherapies(date);
-    }
-
-    public static class InsertTherapyAsyncTask extends AsyncTask<Therapy, Void, Void>{
-        private TherapyDao therapyDao;
-
-        private InsertTherapyAsyncTask(TherapyDao therapyDao){
-            this.therapyDao = therapyDao;
-        }
-
-        @Override
-        protected Void doInBackground(Therapy... therapies) {
-            therapyDao.insert(therapies[0]);
-            return null;
-        }
-    }
-
-    public static class UpdateTherapyAsyncTask extends AsyncTask<Therapy, Void, Void>{
-        private TherapyDao therapyDao;
-
-        private UpdateTherapyAsyncTask(TherapyDao therapyDao){
-            this.therapyDao = therapyDao;
-        }
-
-        @Override
-        protected Void doInBackground(Therapy... therapies) {
-            therapyDao.update(therapies[0]);
-            return null;
-        }
-    }
-
-    public static class DeleteTherapyAsyncTask extends AsyncTask<Therapy, Void, Void>{
-        private TherapyDao therapyDao;
-
-        private DeleteTherapyAsyncTask(TherapyDao therapyDao){
-            this.therapyDao = therapyDao;
-        }
-
-        @Override
-        protected Void doInBackground(Therapy... therapies) {
-            therapyDao.delete(therapies[0]);
-            return null;
-        }
     }
 
 }

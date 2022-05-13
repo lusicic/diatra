@@ -25,6 +25,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @Database(entities = {Therapy.class, User.class, PhysicalActivity.class, Pedometer.class, Food.class, FoodType.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
