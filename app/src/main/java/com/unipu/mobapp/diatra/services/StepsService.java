@@ -60,7 +60,7 @@ public class StepsService extends Service implements SensorEventListener {
             sensorManager.unregisterListener(this);
 
             String ns = Context.NOTIFICATION_SERVICE;
-            NotificationManager nMgr = (NotificationManager) getApplicationContext().getSystemService(ns);
+            NotificationManager nMgr = (NotificationManager) getBaseContext().getSystemService(ns);
             nMgr.cancel(1);
 
             return START_NOT_STICKY;
@@ -105,13 +105,6 @@ public class StepsService extends Service implements SensorEventListener {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        stopForeground(true);
-        stopSelf();
-        sensorManager.unregisterListener(this);
-
-        String ns = Context.NOTIFICATION_SERVICE;
-        NotificationManager nMgr = (NotificationManager) getApplicationContext().getSystemService(ns);
-        nMgr.cancel(1);
     }
 
     @Override
@@ -128,20 +121,19 @@ public class StepsService extends Service implements SensorEventListener {
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     public void showNotification(){
 
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        Intent intent = new Intent(getBaseContext(), MainActivity.class);
         String CHANNEL_ID="MYCHANNEL";
         NotificationChannel notificationChannel=new NotificationChannel(CHANNEL_ID,"name", NotificationManager.IMPORTANCE_LOW);
         notificationChannel.setShowBadge(false);
 
-        PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(),1,intent,0);
+        PendingIntent pendingIntent = PendingIntent.getActivity(getBaseContext(),1,intent,0);
 
         Intent intentic = new Intent(this, StepsService.class);
         intentic.setAction(ACTION_STOP_LISTEN);
         PendingIntent actionIntent = PendingIntent.getService(this, 123, intentic, PendingIntent.FLAG_UPDATE_CURRENT);
 
 
-        Notification notification=new Notification.Builder(getApplicationContext(),CHANNEL_ID)
-                .setContentText("counting steps")
+        Notification notification=new Notification.Builder(getBaseContext(),CHANNEL_ID)
                 .setContentTitle(getString(R.string.steps))
                 .setContentIntent(pendingIntent)
                 .addAction(R.drawable.ic_sneaker,"Stop", actionIntent)
@@ -151,7 +143,9 @@ public class StepsService extends Service implements SensorEventListener {
 
         NotificationManager notificationManager=(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.createNotificationChannel(notificationChannel);
-        notificationManager.notify(1,notification);
+        //notificationManager.notify(1,notification);
+
+        startForeground(101, notification);
     }
 
 }
