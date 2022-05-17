@@ -40,6 +40,13 @@ public class PedometerFragment extends Fragment {
 
         String date = CalendarUtils.dayMonth(dayViewModel.getDate().getValue());
         textViewDate.setText(date);
+
+        dayViewModel.getDaySteps().observe(getViewLifecycleOwner(), new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                textViewTotalSteps.setText(String.valueOf(integer));
+            }
+        });
     }
 
     private void initViewModel(){

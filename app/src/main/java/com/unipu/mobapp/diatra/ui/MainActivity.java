@@ -14,6 +14,10 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.app.job.JobInfo;
+import android.app.job.JobScheduler;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -49,6 +53,12 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_main);
 
         setUpNavigation();
+
+        /*JobScheduler jobScheduler = (JobScheduler) getSystemService(Context.JOB_SCHEDULER_SERVICE);
+        JobInfo jobInfo = new JobInfo.Builder(1, new ComponentName(this, StepsService.class))
+                .setPeriodic(1 * 60 * 1000)
+                .build();
+        jobScheduler.schedule(jobInfo);*/
 
         Intent i = new Intent(MainActivity.this, StepsService.class);
         startService(i);
@@ -88,4 +98,15 @@ public class MainActivity extends AppCompatActivity{
         });
 
     }
+
+    /*public void scheduleJob() {
+        ComponentName componentName = new ComponentName(this, StepsService.class);
+        JobInfo info = new JobInfo.Builder(123, componentName)
+                .setPeriodic(15 * 60 * 1000)
+                .build();
+
+        JobScheduler scheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
+        scheduler.schedule(info);
+    }*/
+
 }

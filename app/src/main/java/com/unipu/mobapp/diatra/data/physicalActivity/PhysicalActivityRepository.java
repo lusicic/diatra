@@ -6,8 +6,12 @@ import android.os.AsyncTask;
 import androidx.lifecycle.LiveData;
 
 import com.unipu.mobapp.diatra.data.AppDatabase;
+import com.unipu.mobapp.diatra.data.therapy.Therapy;
 
 import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 public class PhysicalActivityRepository {
 
@@ -16,6 +20,10 @@ public class PhysicalActivityRepository {
 
     private PedometerDao pedometerDao;
 
+    private String latest;
+
+    private Executor executor = Executors.newSingleThreadExecutor();
+
     public PhysicalActivityRepository(Application application){
         AppDatabase database = AppDatabase.getInstance(application);
         physicalActivityDao = database.physicalActivityDao();
@@ -23,102 +31,69 @@ public class PhysicalActivityRepository {
     }
 
     public void insertPhysicalActivity(PhysicalActivity physicalActivity){
-        new InsertPhysicalActivityAsyncTask(physicalActivityDao).execute(physicalActivity);
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                physicalActivityDao.insert(physicalActivity);
+            }
+        });
     }
 
     public void updatePhysicalActivity(PhysicalActivity physicalActivity){
-        new UpdatePhysicalActivityAsyncTask(physicalActivityDao).execute(physicalActivity);
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                physicalActivityDao.update(physicalActivity);
+            }
+        });
     }
 
     public void deletePhysicalActivity(PhysicalActivity physicalActivity){
-        new DeletePhysicalActivityAsyncTask(physicalActivityDao).execute(physicalActivity);
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                physicalActivityDao.delete(physicalActivity);
+            }
+        });
     }
 
     public LiveData<List<PhysicalActivity>> getDayPhysicalActivities(String date) {
         return physicalActivityDao.getDayPhysicalActivities(date);
     }
 
-    public static class InsertPhysicalActivityAsyncTask extends AsyncTask<PhysicalActivity, Void, Void> {
-        private PhysicalActivityDao physicalActivityDao;
-
-        private InsertPhysicalActivityAsyncTask(PhysicalActivityDao physicalActivityDao){
-            this.physicalActivityDao = physicalActivityDao;
-        }
-
-        @Override
-        protected Void doInBackground(PhysicalActivity... physicalActivities) {
-            physicalActivityDao.insert(physicalActivities[0]);
-            return null;
-        }
-    }
-
-    public static class UpdatePhysicalActivityAsyncTask extends AsyncTask<PhysicalActivity, Void, Void> {
-        private PhysicalActivityDao physicalActivityDao;
-
-        private UpdatePhysicalActivityAsyncTask(PhysicalActivityDao physicalActivityDao){
-            this.physicalActivityDao = physicalActivityDao;
-        }
-
-        @Override
-        protected Void doInBackground(PhysicalActivity... physicalActivities) {
-            physicalActivityDao.update(physicalActivities[0]);
-            return null;
-        }
-    }
-
-    public static class DeletePhysicalActivityAsyncTask extends AsyncTask<PhysicalActivity, Void, Void> {
-        private PhysicalActivityDao physicalActivityDao;
-
-        private DeletePhysicalActivityAsyncTask(PhysicalActivityDao physicalActivityDao){
-            this.physicalActivityDao = physicalActivityDao;
-        }
-
-        @Override
-        protected Void doInBackground(PhysicalActivity... physicalActivities) {
-            physicalActivityDao.delete(physicalActivities[0]);
-            return null;
-        }
-    }
 
     public void insertSteps(Pedometer pedometer){
-        new PhysicalActivityRepository.InsertStepsAsyncTask(pedometerDao).execute(pedometer);
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                pedometerDao.insert(pedometer);
+            }
+        });
     }
 
     public void updateSteps(int steps){
-        new PhysicalActivityRepository.UpdateStepsAsyncTask(pedometerDao).execute(steps);
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                pedometerDao.update(steps);
+            }
+        });
     }
 
     public LiveData<Integer> getDaySteps(String date){
         return pedometerDao.getDaySteps(date);
     }
 
-    public static class InsertStepsAsyncTask extends AsyncTask<Pedometer, Void, Void> {
-        private PedometerDao pedometerDao;
-
-        private InsertStepsAsyncTask(PedometerDao pedometerDao){
-            this.pedometerDao = pedometerDao;
-        }
-
-        @Override
-        protected Void doInBackground(Pedometer... pedometers) {
-            pedometerDao.insert(pedometers[0]);
-            return null;
-        }
+    public void returnLatest() {
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                latest = pedometerDao.getLatest();
+            }
+        });
     }
 
-    public static class UpdateStepsAsyncTask extends AsyncTask<Integer, Void, Void>{
-
-        private PedometerDao pedometerDao;
-
-        private UpdateStepsAsyncTask(PedometerDao pedometerDao){
-            this.pedometerDao = pedometerDao;
-        }
-
-        @Override
-        protected Void doInBackground(Integer... integers) {
-            pedometerDao.update(integers[0]);
-            return null;
-        }
+    public String getLatest(){
+        return latest;
     }
-
 }
