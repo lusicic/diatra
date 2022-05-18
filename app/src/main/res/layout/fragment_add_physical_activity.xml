@@ -78,34 +78,63 @@ tools:context=".ui.physicalActivity.AddPhysicalActivityFragment">
     app:layout_constraintTop_toBottomOf="@+id/spinner_physical_activity_type"
     tools:layout_editor_absoluteX="30dp" />
 
-<EditText
-    android:id="@+id/edit_text_physical_activity_duration_hour"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:padding="12dp"
-    android:hint="00"
-    app:layout_constraintTop_toBottomOf="@+id/textView3"/>
+    <EditText
+        android:id="@+id/edit_text_physical_activity_duration_hour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="00"
+        android:inputType="number"
+        android:padding="12dp"
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="h"
+        android:textColor="@color/gray"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/text_view_add_user_distance"
+        app:layout_constraintStart_toEndOf="@+id/edit_text_physical_activity_duration_hour"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <TextView
         android:id="@+id/colon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:text=":"
         android:textSize="20dp"
-        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/text_view_add_user_distance"
-        app:layout_constraintStart_toEndOf="@+id/edit_text_physical_activity_duration_hour"
+        app:layout_constraintStart_toEndOf="@+id/textView11"
         app:layout_constraintTop_toBottomOf="@+id/textView3"
-        app:layout_constraintVertical_bias="0.321" />
+        app:layout_constraintVertical_bias="0.387" />
 
     <EditText
         android:id="@+id/edit_text_physical_activity_duration_minute"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:inputType="number"
         android:hint="00"
         android:padding="12dp"
         app:layout_constraintStart_toEndOf="@+id/colon"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="min"
+        android:textColor="@color/gray"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/text_view_add_user_distance"
+        app:layout_constraintStart_toEndOf="@+id/edit_text_physical_activity_duration_minute"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
 
     <TextView
     android:id="@+id/text_view_add_user_distance"
@@ -121,6 +150,7 @@ tools:context=".ui.physicalActivity.AddPhysicalActivityFragment">
     android:id="@+id/edit_text_physical_activity_distance"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:inputType="numberDecimal"
     android:hint="@string/distance"
     app:layout_constraintTop_toBottomOf="@+id/text_view_add_user_distance"/>
 

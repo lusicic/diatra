@@ -63,6 +63,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/input_text_rounded_corner"
                 android:padding="12dp"
+                android:inputType="number"
                 android:hint="@string/age"
                 android:textAppearance="@android:style/TextAppearance.Medium"
                 app:layout_constraintTop_toBottomOf="@+id/textView2" />
@@ -84,6 +85,7 @@
                 android:background="@drawable/input_text_rounded_corner"
                 android:padding="12dp"
                 android:hint="@string/height"
+                android:inputType="number"
                 android:textAppearance="@android:style/TextAppearance.Medium"
                 app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
@@ -104,6 +106,7 @@
                 android:background="@drawable/input_text_rounded_corner"
                 android:padding="12dp"
                 android:hint="@string/weight"
+                android:inputType="number"
                 android:textAppearance="@android:style/TextAppearance.Medium"
                 app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
