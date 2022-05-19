@@ -104,7 +104,15 @@ public class StepsService extends Service implements SensorEventListener {
 
     @Override
     public void onDestroy() {
+
         super.onDestroy();
+        stopForeground(true);
+        stopSelf();
+        sensorManager.unregisterListener(this);
+
+        String ns = Context.NOTIFICATION_SERVICE;
+        NotificationManager nMgr = (NotificationManager) getBaseContext().getSystemService(ns);
+        nMgr.cancel(1);
     }
 
     @Override

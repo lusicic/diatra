@@ -20,7 +20,7 @@
     <string name="meal">Obrok</string>
     <string name="activity">Aktivnost</string>
     <string name="taken">unešeno</string>
-    <string name="hours_genitive">sata</string>
+    <string name="hours">sati</string>
     <string name="timeline">Pregled</string>
     <string name="type">Tip</string>
     <string name="dose">Doza</string>
@@ -88,4 +88,12 @@
     <string name="meal_small_title">obrok</string>
     <string name="activity_small_title">aktivnost</string>
     <string name="therapy_small_title">terapija</string>
+    <string name="start">Kreni</string>
+    <string name="stop">Stani</string>
+    <string name="automatic_steps">Automatsko brojanje koraka</string>
+    <string name="automatic_steps_text">Brojanje koraka na otvaranju aplikacije</string>
+    <string name="automatic_steps_title">Automatski broji korake:</string>
+    <string name="yes">Da</string>
+    <string name="no">Ne</string>
+    <string name="navigation_therapies">Terapije</string>
 </resources>

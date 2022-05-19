@@ -52,7 +52,7 @@
     <fragment
         android:id="@+id/therapyFragment"
         android:name="com.unipu.mobapp.diatra.ui.therapy.TherapyFragment"
-        android:label="Therapies"
+        android:label="@string/navigation_therapies"
         tools:layout="@layout/fragment_therapy" >
         <action
             android:id="@+id/action_therapyFragment_to_addTherapyFragment"

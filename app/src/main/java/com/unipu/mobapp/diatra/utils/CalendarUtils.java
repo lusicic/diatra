@@ -1,9 +1,11 @@
 package com.unipu.mobapp.diatra.utils;
 
+import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Locale;
 
 public class CalendarUtils {
@@ -65,6 +67,11 @@ public class CalendarUtils {
         }
 
         return null;
+    }
+
+    public static String today() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        return sdf.format(Calendar.getInstance().getTime());
     }
 
 }

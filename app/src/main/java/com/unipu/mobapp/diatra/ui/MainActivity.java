@@ -26,6 +26,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.unipu.mobapp.diatra.R;
 import com.unipu.mobapp.diatra.utils.CalendarUtils;
 import com.unipu.mobapp.diatra.utils.LanguageUtils;
+import com.unipu.mobapp.diatra.utils.PreferencesUtils;
 import com.unipu.mobapp.diatra.viewmodel.DayViewModel;
 import com.unipu.mobapp.diatra.viewmodel.UserViewModel;
 
@@ -54,14 +55,14 @@ public class MainActivity extends AppCompatActivity{
 
         setUpNavigation();
 
-        /*JobScheduler jobScheduler = (JobScheduler) getSystemService(Context.JOB_SCHEDULER_SERVICE);
-        JobInfo jobInfo = new JobInfo.Builder(1, new ComponentName(this, StepsService.class))
-                .setPeriodic(1 * 60 * 1000)
-                .build();
-        jobScheduler.schedule(jobInfo);*/
+        if(!PreferencesUtils.getStr(this, "AutoSteps").equals("no")){
+            Intent i = new Intent(MainActivity.this, StepsService.class);
+            startService(i);
+        }
+        else if(PreferencesUtils.getStr(this, "AutoSteps").equals("no")){
+            stopService(new Intent(MainActivity.this, StepsService.class));
+        }
 
-        Intent i = new Intent(MainActivity.this, StepsService.class);
-        startService(i);
     }
 
     private void initViewModels() {
@@ -98,15 +99,5 @@ public class MainActivity extends AppCompatActivity{
         });
 
     }
-
-    /*public void scheduleJob() {
-        ComponentName componentName = new ComponentName(this, StepsService.class);
-        JobInfo info = new JobInfo.Builder(123, componentName)
-                .setPeriodic(15 * 60 * 1000)
-                .build();
-
-        JobScheduler scheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
-        scheduler.schedule(info);
-    }*/
 
 }

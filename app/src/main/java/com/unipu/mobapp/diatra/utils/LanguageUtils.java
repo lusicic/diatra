@@ -10,7 +10,7 @@ public class LanguageUtils {
 
     public static void loadLocale(Context context) {
         String langPref = "Language";
-        SharedPreferences prefs = context.getSharedPreferences("CommonPrefs",
+        SharedPreferences prefs = context.getSharedPreferences("diatra_prefs",
                 Activity.MODE_PRIVATE);
         String language = prefs.getString(langPref, "");
         changeLang(context, language);
@@ -30,7 +30,7 @@ public class LanguageUtils {
 
     public static void saveLocale(Context context, String lang) {
         String langPref = "Language";
-        SharedPreferences prefs = context.getSharedPreferences("CommonPrefs",
+        SharedPreferences prefs = context.getSharedPreferences("diatra_prefs",
                 Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString(langPref, lang);

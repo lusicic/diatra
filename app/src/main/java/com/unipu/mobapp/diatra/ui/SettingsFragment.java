@@ -3,6 +3,7 @@ package com.unipu.mobapp.diatra.ui;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -17,16 +18,22 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.unipu.mobapp.diatra.R;
+import com.unipu.mobapp.diatra.services.StepsService;
 import com.unipu.mobapp.diatra.utils.CalendarUtils;
 import com.unipu.mobapp.diatra.utils.LanguageUtils;
+import com.unipu.mobapp.diatra.utils.PreferencesUtils;
+
+import org.w3c.dom.Text;
 
 import java.util.Locale;
 
 public class SettingsFragment extends Fragment {
 
     private TextView btnChangeLanguage;
+    private TextView btnAutoSteps;
 
     private String selectedLanguage;
+    private String choice;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -40,21 +47,37 @@ public class SettingsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         initWidgets(view);
 
-        btnChangeLanguage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openDialog();
-            }
-        });
+        initClickListeners();
+
+
     }
 
     private void initWidgets(View view) {
         btnChangeLanguage = view.findViewById(R.id.text_view_change_language);
+        btnAutoSteps = view.findViewById(R.id.text_view_automatic_steps);
 
     }
 
-    public void openDialog() {
-        final String[] languages = {"English (ENG)", "Hrvatski (CRO)"};
+    private void initClickListeners() {
+
+        btnChangeLanguage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openLanguageDialog();
+            }
+        });
+
+        btnAutoSteps.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openAutoStepsDialog();
+            }
+        });
+    }
+
+
+    public void openLanguageDialog() {
+        final String[] languages = {getString(R.string.english), getString(R.string.croatian)};
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         builder.setTitle(R.string.change_language);
@@ -85,6 +108,41 @@ public class SettingsFragment extends Fragment {
             }
         });
         builder.show();
+    }
+
+    public void openAutoStepsDialog(){
+        final String[] answers = {getString(R.string.yes), getString(R.string.no)};
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+        builder.setTitle(R.string.automatic_steps_title);
+        builder.setSingleChoiceItems(answers, -1, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int selected) {
+                //selectedLanguage = languages[selected];
+                if(selected == 0){
+                    choice="yes";
+                }
+                else if(selected == 1){
+                    choice="no";
+                }
+            }
+        });
+        builder.setPositiveButton(R.string.save, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int i) {
+                PreferencesUtils.saveString(getContext(), "AutoSteps", choice);
+                getActivity().recreate();
+                dialog.dismiss();
+            }
+        });
+        builder.setNegativeButton( R.string.cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int i) {
+                dialog.dismiss();
+            }
+        });
+        builder.show();
+
     }
 
 
