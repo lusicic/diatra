@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "134362114372",
+    "project_id": "diatra2",
+    "storage_bucket": "diatra2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:134362114372:android:5cfa81c9ed683bc3dc0f11",
+        "android_client_info": {
+          "package_name": "com.unipu.mobapp.diatra"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "134362114372-l549e4bku89ifoev9ouqa727vltrb6nl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJoY52MftpKJjgYGHq1CEDmvXo-IFsdLc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "134362114372-l549e4bku89ifoev9ouqa727vltrb6nl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

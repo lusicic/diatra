@@ -1,6 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">diatra</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="diatra" translatable="false">diatra</string>
 
     <string name="welcome_big" tools:ignore="StringEscaping">Lets start tracking</string>
@@ -9,7 +8,7 @@
     <string name="user_title">About you</string>
     <string name="user_title2">Health</string>
 
-    <!--> HOME -->
+    <!-- Home -->
 
     <string name="day_1">Mon</string>
     <string name="day_2">Tue</string>
@@ -40,28 +39,28 @@
 
     <string name="timeline">Timeline</string>
 
-    <!--> therapy -->
+    <!-- therapy -->
 
     <string name="type">Type</string>
     <string name="dose">Dose</string>
 
-    <!--> Food -->
+    <!-- Food -->
 
     <string name="carbs">Carbs</string>
     <string name="type_of_food">Type of food</string>
     <string name="amount">Amount</string>
     <string name="kcal">kcal</string>
 
-    <!--> Physical activity -->
+    <!-- Physical activity -->
 
     <string name="duration">Duration</string>
     <string name="distance">Distance</string>
 
-    <!--> Physical activity -->
+    <!-- Physical activity -->
     <string name="start">Start</string>
     <string name="stop">Stop</string>
 
-    <!--> User -->
+    <!-- User -->
 
     <string name="personal">Personal</string>
     <string name="gender">Gender</string>
@@ -73,7 +72,20 @@
     <string name="undefined">Undefined</string>
     <string name="zero">0</string>
 
-    <!--> Settings -->
+    <!-- Login/Registration -->
+
+    <string name="email">E-mail</string>
+    <string name="password">Password</string>
+
+    <string name="login">Log in</string>
+    <string name="register">Register</string>
+    <string name="signin">Sign in</string>
+    <string name="signup">Sign up</string>
+
+    <string name="login_text">Don't have an account?</string>
+    <string name="register_text">Already have an account?</string>
+
+    <!-- Settings -->
 
     <string name="change_language">Change language</string>
     <string name="display_language">Display in another language</string>
@@ -87,7 +99,10 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
 
-    <!--> Array - physical activity -->
+    <string name="save_data">Saving to Cloud</string>
+    <string name="save_data_text">Enable saving to Cloud</string>
+
+    <!-- Array - physical activity -->
 
     <string name="choose_activity">Choose activity</string>
     <string name="walking">Walking</string>
@@ -96,13 +111,13 @@
     <string name="yoga">Yoga</string>
     <string name="other">Other</string>
 
-    <!--> Array - gender -->
+    <!-- Array - gender -->
 
     <string name="choose_gender">Choose gender</string>
     <string name="female">Female</string>
     <string name="male">Male</string>
 
-    <!--> Array - type of diabetes -->
+    <!-- Array - type of diabetes -->
 
     <string name="choose_type">Choose type</string>
     <string name="type_1">Type 1</string>
@@ -110,13 +125,13 @@
     <string name="gestational">Gestational</string>
 
 
-    <!--> Array - type of therapy -->
+    <!-- Array - type of therapy -->
     <string name="choose_therapy_type">Choose type</string>
     <string name="continuously">Continuously</string>
     <string name="intravenously">Intravenously</string>
     <string name="orally">Orally</string>
 
-    <!--> Menu -->
+    <!-- Menu -->
 
     <string name="menu_home">Home</string>
     <string name="menu_profile">Profile</string>
@@ -130,7 +145,7 @@
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
 
-    <!--> Navigation -->
+    <!-- Navigation -->
 
     <string name="navigation_home">Home</string>
     <string name="navigation_profile">Profile</string>
@@ -145,4 +160,5 @@
     <string name="navigation_steps">Steps</string>
 
     <string name="addTherapyTitle">Add new therapy</string>
+
 </resources>

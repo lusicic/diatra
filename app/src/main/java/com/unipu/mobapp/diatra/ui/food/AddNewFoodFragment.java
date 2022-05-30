@@ -79,12 +79,30 @@ public class AddNewFoodFragment extends Fragment {
         initViewModel();
         initWidgets(view);
         initObservers();
+        initListeners();
 
         foodTypeList=new ArrayList<>();
 
         date = dayViewModel.getDate().getValue();
         editTextDate.setText(date);
 
+    }
+
+    private void initViewModel() {
+        dayViewModel = new ViewModelProvider(requireActivity()).get(DayViewModel.class);
+    }
+
+    private void initWidgets(View view) {
+        buttonAdd = view.findViewById(R.id.button_save_food);
+
+        editTextDate = view.findViewById(R.id.edit_text_food_date);
+        editTextTime = view.findViewById(R.id.edit_text_food_time);
+        editTextAmount = view.findViewById(R.id.edit_text_amount);
+
+        textViewFoodType = view.findViewById(R.id.text_view_type);
+    }
+
+    private void initListeners() {
         editTextDate.setOnClickListener(this::showDatePickerDialog);
         editTextTime.setOnClickListener(this::showTimePickerDialog);
 
@@ -113,22 +131,6 @@ public class AddNewFoodFragment extends Fragment {
                 Navigation.findNavController(view).popBackStack();
             }
         });
-
-    }
-
-    private void initViewModel() {
-        dayViewModel = new ViewModelProvider(requireActivity()).get(DayViewModel.class);
-    }
-
-    private void initWidgets(View view) {
-        buttonAdd = view.findViewById(R.id.button_save_food);
-
-        editTextDate = view.findViewById(R.id.edit_text_food_date);
-        editTextTime = view.findViewById(R.id.edit_text_food_time);
-        editTextAmount = view.findViewById(R.id.edit_text_amount);
-
-        textViewFoodType = view.findViewById(R.id.text_view_type);
-
     }
 
     private void initObservers() {

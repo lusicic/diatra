@@ -25,8 +25,11 @@ import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.unipu.mobapp.diatra.R;
 import com.unipu.mobapp.diatra.data.therapy.Therapy;
+import com.unipu.mobapp.diatra.utils.CalendarUtils;
 import com.unipu.mobapp.diatra.viewmodel.DayViewModel;
 
 import org.jetbrains.annotations.NotNull;
@@ -49,6 +52,8 @@ public class AddTherapyFragment extends Fragment {
     private String date;
     private TimePickerDialog.OnTimeSetListener onTimeSetListener;
     private DatePickerDialog.OnDateSetListener onDateSetListener;
+
+    private DatabaseReference mDatabase;
 
     private ArrayAdapter<CharSequence> adapter;
 
@@ -75,6 +80,34 @@ public class AddTherapyFragment extends Fragment {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerType.setAdapter(adapter);
 
+        mDatabase = FirebaseDatabase.getInstance("https://diatra2-default-rtdb.europe-west1.firebasedatabase.app/").getReference();
+
+        initListeners();
+
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+    }
+
+    public void initViewModel(){
+        dayViewModel = new ViewModelProvider(requireActivity()).get(DayViewModel.class);
+
+    }
+
+    public void initWidgets(View view){
+        buttonAddTherapy = view.findViewById(R.id.button_save_therapy);
+
+        editTextTherapyTime = view.findViewById(R.id.edit_text_therapy_time);
+        editTextDose = view.findViewById(R.id.edit_text_dose);
+        editTextTherapyDate = view.findViewById(R.id.edit_text_therapy_date);
+
+        spinnerType = view.findViewById(R.id.type_spinner);
+    }
+
+    private void initListeners() {
+
         editTextTherapyDate.setOnClickListener(this::showDatePickerDialog);
         editTextTherapyTime.setOnClickListener(this::showTimePickerDialog);
 
@@ -98,7 +131,7 @@ public class AddTherapyFragment extends Fragment {
         onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker timePicker, int hourOfDay, int minute) {
-                String newTime = convertDate(hourOfDay) + ":" + convertDate(minute);
+                String newTime = CalendarUtils.convertDate(hourOfDay) + ":" + CalendarUtils.convertDate(minute);
                 editTextTherapyTime.setText(newTime);
             }
         };
@@ -106,7 +139,7 @@ public class AddTherapyFragment extends Fragment {
         onDateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int day) {
-                String newDate = convertDate(day) + "/" + convertDate(month+1) + "/" + convertDate(year);
+                String newDate = CalendarUtils.convertDate(day) + "/" + CalendarUtils.convertDate(month+1) + "/" + CalendarUtils.convertDate(year);
                 editTextTherapyDate.setText(newDate);
             }
         };
@@ -118,27 +151,6 @@ public class AddTherapyFragment extends Fragment {
                 Navigation.findNavController(view).popBackStack();
             }
         });
-
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-    }
-
-    public void initViewModel(){
-        dayViewModel = new ViewModelProvider(requireActivity()).get(DayViewModel.class);
-
-    }
-
-    public void initWidgets(View view){
-        buttonAddTherapy = view.findViewById(R.id.button_save_therapy);
-
-        editTextTherapyTime = view.findViewById(R.id.edit_text_therapy_time);
-        editTextDose = view.findViewById(R.id.edit_text_dose);
-        editTextTherapyDate = view.findViewById(R.id.edit_text_therapy_date);
-
-        spinnerType = view.findViewById(R.id.type_spinner);
     }
 
     public void initObservers(){
@@ -181,12 +193,15 @@ public class AddTherapyFragment extends Fragment {
         Double dose = Double.parseDouble(editTextDose.getText().toString());
 
         if(therapyTime.trim().isEmpty() || type.trim().isEmpty()){
-            Toast.makeText(getActivity(), "time or type is empty", Toast.LENGTH_SHORT);
+            Toast.makeText(getActivity(), "time or type is empty", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        Therapy therapy = new Therapy(type, dose, therapyTime, date);
+        int id = (int) (Math.random() * 10000);
+        Therapy therapy = new Therapy(id, type, dose, therapyTime, date);
         dayViewModel.insertTherapy(therapy);
+
+        dayViewModel.insertFirebaseTherapy(String.valueOf(id), therapy);
     }
 
     private void editTherapy(int id) {
@@ -196,13 +211,15 @@ public class AddTherapyFragment extends Fragment {
         Double dose = Double.parseDouble(editTextDose.getText().toString());
 
         if(therapyTime.trim().isEmpty() || type.trim().isEmpty()){
-            Toast.makeText(getActivity(), "time or type is empty", Toast.LENGTH_SHORT);
+            Toast.makeText(getActivity(), "time or type is empty", Toast.LENGTH_LONG).show();
             return;
         }
 
-        Therapy therapy = new Therapy(type, dose, therapyTime, date);
+        Therapy therapy = new Therapy(id, type, dose, therapyTime, date);
         therapy.setId(id);
         dayViewModel.updateTherapy(therapy);
+
+        dayViewModel.insertFirebaseTherapy(String.valueOf(id), therapy);
     }
 
     public void showTimePickerDialog(View v) {
@@ -225,14 +242,6 @@ public class AddTherapyFragment extends Fragment {
 
         DatePickerDialog datePicker = new DatePickerDialog(getActivity(), AlertDialog.THEME_HOLO_LIGHT, onDateSetListener, year, month, day);
         datePicker.show();
-    }
-
-    public String convertDate(int input) {
-        if (input >= 10) {
-            return String.valueOf(input);
-        } else {
-            return "0" + String.valueOf(input);
-        }
     }
 
 }

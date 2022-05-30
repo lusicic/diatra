@@ -96,4 +96,6 @@
     <string name="yes">Da</string>
     <string name="no">Ne</string>
     <string name="navigation_therapies">Terapije</string>
+    <string name="save_data">Spremi na Oblak</string>
+    <string name="save_data_text">Omogući spremanje podataka na Oblak</string>
 </resources>

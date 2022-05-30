@@ -8,7 +8,7 @@ import java.util.Date;
 @Entity(tableName = "therapy")
 public class Therapy {
 
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey(autoGenerate = false)
     private int id;
 
     private String type;
@@ -16,7 +16,8 @@ public class Therapy {
     private String time;
     private String date;
 
-    public Therapy(String type, Double dosage, String time, String date) {
+    public Therapy(int id, String type, Double dosage, String time, String date) {
+        this.id = id;
         this.type = type;
         this.dosage = dosage;
         this.time = time;

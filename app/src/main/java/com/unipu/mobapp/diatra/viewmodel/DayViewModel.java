@@ -8,6 +8,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
 
+import com.google.firebase.auth.FirebaseUser;
+import com.unipu.mobapp.diatra.data.firebase.FirebaseRepository;
 import com.unipu.mobapp.diatra.data.food.Food;
 import com.unipu.mobapp.diatra.data.food.FoodRepository;
 import com.unipu.mobapp.diatra.data.food.FoodType;
@@ -22,6 +24,12 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 public class DayViewModel extends AndroidViewModel {
+
+    //Login
+
+    private FirebaseRepository firebaseRepository;
+    private MutableLiveData<FirebaseUser> userLiveData;
+    private MutableLiveData<Boolean> loggedOutLiveData;
 
     // Therapy
     private TherapyRepository therapyRepo;
@@ -48,6 +56,10 @@ public class DayViewModel extends AndroidViewModel {
 
     public DayViewModel(@NonNull @NotNull Application application) {
         super(application);
+        firebaseRepository = new FirebaseRepository(application);
+        userLiveData = firebaseRepository.getUserLiveData();
+        loggedOutLiveData = firebaseRepository.getLoggedOutLiveData();
+
         therapyRepo = new TherapyRepository(application);
         physicalActivityRepository = new PhysicalActivityRepository(application);
         foodRepo = new FoodRepository(application);
@@ -65,6 +77,20 @@ public class DayViewModel extends AndroidViewModel {
     public void setDate(String newDate) { date.setValue(newDate);}
     public LiveData<String> getDate() { return date;}
 
+    // Login
+
+    public void logOut() {
+        firebaseRepository.logOut();
+    }
+
+    public MutableLiveData<FirebaseUser> getUserLiveData() {
+        return userLiveData;
+    }
+
+    public MutableLiveData<Boolean> getLoggedOutLiveData() {
+        return loggedOutLiveData;
+    }
+
     // Therapy
     public LiveData<List<Therapy>> getDayTherapies() { return dayTherapies; }
 
@@ -74,6 +100,9 @@ public class DayViewModel extends AndroidViewModel {
     public void insertTherapy(Therapy therapy) { therapyRepo.insertTherapy(therapy); }
     public void updateTherapy(Therapy therapy){ therapyRepo.updateTherapy(therapy); }
     public void deleteTherapy(Therapy therapy){ therapyRepo.deleteTherapy(therapy); }
+
+    public void insertFirebaseTherapy(String id, Therapy therapy) {  firebaseRepository.insertTherapy(id, therapy); }
+    public void deleteFirebaseTherapy(String id) { firebaseRepository.deleteTherapy(id); }
 
     //Physical activity
     public LiveData<List<PhysicalActivity>> getDayPhysicalActivities() { return dayPhysicalActivities; }

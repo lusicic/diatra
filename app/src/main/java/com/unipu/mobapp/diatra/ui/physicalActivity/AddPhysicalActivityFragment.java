@@ -75,6 +75,34 @@ public class AddPhysicalActivityFragment extends Fragment {
         date = dayViewModel.getDate().getValue();
         editTextPhyActDate.setText(date);
 
+        setListeners();
+
+    }
+
+    private void initViewModel() {
+        dayViewModel = new ViewModelProvider(requireActivity()).get(DayViewModel.class);
+    }
+
+    private void initWidgets(View view) {
+        editTextPhyActDate = view.findViewById(R.id.edit_text_physical_activity_date);
+        editTextPhyActTime = view.findViewById(R.id.edit_text_physical_activity_time);
+        editTextPhyActDurationHour = view.findViewById(R.id.edit_text_physical_activity_duration_hour);
+        editTextPhyActDurationMinute = view.findViewById(R.id.edit_text_physical_activity_duration_minute);
+        editTextPhyActDistance = view.findViewById(R.id.edit_text_physical_activity_distance);
+
+        textViewDistance = view.findViewById(R.id.text_view_add_user_distance);
+
+        spinnerPhyActType = view.findViewById(R.id.spinner_physical_activity_type);
+
+        buttonAddPhyAct = view.findViewById(R.id.button_save_physical_activity);
+
+        adapterActivities = ArrayAdapter.createFromResource(getActivity(), R.array.array_physical_activity, android.R.layout.simple_spinner_item);
+        adapterActivities.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerPhyActType.setAdapter(adapterActivities);
+    }
+
+    private void setListeners() {
+
         editTextPhyActDate.setOnClickListener(this::showDatePickerDialog);
         editTextPhyActTime.setOnClickListener(this::showTimePickerDialog);
 
@@ -125,7 +153,6 @@ public class AddPhysicalActivityFragment extends Fragment {
                 editTextPhyActTime.setText(newTime);
             }
         };
-
     }
 
     private void initObservers() {
@@ -153,28 +180,6 @@ public class AddPhysicalActivityFragment extends Fragment {
                 Navigation.findNavController(view).popBackStack();
             }
         });
-    }
-
-    private void initViewModel() {
-        dayViewModel = new ViewModelProvider(requireActivity()).get(DayViewModel.class);
-    }
-
-    private void initWidgets(View view) {
-        editTextPhyActDate = view.findViewById(R.id.edit_text_physical_activity_date);
-        editTextPhyActTime = view.findViewById(R.id.edit_text_physical_activity_time);
-        editTextPhyActDurationHour = view.findViewById(R.id.edit_text_physical_activity_duration_hour);
-        editTextPhyActDurationMinute = view.findViewById(R.id.edit_text_physical_activity_duration_minute);
-        editTextPhyActDistance = view.findViewById(R.id.edit_text_physical_activity_distance);
-
-        textViewDistance = view.findViewById(R.id.text_view_add_user_distance);
-
-        spinnerPhyActType = view.findViewById(R.id.spinner_physical_activity_type);
-
-        buttonAddPhyAct = view.findViewById(R.id.button_save_physical_activity);
-
-        adapterActivities = ArrayAdapter.createFromResource(getActivity(), R.array.array_physical_activity, android.R.layout.simple_spinner_item);
-        adapterActivities.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerPhyActType.setAdapter(adapterActivities);
     }
 
     private void savePhysicalActivity() {

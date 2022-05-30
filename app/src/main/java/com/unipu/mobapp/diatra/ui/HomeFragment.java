@@ -18,6 +18,8 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.unipu.mobapp.diatra.R;
 import com.unipu.mobapp.diatra.adapter.CalendarAdapter;
 import com.unipu.mobapp.diatra.data.food.Food;
@@ -47,6 +49,7 @@ public class HomeFragment extends Fragment implements CalendarAdapter.OnItemList
     private TextView textViewTotalSteps;
     private TextView textViewTotalCalories;
     private TextView textViewTotalTimeActive;
+    private TextView textViewLogin;
 
     ImageButton btnBack;
     ImageButton btnNext;
@@ -59,6 +62,8 @@ public class HomeFragment extends Fragment implements CalendarAdapter.OnItemList
     CardView newFoodCardView;
     CardView stepsCardView;
 
+    private FirebaseAuth mAuth;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -70,15 +75,48 @@ public class HomeFragment extends Fragment implements CalendarAdapter.OnItemList
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        mAuth = FirebaseAuth.getInstance();
+
         initViewModel();
         initWidgets(view);
 
         setUpCalendar();
+        initObservers();
+        initListeners();
+
+    }
+
+    private void initViewModel(){
+
+        dayViewModel = new ViewModelProvider(requireActivity()).get(DayViewModel.class);
 
         dayViewModel.setDate(String.valueOf(formattedDate(CalendarUtils.selectedDate)));
+    }
 
+    private void initWidgets(View view){
+        therapyCardView = view.findViewById(R.id.therapyCard);
+        physicalActivityCardView = view.findViewById(R.id.physicalActivityCard);
+        foodCardView = view.findViewById(R.id.mealCard);
+        newTherapyCardView = view.findViewById(R.id.newTherapyCard);
+        newActivityCardView = view.findViewById(R.id.newActivityCard);
+        newFoodCardView = view.findViewById(R.id.newFoodCard);
+        stepsCardView = view.findViewById(R.id.stepsCard);
+
+        btnBack = view.findViewById(R.id.button_calendar_back);
+        btnNext = view.findViewById(R.id.button_calendar_next);
+
+        calendarRecyclerView = view.findViewById(R.id.calendarRecyclerView);
+        monthYearText = view.findViewById(R.id.monthYearTV);
+
+        textViewTest = view.findViewById(R.id.text_view_test);
+        textViewTotalSteps = view.findViewById(R.id.text_view_number_of_steps);
+        textViewTotalCalories = view.findViewById(R.id.text_view_taken_calories);
+        textViewTotalTimeActive = view.findViewById(R.id.text_view_total_time_active);
+        textViewLogin = view.findViewById(R.id.text_view_login);
+    }
+
+    private void initListeners() {
         btnBack.setOnClickListener(this::previousWeekAction);
-
         btnNext.setOnClickListener(this::nextWeekAction);
 
         therapyCardView.setOnClickListener(this::toTherapies);
@@ -88,6 +126,11 @@ public class HomeFragment extends Fragment implements CalendarAdapter.OnItemList
         newActivityCardView.setOnClickListener(this::newActivity);
         newFoodCardView.setOnClickListener(this::newFood);
         stepsCardView.setOnClickListener(this::toSteps);
+
+        textViewLogin.setOnClickListener(this::toSignIn);
+    }
+
+    private void initObservers() {
 
         dayViewModel.getDayTherapies().observe(getActivity(), new Observer<List<Therapy>>() {
             @Override
@@ -144,32 +187,23 @@ public class HomeFragment extends Fragment implements CalendarAdapter.OnItemList
             }
         });
 
+        dayViewModel.getUserLiveData().observe(getViewLifecycleOwner(), new Observer<FirebaseUser>() {
+            @Override
+            public void onChanged(FirebaseUser firebaseUser) {
+                if (firebaseUser != null) {
+                    textViewLogin.setText("Log out");
+                    textViewLogin.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            dayViewModel.logOut();
+                            textViewLogin.setText("Sign in");
+                        }
+                    });
+                }
+            }
+        });
     }
 
-    private void initViewModel(){
-        dayViewModel = new ViewModelProvider(requireActivity()).get(DayViewModel.class);
-    }
-
-    private void initWidgets(View view){
-        therapyCardView = view.findViewById(R.id.therapyCard);
-        physicalActivityCardView = view.findViewById(R.id.physicalActivityCard);
-        foodCardView = view.findViewById(R.id.mealCard);
-        newTherapyCardView = view.findViewById(R.id.newTherapyCard);
-        newActivityCardView = view.findViewById(R.id.newActivityCard);
-        newFoodCardView = view.findViewById(R.id.newFoodCard);
-        stepsCardView = view.findViewById(R.id.stepsCard);
-
-        btnBack = view.findViewById(R.id.button_calendar_back);
-        btnNext = view.findViewById(R.id.button_calendar_next);
-
-        calendarRecyclerView = view.findViewById(R.id.calendarRecyclerView);
-        monthYearText = view.findViewById(R.id.monthYearTV);
-
-        textViewTest = view.findViewById(R.id.text_view_test);
-        textViewTotalSteps = view.findViewById(R.id.text_view_number_of_steps);
-        textViewTotalCalories = view.findViewById(R.id.text_view_taken_calories);
-        textViewTotalTimeActive = view.findViewById(R.id.text_view_total_time_active);
-    }
 
 
     private void setUpCalendar(){
@@ -231,6 +265,10 @@ public class HomeFragment extends Fragment implements CalendarAdapter.OnItemList
 
     public void toSteps(View view){
         Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_pedometerFragment);
+    }
+
+    private void toSignIn(View view) {
+        Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_signInFragment);
     }
 
     @Override
