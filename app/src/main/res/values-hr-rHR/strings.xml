@@ -98,4 +98,12 @@
     <string name="navigation_therapies">Terapije</string>
     <string name="save_data">Spremi na Oblak</string>
     <string name="save_data_text">Omogući spremanje podataka na Oblak</string>
+    <string name="email">E-pošta</string>
+    <string name="password">Lozinka</string>
+    <string name="login">Ulogirajte se</string>
+    <string name="register">Registrirajte se</string>
+    <string name="signin">Prijavite se</string>
+    <string name="signup">Registrirajte se</string>
+    <string name="login_text">Nemate račun?</string>
+    <string name="register_text">Već imate račun?</string>
 </resources>

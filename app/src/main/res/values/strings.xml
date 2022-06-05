@@ -82,7 +82,7 @@
     <string name="signin">Sign in</string>
     <string name="signup">Sign up</string>
 
-    <string name="login_text">Don't have an account?</string>
+    <string name="login_text">Don\'t have an account?</string>
     <string name="register_text">Already have an account?</string>
 
     <!-- Settings -->

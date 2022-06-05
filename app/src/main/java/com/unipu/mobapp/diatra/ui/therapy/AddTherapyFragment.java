@@ -139,7 +139,7 @@ public class AddTherapyFragment extends Fragment {
         onDateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int day) {
-                String newDate = CalendarUtils.convertDate(day) + "/" + CalendarUtils.convertDate(month+1) + "/" + CalendarUtils.convertDate(year);
+                String newDate = CalendarUtils.convertDate(day) + "-" + CalendarUtils.convertDate(month+1) + "-" + CalendarUtils.convertDate(year);
                 editTextTherapyDate.setText(newDate);
             }
         };

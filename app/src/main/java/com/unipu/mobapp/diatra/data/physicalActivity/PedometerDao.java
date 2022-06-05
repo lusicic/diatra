@@ -11,7 +11,7 @@ public interface PedometerDao {
     @Insert
     void insert(Pedometer pedometer);
 
-    @Query("UPDATE pedometer SET steps = steps + :stepsToAdd WHERE id IN(SELECT id FROM pedometer ORDER BY date DESC LIMIT 1)")
+    @Query("UPDATE pedometer SET steps = :stepsToAdd WHERE id IN(SELECT id FROM pedometer ORDER BY date DESC LIMIT 1)")
     void update(int stepsToAdd);
 
     @Query("SELECT steps FROM pedometer WHERE date==:date")
@@ -19,5 +19,8 @@ public interface PedometerDao {
 
     @Query("SELECT date FROM pedometer ORDER BY date DESC LIMIT 1")
     String getLatest();
+
+    @Query("SELECT steps FROM pedometer ORDER BY date DESC LIMIT 1")
+    Integer getSteps();
 
 }

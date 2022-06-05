@@ -23,13 +23,16 @@ import androidx.room.Room;
 
 import com.unipu.mobapp.diatra.R;
 import com.unipu.mobapp.diatra.data.AppDatabase;
+import com.unipu.mobapp.diatra.data.firebase.FirebaseRepository;
 import com.unipu.mobapp.diatra.data.physicalActivity.Pedometer;
 import com.unipu.mobapp.diatra.data.physicalActivity.PedometerDao;
 import com.unipu.mobapp.diatra.data.physicalActivity.PhysicalActivityRepository;
 import com.unipu.mobapp.diatra.ui.MainActivity;
+import com.unipu.mobapp.diatra.utils.CalendarUtils;
 import com.unipu.mobapp.diatra.utils.PreferencesUtils;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Calendar;
 
 public class StepsService extends Service implements SensorEventListener {
@@ -38,23 +41,25 @@ public class StepsService extends Service implements SensorEventListener {
     private Sensor sensor;
 
     PhysicalActivityRepository physicalActivityRepository;
+    FirebaseRepository firebaseRepository;
 
     private static final String ACTION_STOP_LISTEN = "action_stop_listen";
 
     int deltaSteps = 0;
+    int milestoneSteps = 0;
 
     @Override
     public void onCreate() {
         super.onCreate();
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         sensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
-        sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL);
+
+        if(sensor != null)  sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL);
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         if (intent != null && ACTION_STOP_LISTEN.equals(intent.getAction())) {
-
             stopForeground(true);
             stopSelf();
             sensorManager.unregisterListener(this);
@@ -67,8 +72,12 @@ public class StepsService extends Service implements SensorEventListener {
         }
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         sensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
-        sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL);
-        showNotification();
+
+        if(sensor != null){
+            sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL);
+            showNotification();
+        }
+
         return START_STICKY;
     }
 
@@ -81,24 +90,30 @@ public class StepsService extends Service implements SensorEventListener {
     @Override
     public void onSensorChanged(SensorEvent event) {
 
-        physicalActivityRepository = new PhysicalActivityRepository(getApplication());
-
-        Toast.makeText(this, PreferencesUtils.getInt(this, "Steps") + " steps", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, PreferencesUtils.getInt(this, "Steps") + " steps", Toast.LENGTH_SHORT).show();
         int eventSteps = Math.round(event.values[0]);
 
-        if (!PreferencesUtils.getStr(this, "Today").equals(today())) {
-            PreferencesUtils.saveString(this, "Today", today());
+        if (!PreferencesUtils.getStr(this, "Today").equals(CalendarUtils.today())) {
+            PreferencesUtils.saveString(this, "Today", CalendarUtils.today());
             PreferencesUtils.saveInt(this, "Steps", eventSteps);
-            physicalActivityRepository.insertSteps(new Pedometer(today(), 0));
+
+            physicalActivityRepository = new PhysicalActivityRepository(getApplication());
+            physicalActivityRepository.insertSteps(new Pedometer(CalendarUtils.today(), 0));
+
+            milestoneSteps = 0;
             deltaSteps = 0;
         }
         else {
             deltaSteps = eventSteps - PreferencesUtils.getInt(this,"Steps");
-            PreferencesUtils.saveInt(this, "Steps", eventSteps);
-            if(deltaSteps>0) physicalActivityRepository.updateSteps(deltaSteps);
-            if(deltaSteps>50){
-                PreferencesUtils.saveString(this, "Today", "17/05/2022");
+            PreferencesUtils.saveInt(this, "DeltaSteps", deltaSteps);
+
+            //if(deltaSteps>0) physicalActivityRepository.updateSteps(PreferencesUtils.getInt(this, "DeltaSteps"));
+
+            if(deltaSteps >= milestoneSteps){
+                saveSteps();
+                milestoneSteps+=20;
             }
+
         }
     }
 
@@ -118,11 +133,6 @@ public class StepsService extends Service implements SensorEventListener {
     @Override
     public void onAccuracyChanged(Sensor sensor, int i) {
 
-    }
-
-    public String today() {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        return sdf.format(Calendar.getInstance().getTime());
     }
 
     @TargetApi(Build.VERSION_CODES.O)
@@ -154,6 +164,14 @@ public class StepsService extends Service implements SensorEventListener {
         //notificationManager.notify(1,notification);
 
         startForeground(101, notification);
+    }
+
+    public void saveSteps(){
+        firebaseRepository = new FirebaseRepository(getApplication());
+        firebaseRepository.insertSteps(CalendarUtils.today(), PreferencesUtils.getInt(this, "DeltaSteps"));
+
+        physicalActivityRepository = new PhysicalActivityRepository(getApplication());
+        physicalActivityRepository.updateSteps(PreferencesUtils.getInt(this, "DeltaSteps"));
     }
 
 }

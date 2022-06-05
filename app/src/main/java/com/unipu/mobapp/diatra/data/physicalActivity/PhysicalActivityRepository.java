@@ -84,6 +84,8 @@ public class PhysicalActivityRepository {
         return pedometerDao.getDaySteps(date);
     }
 
+    public Integer getSteps() { return pedometerDao.getSteps(); }
+
     public void returnLatest() {
         executor.execute(new Runnable() {
             @Override

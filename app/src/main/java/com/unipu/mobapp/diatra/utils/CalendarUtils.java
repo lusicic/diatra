@@ -19,13 +19,13 @@ public class CalendarUtils {
 
     public static String formattedDate(LocalDate date)
     {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         return date.format(formatter);
     }
 
     public static String dayMonth(String dateToFormat)
     {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         LocalDate date = LocalDate.parse(dateToFormat, formatter);
         DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd MMMM");
         return date.format(formatter2);
@@ -70,7 +70,7 @@ public class CalendarUtils {
     }
 
     public static String today() {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         return sdf.format(Calendar.getInstance().getTime());
     }
 

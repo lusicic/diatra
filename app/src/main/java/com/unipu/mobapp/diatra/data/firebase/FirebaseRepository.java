@@ -109,4 +109,17 @@ public class FirebaseRepository {
                     .removeValue();
         }
     }
+
+    public void insertSteps(String date, int steps){
+
+        if (firebaseAuth.getCurrentUser() != null) {
+            databaseReference
+                    .child("users")
+                    .child(firebaseAuth.getCurrentUser().getUid())
+                    .child("steps")
+                    .child(date)
+                    .setValue(steps);
+        }
+
+    }
 }
