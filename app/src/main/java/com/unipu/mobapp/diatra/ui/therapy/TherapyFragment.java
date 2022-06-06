@@ -59,8 +59,9 @@ public class TherapyFragment extends Fragment {
 
         dayViewModel = new ViewModelProvider(requireActivity()).get(DayViewModel.class);
 
-        String date = CalendarUtils.dayMonth(dayViewModel.getDate().getValue());
-        textViewTherapiesDate.setText(date);
+        String date = dayViewModel.getDate().getValue();
+        String formattedDate = CalendarUtils.dayMonth(date);
+        textViewTherapiesDate.setText(formattedDate);
 
 
         dayViewModel.getDayTherapies().observe(getActivity(), new Observer<List<Therapy>>() {
@@ -88,7 +89,7 @@ public class TherapyFragment extends Fragment {
             @Override
             public void onSwiped(@NonNull @NotNull RecyclerView.ViewHolder viewHolder, int direction) {
                 dayViewModel.deleteTherapy(therapyAdapter.getTherapyAt(viewHolder.getAdapterPosition()));
-                dayViewModel.deleteFirebaseTherapy(String.valueOf(therapyAdapter.getTherapyAt(viewHolder.getAdapterPosition()).getId()));
+                dayViewModel.deleteFirebaseTherapy(date, String.valueOf(therapyAdapter.getTherapyAt(viewHolder.getAdapterPosition()).getId()));
 
                 Toast.makeText(getActivity().getApplicationContext(), "Therapy deleted", Toast.LENGTH_SHORT).show();
             }

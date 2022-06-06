@@ -194,8 +194,13 @@ public class AddPhysicalActivityFragment extends Fragment {
             return;
         }
 
+        int id = (int) (Math.random() * 100000);
         PhysicalActivity physicalActivity = new PhysicalActivity(type, duration, distance, date, time);
         dayViewModel.insertPhysicalActivity(physicalActivity);
+        physicalActivity.setId(id);
+
+        dayViewModel.insertFirebasePhysicalActivity(String.valueOf(id), physicalActivity);
+
     }
 
     private void editPhysicalActivity(int id) {
@@ -213,6 +218,8 @@ public class AddPhysicalActivityFragment extends Fragment {
         PhysicalActivity physicalActivity = new PhysicalActivity(type, duration, distance, date, time);
         physicalActivity.setId(id);
         dayViewModel.updatePhysicalActivity(physicalActivity);
+
+        dayViewModel.insertFirebasePhysicalActivity(String.valueOf(id), physicalActivity);
     }
 
     public void showTimePickerDialog(View v) {

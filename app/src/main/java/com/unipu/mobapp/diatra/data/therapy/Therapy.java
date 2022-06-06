@@ -16,8 +16,7 @@ public class Therapy {
     private String time;
     private String date;
 
-    public Therapy(int id, String type, Double dosage, String time, String date) {
-        this.id = id;
+    public Therapy(String type, Double dosage, String time, String date) {
         this.type = type;
         this.dosage = dosage;
         this.time = time;

@@ -197,8 +197,9 @@ public class AddTherapyFragment extends Fragment {
             return;
         }
 
-        int id = (int) (Math.random() * 10000);
-        Therapy therapy = new Therapy(id, type, dose, therapyTime, date);
+        int id = (int) (Math.random() * 100000);
+        Therapy therapy = new Therapy(type, dose, therapyTime, date);
+        therapy.setId(id);
         dayViewModel.insertTherapy(therapy);
 
         dayViewModel.insertFirebaseTherapy(String.valueOf(id), therapy);
@@ -215,7 +216,7 @@ public class AddTherapyFragment extends Fragment {
             return;
         }
 
-        Therapy therapy = new Therapy(id, type, dose, therapyTime, date);
+        Therapy therapy = new Therapy(type, dose, therapyTime, date);
         therapy.setId(id);
         dayViewModel.updateTherapy(therapy);
 

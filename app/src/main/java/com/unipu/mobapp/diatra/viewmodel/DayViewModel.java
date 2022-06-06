@@ -102,7 +102,7 @@ public class DayViewModel extends AndroidViewModel {
     public void deleteTherapy(Therapy therapy){ therapyRepo.deleteTherapy(therapy); }
 
     public void insertFirebaseTherapy(String id, Therapy therapy) {  firebaseRepository.insertTherapy(id, therapy); }
-    public void deleteFirebaseTherapy(String id) { firebaseRepository.deleteTherapy(id); }
+    public void deleteFirebaseTherapy(String tDate, String id) { firebaseRepository.deleteTherapy(tDate, id); }
 
     //Physical activity
     public LiveData<List<PhysicalActivity>> getDayPhysicalActivities() { return dayPhysicalActivities; }
@@ -116,6 +116,10 @@ public class DayViewModel extends AndroidViewModel {
     public void insertPhysicalActivity(PhysicalActivity physicalActivity) {physicalActivityRepository.insertPhysicalActivity(physicalActivity);}
     public void updatePhysicalActivity(PhysicalActivity physicalActivity) {physicalActivityRepository.updatePhysicalActivity(physicalActivity);}
     public void deletePhysicalActivity(PhysicalActivity physicalActivity) {physicalActivityRepository.deletePhysicalActivity(physicalActivity);}
+
+    public void insertFirebasePhysicalActivity(String id, PhysicalActivity physicalActivity) {  firebaseRepository.insertPhysicalActivity(id, physicalActivity); }
+    public void deleteFirebasePhysicalActivity(String paDate, String id) { firebaseRepository.deletePhysicalActivity(paDate, id); }
+
 
     // Steps
 
@@ -137,5 +141,8 @@ public class DayViewModel extends AndroidViewModel {
     public void insertFood(Food food) { foodRepo.insertFood(food); }
     public void updateFood(Food food) { foodRepo.updateFood(food); }
     public void deleteFood(Food food) { foodRepo.deleteFood(food);}
+
+    public void insertFirebaseFood(String id, Food food) {  firebaseRepository.insertFood(id, food); }
+    public void deleteFirebaseFood(String fDate, String id) { firebaseRepository.deleteFood(fDate, id); }
 
 }

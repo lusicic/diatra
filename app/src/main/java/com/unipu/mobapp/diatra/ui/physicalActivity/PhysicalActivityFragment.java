@@ -56,8 +56,9 @@ public class PhysicalActivityFragment extends Fragment {
         PhysicalActivityAdapter physicalActivityAdapter = new PhysicalActivityAdapter();
         recyclerViewPhysicalActivity.setAdapter(physicalActivityAdapter);
 
-        String date = CalendarUtils.dayMonth(dayViewModel.getDate().getValue());
-        textViewPhysicalActivitiesDate.setText(date);
+        String date = dayViewModel.getDate().getValue();
+        String formattedDate = CalendarUtils.dayMonth(date);
+        textViewPhysicalActivitiesDate.setText(formattedDate);
 
         textViewTotalTimeActive.setText(dayViewModel.getTotalDayActive().getValue());
 
@@ -84,6 +85,7 @@ public class PhysicalActivityFragment extends Fragment {
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 dayViewModel.deletePhysicalActivity(physicalActivityAdapter.getPhysicalActivityAt(viewHolder.getAdapterPosition()));
+                dayViewModel.deleteFirebasePhysicalActivity(date, String.valueOf(physicalActivityAdapter.getPhysicalActivityAt(viewHolder.getAdapterPosition()).getId()));
                 Toast.makeText(getActivity().getApplicationContext(), "Activity deleted", Toast.LENGTH_SHORT).show();
             }
         }).attachToRecyclerView(recyclerViewPhysicalActivity);

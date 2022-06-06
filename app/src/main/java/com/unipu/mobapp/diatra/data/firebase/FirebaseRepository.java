@@ -14,6 +14,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.unipu.mobapp.diatra.data.food.Food;
+import com.unipu.mobapp.diatra.data.physicalActivity.PhysicalActivity;
 import com.unipu.mobapp.diatra.data.therapy.Therapy;
 
 import java.time.LocalDate;
@@ -90,21 +92,75 @@ public class FirebaseRepository {
                     .child("users")
                     .child(firebaseAuth.getCurrentUser().getUid())
                     .child("therapies")
-                    .child(LocalDate.now().toString())
+                    .child(therapy.getDate())
                     .child(String.valueOf(id))
                     .setValue(therapy);
         }
 
     }
 
-    public void deleteTherapy(String id){
+    public void deleteTherapy(String date, String id){
 
         if(firebaseAuth.getCurrentUser() != null){
             databaseReference
                     .child("users")
                     .child(firebaseAuth.getCurrentUser().getUid())
                     .child("therapies")
-                    .child(LocalDate.now().toString())
+                    .child(date)
+                    .child(String.valueOf(id))
+                    .removeValue();
+        }
+    }
+
+    public void insertFood(String id, Food food){
+
+        if (firebaseAuth.getCurrentUser() != null) {
+            databaseReference
+                    .child("users")
+                    .child(firebaseAuth.getCurrentUser().getUid())
+                    .child("foods")
+                    .child(food.getDate())
+                    .child(String.valueOf(id))
+                    .setValue(food);
+        }
+
+    }
+
+    public void deleteFood(String date, String id){
+
+        if(firebaseAuth.getCurrentUser() != null){
+            databaseReference
+                    .child("users")
+                    .child(firebaseAuth.getCurrentUser().getUid())
+                    .child("foods")
+                    .child(date)
+                    .child(String.valueOf(id))
+                    .removeValue();
+        }
+    }
+
+    public void insertPhysicalActivity(String id, PhysicalActivity physicalActivity){
+
+        if (firebaseAuth.getCurrentUser() != null) {
+            databaseReference
+                    .child("users")
+                    .child(firebaseAuth.getCurrentUser().getUid())
+                    .child("physicalActivities")
+                    .child(physicalActivity.getDate())
+                    .child(String.valueOf(id))
+                    .setValue(physicalActivity);
+        }
+
+    }
+
+    public void deletePhysicalActivity(String date, String id){
+
+        if(firebaseAuth.getCurrentUser() != null){
+            databaseReference
+                    .child("users")
+                    .child(firebaseAuth.getCurrentUser().getUid())
+                    .child("physicalActivities")
+                    .child(date)
                     .child(String.valueOf(id))
                     .removeValue();
         }

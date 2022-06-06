@@ -259,8 +259,13 @@ public class AddNewFoodFragment extends Fragment {
             return;
         }
 
+        int id = (int) (Math.random() * 100000);
         Food food = new Food(type, amount, calories, carbs, date, time);
+        food.setId(id);
         dayViewModel.insertFood(food);
+
+        dayViewModel.insertFirebaseFood(String.valueOf(id), food);
+
     }
 
     private void editFood(int id) {
@@ -277,6 +282,9 @@ public class AddNewFoodFragment extends Fragment {
         Food food = new Food(type, amount, calories, carbs, date, time);
         food.setId(id);
         dayViewModel.updateFood(food);
+
+        dayViewModel.insertFirebaseFood(String.valueOf(id), food);
+
     }
 
     private String whichLanguage(){

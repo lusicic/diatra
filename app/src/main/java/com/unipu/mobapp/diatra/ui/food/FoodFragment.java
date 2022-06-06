@@ -51,8 +51,9 @@ public class FoodFragment extends Fragment {
         initViewModel();
         initWidgets(view);
 
-        String date = CalendarUtils.dayMonth(dayViewModel.getDate().getValue());
-        textViewFoodDate.setText(date);
+        String date = dayViewModel.getDate().getValue();
+        String formattedDate = CalendarUtils.dayMonth(date);
+        textViewFoodDate.setText(formattedDate);
 
         textViewIntakeSum.setText(String.valueOf(dayViewModel.getTotalDayCalories().getValue()));
         textViewCarbsSum.setText(String.valueOf(dayViewModel.getTotalDayCarbs().getValue()));
@@ -88,6 +89,7 @@ public class FoodFragment extends Fragment {
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 dayViewModel.deleteFood(foodAdapter.getFoodAt(viewHolder.getAdapterPosition()));
+                dayViewModel.deleteFirebaseFood(date, String.valueOf(foodAdapter.getFoodAt(viewHolder.getAdapterPosition()).getId()));
                 Toast.makeText(getActivity().getApplicationContext(), "Meal deleted", Toast.LENGTH_SHORT).show();
             }
         }).attachToRecyclerView(recyclerViewFood);;
