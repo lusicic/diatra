@@ -173,4 +173,8 @@
 
     <string name="addTherapyTitle">Add new therapy</string>
 
+    <!-- MISC -->
+
+    <string name="enterAllData">Enter all data</string>
+
 </resources>

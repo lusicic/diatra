@@ -147,8 +147,10 @@ public class AddTherapyFragment extends Fragment {
         buttonAddTherapy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                saveTherapy();
-                Navigation.findNavController(view).popBackStack();
+                if(checkEntry()) {
+                    saveTherapy();
+                    Navigation.findNavController(view).popBackStack();
+                }
             }
         });
     }
@@ -180,8 +182,10 @@ public class AddTherapyFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 int id = therapy.getId();
-                editTherapy(id);
-                Navigation.findNavController(view).popBackStack();
+                if(checkEntry()) {
+                    editTherapy(id);
+                    Navigation.findNavController(view).popBackStack();
+                }
             }
         });
     }
@@ -191,11 +195,6 @@ public class AddTherapyFragment extends Fragment {
         String therapyTime = editTextTherapyTime.getText().toString();
         String type = therapyType;
         Double dose = Double.parseDouble(editTextDose.getText().toString());
-
-        if(therapyTime.trim().isEmpty() || type.trim().isEmpty()){
-            Toast.makeText(getActivity(), "time or type is empty", Toast.LENGTH_SHORT).show();
-            return;
-        }
 
         int id = (int) (Math.random() * 100000);
         Therapy therapy = new Therapy(type, dose, therapyTime, date);
@@ -210,11 +209,6 @@ public class AddTherapyFragment extends Fragment {
         String therapyTime = editTextTherapyTime.getText().toString();
         String type = therapyType;
         Double dose = Double.parseDouble(editTextDose.getText().toString());
-
-        if(therapyTime.trim().isEmpty() || type.trim().isEmpty()){
-            Toast.makeText(getActivity(), "time or type is empty", Toast.LENGTH_LONG).show();
-            return;
-        }
 
         Therapy therapy = new Therapy(type, dose, therapyTime, date);
         therapy.setId(id);
@@ -243,6 +237,22 @@ public class AddTherapyFragment extends Fragment {
 
         DatePickerDialog datePicker = new DatePickerDialog(getActivity(), AlertDialog.THEME_HOLO_LIGHT, onDateSetListener, year, month, day);
         datePicker.show();
+    }
+
+    public boolean checkEntry(){
+
+        String date = editTextTherapyDate.getText().toString();
+        String time = editTextTherapyTime.getText().toString();
+        String type = therapyType;
+        String dose = editTextDose.getText().toString();
+
+        if(date.trim().isEmpty() || time.trim().isEmpty()
+            || type.trim().isEmpty() || dose.trim().isEmpty()){
+            Toast.makeText(getActivity(), getString(R.string.enterAllData), Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        return true;
     }
 
 }

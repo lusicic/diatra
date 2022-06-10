@@ -114,4 +114,5 @@
     <string name="navigation_registration">Registracija novog računa</string>
     <string name="login_home">Prijavi se</string>
     <string name="logout_home">Odjavi se</string>
+    <string name="enterAllData">Unesi sve podatke</string>
 </resources>

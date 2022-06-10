@@ -78,10 +78,11 @@ public class AddNewFoodFragment extends Fragment {
 
         initViewModel();
         initWidgets(view);
-        initObservers();
+
         initListeners();
 
         foodTypeList=new ArrayList<>();
+        initObservers();
 
         date = dayViewModel.getDate().getValue();
         editTextDate.setText(date);
@@ -127,8 +128,10 @@ public class AddNewFoodFragment extends Fragment {
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                saveFood();
-                Navigation.findNavController(view).popBackStack();
+                if(checkEntry()) {
+                    saveFood();
+                    Navigation.findNavController(view).popBackStack();
+                }
             }
         });
     }
@@ -139,7 +142,7 @@ public class AddNewFoodFragment extends Fragment {
             @Override
             public void onChanged(List<FoodType> foodTypes) {
                 foodTypeList.addAll(foodTypes);
-                dayViewModel.getAllFoodTypes(whichLanguage()).removeObserver(this::onChanged);
+                //dayViewModel.getAllFoodTypes(whichLanguage()).removeObserver(this::onChanged);
             }
 
         });
@@ -174,8 +177,10 @@ public class AddNewFoodFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 int id = food.getId();
-                editFood(id);
-                Navigation.findNavController(view).popBackStack();
+                if(checkEntry()) {
+                    editFood(id);
+                    Navigation.findNavController(view).popBackStack();
+                }
             }
         });
 
@@ -252,12 +257,9 @@ public class AddNewFoodFragment extends Fragment {
         String date = editTextDate.getText().toString();
         String time = editTextTime.getText().toString();
         String type = textViewFoodType.getText().toString();
-        Integer amount = Integer.parseInt(editTextAmount.getText().toString());
+        String sAmount = editTextAmount.getText().toString();
 
-        if(time.trim().isEmpty() || type.trim().isEmpty()){
-            Toast.makeText(getActivity(), "time or type is empty", Toast.LENGTH_SHORT);
-            return;
-        }
+        Integer amount = Integer.parseInt(sAmount);
 
         int id = (int) (Math.random() * 100000);
         Food food = new Food(type, amount, calories, carbs, date, time);
@@ -274,11 +276,6 @@ public class AddNewFoodFragment extends Fragment {
         String type = textViewFoodType.getText().toString();
         Integer amount = Integer.parseInt(editTextAmount.getText().toString());
 
-        if(time.trim().isEmpty() || type.trim().isEmpty()){
-            Toast.makeText(getActivity(), "time or type is empty", Toast.LENGTH_SHORT);
-            return;
-        }
-
         Food food = new Food(type, amount, calories, carbs, date, time);
         food.setId(id);
         dayViewModel.updateFood(food);
@@ -288,14 +285,28 @@ public class AddNewFoodFragment extends Fragment {
     }
 
     private String whichLanguage(){
-        String langPref = "Language";
-        SharedPreferences prefs = getContext().getSharedPreferences("CommonPrefs",
-                Activity.MODE_PRIVATE);
-        String language = prefs.getString(langPref, "");
+        String language = PreferencesUtils.getStr(getContext(), "Language");
 
         if(language.isEmpty()){
             language="en";
         }
         return language;
+    }
+
+    private boolean checkEntry(){
+
+        String date = editTextDate.getText().toString();
+        String time = editTextTime.getText().toString();
+        String type = textViewFoodType.getText().toString();
+        String amount = editTextAmount.getText().toString();
+
+        if(date.trim().isEmpty() || time.trim().isEmpty()
+                || type.trim().isEmpty() || amount.trim().isEmpty()){
+            Toast.makeText(getContext(), getString(R.string.enterAllData), Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        return true;
+
     }
 }

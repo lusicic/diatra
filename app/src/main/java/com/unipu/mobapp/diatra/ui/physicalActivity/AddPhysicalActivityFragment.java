@@ -133,8 +133,10 @@ public class AddPhysicalActivityFragment extends Fragment {
         buttonAddPhyAct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                savePhysicalActivity();
-                Navigation.findNavController(view).popBackStack();
+                if(checkEntry()) {
+                    savePhysicalActivity();
+                    Navigation.findNavController(view).popBackStack();
+                }
             }
         });
 
@@ -176,8 +178,10 @@ public class AddPhysicalActivityFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 int id = physicalActivity.getId();
-                editPhysicalActivity(id);
-                Navigation.findNavController(view).popBackStack();
+                if(checkEntry()) {
+                    editPhysicalActivity(id);
+                    Navigation.findNavController(view).popBackStack();
+                }
             }
         });
     }
@@ -188,11 +192,6 @@ public class AddPhysicalActivityFragment extends Fragment {
         String type = phyActType;
         String duration = editTextPhyActDurationHour.getText().toString() + ":" + editTextPhyActDurationMinute.getText().toString();
         Double distance = Double.parseDouble(editTextPhyActDistance.getText().toString());
-
-        if(time.trim().isEmpty() || type.trim().isEmpty()){
-            Toast.makeText(getActivity(), "time or type is empty", Toast.LENGTH_SHORT);
-            return;
-        }
 
         int id = (int) (Math.random() * 100000);
         PhysicalActivity physicalActivity = new PhysicalActivity(type, duration, distance, date, time);
@@ -209,11 +208,6 @@ public class AddPhysicalActivityFragment extends Fragment {
         String type = phyActType;
         String duration = editTextPhyActDurationHour.getText().toString() + ":" + editTextPhyActDurationMinute.getText().toString();
         Double distance = Double.parseDouble(editTextPhyActDistance.getText().toString());
-
-        if(time.trim().isEmpty() || type.trim().isEmpty()){
-            Toast.makeText(getActivity(), "time or type is empty", Toast.LENGTH_SHORT);
-            return;
-        }
 
         PhysicalActivity physicalActivity = new PhysicalActivity(type, duration, distance, date, time);
         physicalActivity.setId(id);
@@ -242,6 +236,23 @@ public class AddPhysicalActivityFragment extends Fragment {
 
         DatePickerDialog datePicker = new DatePickerDialog(getActivity(), AlertDialog.THEME_HOLO_LIGHT, onDateSetListener, year, month, day);
         datePicker.show();
+    }
+
+    public boolean checkEntry(){
+
+        String date = editTextPhyActDate.getText().toString();
+        String time = editTextPhyActTime.getText().toString();
+        String type = phyActType;
+        String duration = editTextPhyActDurationHour.getText().toString() + ":" + editTextPhyActDurationMinute.getText().toString();
+        String distance = editTextPhyActDistance.getText().toString();
+
+        if(date.trim().isEmpty() || time.trim().isEmpty()
+        || type.trim().isEmpty() || duration.trim().isEmpty() || distance.trim().isEmpty()){
+            Toast.makeText(getActivity(), getString(R.string.enterAllData), Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        return true;
     }
 
 }

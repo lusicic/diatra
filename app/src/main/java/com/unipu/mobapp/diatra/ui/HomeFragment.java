@@ -207,7 +207,6 @@ public class HomeFragment extends Fragment implements CalendarAdapter.OnItemList
 
     private void signIn() {
         textViewLogin.setText(getString(R.string.login_home));
-        textViewLogin.setTextColor(getResources().getColor(R.color.lightPurple));
         textViewLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
