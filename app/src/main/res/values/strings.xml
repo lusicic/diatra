@@ -18,6 +18,9 @@
     <string name="day_6">Sat</string>
     <string name="day_7">Sun</string>
 
+    <string name="login_home">Log in</string>
+    <string name="logout_home">Log out</string>
+
     <string name="therapy_title">therapy</string>
     <string name="steps_title">steps</string>
     <string name="food_title">intake</string>
@@ -38,6 +41,7 @@
     <string name="hours">hours</string>
 
     <string name="timeline">Timeline</string>
+
 
     <!-- therapy -->
 
@@ -81,6 +85,12 @@
     <string name="register">Register</string>
     <string name="signin">Sign in</string>
     <string name="signup">Sign up</string>
+
+    <string name="login_button">Log in</string>
+    <string name="register_button">Sign up</string>
+
+    <string name="login_click_text">Sign up.</string>
+    <string name="register_click_text">Sign in.</string>
 
     <string name="login_text">Don\'t have an account?</string>
     <string name="register_text">Already have an account?</string>
@@ -158,6 +168,8 @@
     <string name="navigation_food">Meals</string>
     <string name="navigation_add_new_food">Add new meal</string>
     <string name="navigation_steps">Steps</string>
+    <string name="navigation_login">Log into account</string>
+    <string name="navigation_registration">Sign up for an account</string>
 
     <string name="addTherapyTitle">Add new therapy</string>
 

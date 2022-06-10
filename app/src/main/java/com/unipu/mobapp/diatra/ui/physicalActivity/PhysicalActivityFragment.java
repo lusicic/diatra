@@ -66,6 +66,21 @@ public class PhysicalActivityFragment extends Fragment {
             @Override
             public void onChanged(List<PhysicalActivity> physicalActivities) {
                 physicalActivityAdapter.setPhysicalActivities(physicalActivities);
+
+                int tm = 0;
+                for (PhysicalActivity physicalActivity: physicalActivities){
+                    String[] arr = physicalActivity.getDuration().split(":");
+                    tm += 60 * Integer.parseInt(arr[1]);
+                    tm += 3600 * Integer.parseInt(arr[0]);
+                }
+
+                int hh = tm / 3600;
+                tm %= 3600;
+                int mm = tm / 60;
+
+                String totalTimeActive = CalendarUtils.convertDate(hh) + ":" + CalendarUtils.convertDate(mm);
+                textViewTotalTimeActive.setText(totalTimeActive);
+                dayViewModel.setTotalDayActive(totalTimeActive);
             }
         });
 

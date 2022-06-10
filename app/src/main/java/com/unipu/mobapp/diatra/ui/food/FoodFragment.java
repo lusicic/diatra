@@ -68,7 +68,20 @@ public class FoodFragment extends Fragment {
         dayViewModel.getDayFood().observe(getViewLifecycleOwner(), new Observer<List<Food>>() {
             @Override
             public void onChanged(List<Food> foods) {
+
                 foodAdapter.setFoods(foods);
+
+                int sumCalories=0;
+                int sumCarbs=0;
+                for (Food food : foods)
+                {
+                    sumCalories+=food.getTotalCalories();
+                    sumCarbs+=food.getTotalCarbs();
+                }
+                textViewIntakeSum.setText(String.valueOf(sumCalories));
+                textViewCarbsSum.setText(String.valueOf(sumCarbs));
+                dayViewModel.setTotalDayCalories(sumCalories);
+                dayViewModel.setTotalDayCarbs(sumCarbs);
             }
         });
 

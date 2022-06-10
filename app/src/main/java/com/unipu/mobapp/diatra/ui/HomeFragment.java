@@ -191,12 +191,13 @@ public class HomeFragment extends Fragment implements CalendarAdapter.OnItemList
             @Override
             public void onChanged(FirebaseUser firebaseUser) {
                 if (firebaseUser != null) {
-                    textViewLogin.setText("Log out");
+                    textViewLogin.setTextColor(getResources().getColor(R.color.light_gray));
+                    textViewLogin.setText(getString(R.string.logout_home));
                     textViewLogin.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             dayViewModel.logOut();
-                            textViewLogin.setText("Sign in");
+                            signIn();
                         }
                     });
                 }
@@ -204,6 +205,16 @@ public class HomeFragment extends Fragment implements CalendarAdapter.OnItemList
         });
     }
 
+    private void signIn() {
+        textViewLogin.setText(getString(R.string.login_home));
+        textViewLogin.setTextColor(getResources().getColor(R.color.lightPurple));
+        textViewLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                toSignIn(view);
+            }
+        });
+    }
 
 
     private void setUpCalendar(){

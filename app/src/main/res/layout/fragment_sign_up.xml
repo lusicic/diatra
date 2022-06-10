@@ -23,7 +23,7 @@
                 android:id="@+id/textView15"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sign up"
+                android:text="@string/signup"
                 android:layout_marginBottom="25dp"
                 android:textStyle="bold"
                 android:textColor="@color/black"
@@ -37,7 +37,7 @@
                 android:id="@+id/textViewSignUpEmailText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Email"
+                android:text="@string/email"
                 app:layout_constraintTop_toBottomOf="@+id/textViewSignUptitle"
                 tools:layout_editor_absoluteX="91dp" />
 
@@ -54,7 +54,7 @@
                 android:id="@+id/textView17"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Password"
+                android:text="@string/password"
                 app:layout_constraintTop_toBottomOf="@+id/edit_text_sign_up_email"
                 tools:layout_editor_absoluteX="80dp" />
 
@@ -73,10 +73,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="35dp"
                 android:layout_gravity="center"
-                android:text="Sign up"
+                android:text="@string/register_button"
                 app:layout_constraintTop_toBottomOf="@+id/edit_text_sign_up_password" />
 
             <LinearLayout
+                android:layout_marginTop="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center">
@@ -90,7 +91,7 @@
                     android:textColor="@color/light_gray"
                     android:clickable="true"
                     android:layout_gravity="center"
-                    android:text="Already have an account?"
+                    android:text="@string/register_text"
                     />
 
                 <TextView
@@ -102,7 +103,7 @@
                     android:paddingTop="10dp"
                     android:paddingBottom="10dp"
                     android:clickable="true"
-                    android:text="Sign in."
+                    android:text="@string/register_click_text"
                     app:layout_constraintTop_toBottomOf="@+id/btn_sign_up"
                     tools:layout_editor_absoluteX="80dp" />
 

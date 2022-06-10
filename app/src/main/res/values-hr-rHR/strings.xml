@@ -100,10 +100,18 @@
     <string name="save_data_text">Omogući spremanje podataka na Oblak</string>
     <string name="email">E-pošta</string>
     <string name="password">Lozinka</string>
-    <string name="login">Ulogirajte se</string>
-    <string name="register">Registrirajte se</string>
+    <string name="login">Prijavi se</string>
+    <string name="register">Registriraj se</string>
     <string name="signin">Prijavite se</string>
     <string name="signup">Registrirajte se</string>
     <string name="login_text">Nemate račun?</string>
     <string name="register_text">Već imate račun?</string>
+    <string name="login_button">Prijava</string>
+    <string name="login_click_text">Registrirajte se.</string>
+    <string name="register_button">Registracija</string>
+    <string name="register_click_text">Prijavite se.</string>
+    <string name="navigation_login">Prijavite se u račun</string>
+    <string name="navigation_registration">Registracija novog računa</string>
+    <string name="login_home">Prijavi se</string>
+    <string name="logout_home">Odjavi se</string>
 </resources>
