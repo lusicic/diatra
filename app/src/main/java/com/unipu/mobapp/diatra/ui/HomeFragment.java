@@ -26,6 +26,7 @@ import com.unipu.mobapp.diatra.data.food.Food;
 import com.unipu.mobapp.diatra.data.physicalActivity.PhysicalActivity;
 import com.unipu.mobapp.diatra.data.therapy.Therapy;
 import com.unipu.mobapp.diatra.utils.CalendarUtils;
+import com.unipu.mobapp.diatra.utils.PreferencesUtils;
 import com.unipu.mobapp.diatra.viewmodel.DayViewModel;
 
 import static com.unipu.mobapp.diatra.utils.CalendarUtils.formattedDate;
@@ -87,9 +88,7 @@ public class HomeFragment extends Fragment implements CalendarAdapter.OnItemList
     }
 
     private void initViewModel(){
-
         dayViewModel = new ViewModelProvider(requireActivity()).get(DayViewModel.class);
-
         dayViewModel.setDate(String.valueOf(formattedDate(CalendarUtils.selectedDate)));
     }
 
@@ -203,6 +202,7 @@ public class HomeFragment extends Fragment implements CalendarAdapter.OnItemList
                 }
             }
         });
+
     }
 
     private void signIn() {

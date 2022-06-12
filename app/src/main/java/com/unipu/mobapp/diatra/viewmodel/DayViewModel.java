@@ -48,9 +48,12 @@ public class DayViewModel extends AndroidViewModel {
     // Food
     private FoodRepository foodRepo;
     private LiveData<List<Food>> dayFood;
+    private LiveData<List<FoodType>> foodTypes;
     private MutableLiveData<Integer> totalDayCalories = new MutableLiveData<>();
     private MutableLiveData<Integer> totalDayCarbs = new MutableLiveData<>();
     private SingleLiveEvent<Food> sFood = new SingleLiveEvent<>();
+
+    private MutableLiveData<String> language = new MutableLiveData<>();
 
     private MutableLiveData<String> date = new MutableLiveData<>();
 
@@ -72,10 +75,16 @@ public class DayViewModel extends AndroidViewModel {
                 date -> physicalActivityRepository.getDaySteps(date));
         dayFood = Transformations.switchMap(date,
                 date -> foodRepo.getDayFood(date));
+
+        foodTypes = Transformations.switchMap(language,
+                language -> foodRepo.getAllFoodTypes(language));
+
     }
 
     public void setDate(String newDate) { date.setValue(newDate);}
     public LiveData<String> getDate() { return date;}
+
+    public void setLanguage(String newLangauge) { language.setValue(newLangauge);}
 
     // Login
 
@@ -86,7 +95,6 @@ public class DayViewModel extends AndroidViewModel {
     public MutableLiveData<FirebaseUser> getUserLiveData() {
         return userLiveData;
     }
-
     public MutableLiveData<Boolean> getLoggedOutLiveData() {
         return loggedOutLiveData;
     }
@@ -122,12 +130,12 @@ public class DayViewModel extends AndroidViewModel {
 
 
     // Steps
-
     public LiveData<Integer> getDaySteps() { return daySteps; }
 
     // Food
     public LiveData<List<Food>> getDayFood() { return dayFood;}
-    public LiveData<List<FoodType>> getAllFoodTypes(String language) { return foodRepo.getAllFoodTypes(language); }
+
+    public LiveData<List<FoodType>> getAllFoodTypes() { return foodTypes; }
 
     public void setTotalDayCalories(Integer calories) { totalDayCalories.setValue(calories); }
     public LiveData<Integer> getTotalDayCalories() { return totalDayCalories; }

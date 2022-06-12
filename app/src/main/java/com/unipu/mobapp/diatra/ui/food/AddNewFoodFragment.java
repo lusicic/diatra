@@ -43,6 +43,7 @@ import com.unipu.mobapp.diatra.viewmodel.DayViewModel;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 public class AddNewFoodFragment extends Fragment {
 
@@ -78,14 +79,14 @@ public class AddNewFoodFragment extends Fragment {
 
         initViewModel();
         initWidgets(view);
-
         initListeners();
 
-        foodTypeList=new ArrayList<>();
         initObservers();
 
         date = dayViewModel.getDate().getValue();
         editTextDate.setText(date);
+
+        dayViewModel.setLanguage(Locale.getDefault().getLanguage());
 
     }
 
@@ -107,7 +108,12 @@ public class AddNewFoodFragment extends Fragment {
         editTextDate.setOnClickListener(this::showDatePickerDialog);
         editTextTime.setOnClickListener(this::showTimePickerDialog);
 
-        textViewFoodType.setOnClickListener(this::showSearchDialog);
+        textViewFoodType.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showSearchDialog(view);
+            }
+        });
 
         onDateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -138,11 +144,11 @@ public class AddNewFoodFragment extends Fragment {
 
     private void initObservers() {
 
-        dayViewModel.getAllFoodTypes(whichLanguage()).observe(getViewLifecycleOwner(), new Observer<List<FoodType>>() {
+        dayViewModel.getAllFoodTypes().observe(getViewLifecycleOwner(), new Observer<List<FoodType>>() {
             @Override
             public void onChanged(List<FoodType> foodTypes) {
+                foodTypeList=new ArrayList<>();
                 foodTypeList.addAll(foodTypes);
-                //dayViewModel.getAllFoodTypes(whichLanguage()).removeObserver(this::onChanged);
             }
 
         });

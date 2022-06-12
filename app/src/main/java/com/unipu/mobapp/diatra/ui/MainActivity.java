@@ -20,6 +20,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -33,6 +34,7 @@ import com.unipu.mobapp.diatra.viewmodel.UserViewModel;
 import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDate;
+import java.util.Locale;
 
 import com.unipu.mobapp.diatra.services.StepsService;
 
@@ -55,13 +57,7 @@ public class MainActivity extends AppCompatActivity{
 
         setUpNavigation();
 
-        if(!PreferencesUtils.getStr(this, "AutoSteps").equals("no")){
-            Intent i = new Intent(MainActivity.this, StepsService.class);
-            startService(i);
-        }
-        else if(PreferencesUtils.getStr(this, "AutoSteps").equals("no")){
-            stopService(new Intent(MainActivity.this, StepsService.class));
-        }
+        checkAutoSteps();
 
     }
 
@@ -97,6 +93,18 @@ public class MainActivity extends AppCompatActivity{
                     }
                 }
         });
+
+    }
+
+    private void checkAutoSteps() {
+
+        if(!PreferencesUtils.getStr(this, "AutoSteps").equals("no")){
+            Intent i = new Intent(MainActivity.this, StepsService.class);
+            startService(i);
+        }
+        else if(PreferencesUtils.getStr(this, "AutoSteps").equals("no")){
+            stopService(new Intent(MainActivity.this, StepsService.class));
+        }
 
     }
 
