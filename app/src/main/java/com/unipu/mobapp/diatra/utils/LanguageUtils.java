@@ -25,7 +25,6 @@ public class LanguageUtils {
         android.content.res.Configuration config = new android.content.res.Configuration();
         config.locale = myLocale;
         context.getResources().updateConfiguration(config, context.getResources().getDisplayMetrics());
-
     }
 
     public static void saveLocale(Context context, String lang) {

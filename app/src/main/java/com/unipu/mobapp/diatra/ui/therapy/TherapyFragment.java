@@ -60,8 +60,8 @@ public class TherapyFragment extends Fragment {
         dayViewModel = new ViewModelProvider(requireActivity()).get(DayViewModel.class);
 
         String date = dayViewModel.getDate().getValue();
-        String formattedDate = CalendarUtils.dayMonth(date);
-        textViewTherapiesDate.setText(formattedDate);
+        //String formattedDate = CalendarUtils.dayMonth(date);
+        textViewTherapiesDate.setText(date);
 
 
         dayViewModel.getDayTherapies().observe(getActivity(), new Observer<List<Therapy>>() {

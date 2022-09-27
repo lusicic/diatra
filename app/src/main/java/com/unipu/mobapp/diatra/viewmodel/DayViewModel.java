@@ -33,6 +33,7 @@ public class DayViewModel extends AndroidViewModel {
 
     // Therapy
     private TherapyRepository therapyRepo;
+    private LiveData<List<Therapy>> allTherapies;
     private LiveData<List<Therapy>> dayTherapies;
     private SingleLiveEvent<Therapy> sTherapy = new SingleLiveEvent<>();
 
@@ -59,13 +60,15 @@ public class DayViewModel extends AndroidViewModel {
 
     public DayViewModel(@NonNull @NotNull Application application) {
         super(application);
-        firebaseRepository = new FirebaseRepository(application);
-        userLiveData = firebaseRepository.getUserLiveData();
-        loggedOutLiveData = firebaseRepository.getLoggedOutLiveData();
-
         therapyRepo = new TherapyRepository(application);
         physicalActivityRepository = new PhysicalActivityRepository(application);
         foodRepo = new FoodRepository(application);
+
+        allTherapies = therapyRepo.getAllTherapies();
+
+        firebaseRepository = new FirebaseRepository(application);
+        userLiveData = firebaseRepository.getUserLiveData();
+        loggedOutLiveData = firebaseRepository.getLoggedOutLiveData();
 
         dayTherapies = Transformations.switchMap(date,
                 date -> therapyRepo.getDayTherapies(date));
@@ -101,13 +104,14 @@ public class DayViewModel extends AndroidViewModel {
 
     // Therapy
     public LiveData<List<Therapy>> getDayTherapies() { return dayTherapies; }
-
+    public LiveData<List<Therapy>> getAllTherapies() { return allTherapies; }
     public void setSTherapy(Therapy therapy) { sTherapy.setValue(therapy); }
     public SingleLiveEvent<Therapy> getSTherapy() { return sTherapy; }
 
     public void insertTherapy(Therapy therapy) { therapyRepo.insertTherapy(therapy); }
     public void updateTherapy(Therapy therapy){ therapyRepo.updateTherapy(therapy); }
     public void deleteTherapy(Therapy therapy){ therapyRepo.deleteTherapy(therapy); }
+    public void deleteAllTherapies() { therapyRepo.deleteAllTherapies(); }
 
     public void insertFirebaseTherapy(String id, Therapy therapy) {  firebaseRepository.insertTherapy(id, therapy); }
     public void deleteFirebaseTherapy(String tDate, String id) { firebaseRepository.deleteTherapy(tDate, id); }

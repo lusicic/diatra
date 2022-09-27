@@ -115,4 +115,6 @@
     <string name="login_home">Prijavi se</string>
     <string name="logout_home">Odjavi se</string>
     <string name="enterAllData">Unesi sve podatke</string>
+    <string name="therapyAdded">Terapija dodana</string>
+    <string name="userAdded">Korisnik dodan</string>
 </resources>

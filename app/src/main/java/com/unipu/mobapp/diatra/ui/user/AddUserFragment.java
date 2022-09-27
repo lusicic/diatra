@@ -17,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.unipu.mobapp.diatra.R;
 import com.unipu.mobapp.diatra.data.user.User;
@@ -154,6 +155,8 @@ public class AddUserFragment extends Fragment {
 
         User user = new User(ggender, age, height, weight, typeOfDiabetes);
         userViewModel.insert(user);
+        Toast.makeText(getActivity(), getString(R.string.enterAllData), Toast.LENGTH_LONG).show();
+
     }
 
     private void editUser(int id) {
@@ -166,6 +169,8 @@ public class AddUserFragment extends Fragment {
         User user = new User(gender, age, height, weight, typeOfDiabetes);
         user.setUserId(id);
         userViewModel.update(user);
+        Toast.makeText(getActivity(), getString(R.string.userAdded), Toast.LENGTH_LONG).show();
+
     }
 
 }

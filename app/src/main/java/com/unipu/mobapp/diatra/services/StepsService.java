@@ -90,7 +90,6 @@ public class StepsService extends Service implements SensorEventListener {
     @Override
     public void onSensorChanged(SensorEvent event) {
 
-        //Toast.makeText(this, PreferencesUtils.getInt(this, "Steps") + " steps", Toast.LENGTH_SHORT).show();
         int eventSteps = Math.round(event.values[0]);
 
         if (!PreferencesUtils.getStr(this, "Today").equals(CalendarUtils.today())) {
@@ -107,11 +106,9 @@ public class StepsService extends Service implements SensorEventListener {
             deltaSteps = eventSteps - PreferencesUtils.getInt(this,"Steps");
             PreferencesUtils.saveInt(this, "DeltaSteps", deltaSteps);
 
-            //if(deltaSteps>0) physicalActivityRepository.updateSteps(PreferencesUtils.getInt(this, "DeltaSteps"));
-
             if(deltaSteps >= milestoneSteps){
                 saveSteps();
-                milestoneSteps+=20;
+                milestoneSteps+=100;
             }
 
         }

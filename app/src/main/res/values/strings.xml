@@ -176,5 +176,8 @@
     <!-- MISC -->
 
     <string name="enterAllData">Enter all data</string>
+    <string name="therapyAdded">Therapy added</string>
+    <string name="userAdded">User added</string>
+
 
 </resources>

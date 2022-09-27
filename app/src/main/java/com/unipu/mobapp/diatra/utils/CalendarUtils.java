@@ -13,7 +13,7 @@ public class CalendarUtils {
     public static LocalDate selectedDate = LocalDate.now();
 
     public static String monthYear(LocalDate date){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("LLLL yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM yyyy");
         return date.format(formatter);
     }
 

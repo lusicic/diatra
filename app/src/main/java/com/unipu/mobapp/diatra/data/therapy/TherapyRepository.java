@@ -57,6 +57,15 @@ public class TherapyRepository {
         });
     }
 
+    public void deleteAllTherapies(){
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                therapyDao.deleteAllTherapies();
+            }
+        });
+    }
+
     public LiveData<List<Therapy>> getAllTherapies(){
         return allTherapies;
     }

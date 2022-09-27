@@ -28,4 +28,7 @@ public interface TherapyDao {
 
     @Query("SELECT * FROM therapy WHERE date==:date ORDER BY time DESC")
     LiveData<List<Therapy>> getDayTherapies(String date);
+
+    @Query("DELETE FROM therapy")
+    void deleteAllTherapies();
 }
